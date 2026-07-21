@@ -501,4 +501,167 @@
         });
     }
 </script>
+<div class="card" style="margin-top: 25px; text-align: right; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--card-border); border-radius: 24px; padding: 25px;">
+    <h3 style="color: var(--accent-color); font-size: 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+        <span>✉️</span> پشکا نامێن هێلای (Wall of Notes)
+    </h3>
+    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.5;">ناما خۆ لێرە بهێلە، دیزاین بکە و بۆ کەسێن دی بهێلە!</p>
+    
+    <textarea id="user-note-text" placeholder="ناما خۆ لێرە بنڤیسە..." style="width: 100%; height: 85px; padding: 12px; border-radius: 14px; border: 1px solid var(--card-border); background: var(--card-bg); color: var(--text-main); font-size: 14px; box-sizing: border-box; resize: none; outline: none; margin-bottom: 12px;"></textarea>
+    
+    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+        <select id="note-color" style="flex: 1; padding: 10px; border-radius: 12px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--card-border); font-size: 13px; outline: none;">
+            <option value="#64ffda">🟢 ڕەنگێ تیشک (Green)</option>
+            <option value="#fde047">🟡 ڕەنگێ زێری (Gold)</option>
+            <option value="#ff6b6b">🔴 ڕەنگێ سۆر (Coral)</option>
+            <option value="#a29bfe">🟣 ڕەنگێ مۆرتک (Purple)</option>
+        </select>
+        <button onclick="saveUserNote()" class="noti-btn" style="flex: 1; margin: 0; padding: 10px; border-radius: 12px;">✉️ ناما خۆ بنێره</button>
+    </div>
+
+    <div id="notes-container" style="max-height: 220px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; margin-top: 15px; padding-left: 5px;">
+        </div>
+</div>
+
+<script>
+    window.addEventListener('DOMContentLoaded', loadNotes);
+
+    function saveUserNote() {
+        const text = document.getElementById('user-note-text').value.trim();
+        const color = document.getElementById('note-color').value;
+        
+        if (!text) {
+            alert("هیڤیە نامەیەکێ بنڤیسە!");
+            return;
+        }
+
+        const notes = JSON.parse(localStorage.getItem('badinan_notes') || '[]');
+        notes.unshift({ text, color, date: new Date().toLocaleDateString() });
+        
+        localStorage.setItem('badinan_notes', JSON.stringify(notes));
+        document.getElementById('user-note-text').value = '';
+        loadNotes();
+    }
+
+    function loadNotes() {
+        const container = document.getElementById('notes-container');
+        container.innerHTML = '';
+        const notes = JSON.parse(localStorage.getItem('badinan_notes') || '[]');
+
+        if (notes.length === 0) {
+            container.innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 15px;">هێشتا چ نامە نینن، یەکەم کەس بی نامەکێ بهێلی!</p>';
+            return;
+        }
+
+        notes.forEach(note => {
+            const div = document.createElement('div');
+            // دیزاینا زەرفێ نامەیێ (Envelope Style)
+            div.style.background = 'rgba(255, 255, 255, 0.04)';
+            div.style.border = '1px solid rgba(255, 255, 255, 0.08)';
+            div.style.borderRight = `5px solid ${note.color}`;
+            div.style.padding = '14px 16px';
+            div.style.borderRadius = '16px';
+            div.style.fontSize = '14px';
+            div.style.color = 'var(--text-main)';
+            div.style.textAlign = 'right';
+            div.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+            div.style.position = 'relative';
+            
+            div.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                    <span style="font-size: 11px; color: ${note.color}; font-weight: 700; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 6px;">✉️ ناما هێلای</span>
+                    <span style="font-size: 10px; color: var(--text-muted);">${note.date}</span>
+                </div>
+                <p style="margin: 0; line-height: 1.6; word-break: break-word; font-weight: 500;">${note.text}</p>
+            `;
+            container.appendChild(div);
+        });
+    }
+</script>
+<div class="card" style="margin-top: 25px; text-align: right; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--card-border); border-radius: 24px; padding: 25px;">
+    <h3 style="color: var(--accent-color); font-size: 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+        <span>✉️</span> پشکا نامێن هێلای (Wall of Notes)
+    </h3>
+    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.5;">ناما خۆ لێرە بهێلە، دیزاین بکە و بۆ کەسێن دی بهێلە!</p>
+    
+    <textarea id="user-note-text" placeholder="ناما خۆ لێرە بنڤیسە..." style="width: 100%; height: 85px; padding: 12px; border-radius: 14px; border: 1px solid var(--card-border); background: var(--card-bg); color: var(--text-main); font-size: 14px; box-sizing: border-box; resize: none; outline: none; margin-bottom: 12px;"></textarea>
+    
+    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+        <select id="note-color" style="flex: 1; padding: 10px; border-radius: 12px; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--card-border); font-size: 13px; outline: none;">
+            <option value="#64ffda">🟢 ڕەنگێ تیشک (Green)</option>
+            <option value="#fde047">🟡 ڕەنگێ زێری (Gold)</option>
+            <option value="#ff6b6b">🔴 ڕەنگێ سۆر (Coral)</option>
+            <option value="#a29bfe">🟣 ڕەنگێ مۆرتک (Purple)</option>
+        </select>
+        <button onclick="saveUserNote()" class="noti-btn" style="flex: 1; margin: 0; padding: 10px; border-radius: 12px;">✉️ ناما خۆ بنێره</button>
+    </div>
+
+    <div id="notes-container" style="max-height: 220px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; margin-top: 15px; padding-left: 5px;">
+        </div>
+</div>
+
+<script>
+    window.addEventListener('DOMContentLoaded', loadNotes);
+
+    function saveUserNote() {
+        const text = document.getElementById('user-note-text').value.trim();
+        const color = document.getElementById('note-color').value;
+        
+        if (!text) {
+            alert("هیڤیە نامەیەکێ بنڤیسە!");
+            return;
+        }
+
+        const notes = JSON.parse(localStorage.getItem('badinan_notes') || '[]');
+        notes.unshift({ text, color, date: new Date().toLocaleDateString() });
+        
+        localStorage.setItem('badinan_notes', JSON.stringify(notes));
+        document.getElementById('user-note-text').value = '';
+        loadNotes();
+    }
+
+    function loadNotes() {
+        const container = document.getElementById('notes-container');
+        container.innerHTML = '';
+        const notes = JSON.parse(localStorage.getItem('badinan_notes') || '[]');
+
+        if (notes.length === 0) {
+            container.innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 15px;">هێشتا چ نامە نینن، یەکەم کەس بی نامەکێ بهێلی!</p>';
+            return;
+        }
+
+        notes.forEach(note => {
+            const div = document.createElement('div');
+            // دیزاینا زەرفێ نامەیێ (Envelope Style)
+            div.style.background = 'rgba(255, 255, 255, 0.04)';
+            div.style.border = '1px solid rgba(255, 255, 255, 0.08)';
+            div.style.borderRight = `5px solid ${note.color}`;
+            div.style.padding = '14px 16px';
+            div.style.borderRadius = '16px';
+            div.style.fontSize = '14px';
+            div.style.color = 'var(--text-main)';
+            div.style.textAlign = 'right';
+            div.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+            div.style.position = 'relative';
+            
+            div.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                    <span style="font-size: 11px; color: ${note.color}; font-weight: 700; background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 6px;">✉️ ناما هێلای</span>
+                    <span style="font-size: 10px; color: var(--text-muted);">${note.date}</span>
+                </div>
+                <p style="margin: 0; line-height: 1.6; word-break: break-word; font-weight: 500;">${note.text}</p>
+            `;
+            container.appendChild(div);
+        });
+    }
+</script>
+<link rel="icon" type="image/png" href="لینکێ_وێنەیێ_تە_لێرە_دانە.png">
+<div class="top-bar">
+    <div class="logo-area" style="display: flex; align-items: center; gap: 8px;">
+        <!-- لێرە تو دشێی وێنەیەکێ بچووک دانێ -->
+        <img src="لینکێ_وێنەیێ_تە.png" style="width: 24px; height: 24px; border-radius: 50%;">
+        <h1>Badinan Motivation</h1>
+    </div>
+    <button class="circle-btn" onclick="toggleTheme()">🌓</button>
+</div>
 

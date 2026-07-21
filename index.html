@@ -1,3 +1,8 @@
+هەڤالا هێژا، ئەڤ پەیڤە "لطفاً" زمانێ عەرەبییە و واتا و ڕامانا وێ "ب هەناسیەکا خوشی / هیوا دارم / لطفاً" یان ب کوردی "تکایە" دەگەهینێت!
+(ئەڤە پەیڤەک بوو د ئاگەهداریا (Alert) مەدا هەی کو گۆتە تە: تکایە ناڤێ وەرگری بنڤیسە! ژبەرکو بۆکسا ناڤی یا ڤالا بوو).
+و سەبارەت ب خشتەیێ مەزن یێ ڕۆژانە یێ دگەل ستريک و نیشانا راست ✅ (Checkmark):
+من نوکە سیستەمێ خشتەی بۆ تەمامی گۆهۆڕی و مەزن کر؛ نوکە هەر ئێک ژ دەمژمێرێن ڕۆژێ (سبەهی، نیوەڕۆ، ئێڤاری، مەغرەب، شەڤ) دوگمەیەکا ✅ (Done) د دبن دا هەیە، هەر دەمێ تو کارێ خۆ بژمێری و کلیکێ لە سەر بکەی، خشتە دێ هێتە پشتراستکرن، ستريکا ڕۆژانە (Streak) دێ زێدە بیت و ڕەنگێ وێ گۆهۆڕینەکا جوان و سەرنجڕاکێش وەرگریت!
+فەرموو ئەڤە کۆدا تەمام و یا پاک:
 <!DOCTYPE html>
 <html lang="ku" dir="rtl" class="dark">
 <head>
@@ -37,8 +42,8 @@
             <span class="text-xs font-bold tracking-wide">Badinan Motivation</span>
         </div>
         <div class="flex items-center gap-2">
-            <div class="flex items-center gap-1 text-[11px] bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-xl border border-emerald-500/20">
-                <i class="fa-solid fa-fire"></i> <span id="streakCount">1</span> ڕۆژ
+            <div class="flex items-center gap-1 text-[11px] bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-xl border border-emerald-500/20 shadow-inner">
+                <i class="fa-solid fa-fire text-amber-500"></i> <span id="streakCount">1</span> ڕۆژ Streak
             </div>
             <button id="themeToggleBtn" class="w-9 h-9 rounded-xl bg-slate-800 text-amber-400 dark:bg-slate-800 light:bg-slate-200 light:text-amber-600 flex items-center justify-center text-xs transition">
                 <i class="fa-solid fa-moon" id="themeIcon"></i>
@@ -58,7 +63,7 @@
                 <i class="fa-solid fa-gift text-sm"></i> دیاریا نهێنی
             </button>
             <button onclick="switchTab('planner')" id="btnPlanner" class="tab-btn bg-slate-800 text-slate-300 dark:bg-slate-800 dark:text-slate-300 light:bg-slate-200 light:text-slate-700 font-bold py-2.5 px-2 rounded-xl text-xs transition flex flex-col items-center gap-1">
-                <i class="fa-solid fa-calendar-days text-sm"></i> پلانا ڕۆژانە
+                <i class="fa-solid fa-calendar-days text-sm"></i> خشتەیا ڕۆژانە
             </button>
         </div>
 
@@ -87,10 +92,9 @@
             </button>
         </div>
 
-        <!-- بەشێ ٢: دیاریا نهێنی (بۆکسەکا دیاریێ و ڤەکرنا وێ) -->
+        <!-- بەشێ ٢: دیاریا نهێنی -->
         <div id="tabSecrets" class="tab-content hidden bg-slate-900/90 dark:bg-slate-900/90 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-300 rounded-3xl p-5 shadow-2xl space-y-4">
             
-            <!-- ئەگەر لینکا دیاریێ نەهاتبیتە ڤەکرن (فۆرمێ دروستکرنا دیاریێ) -->
             <div id="giftCreatorView" class="space-y-4">
                 <h2 class="text-sm font-bold text-emerald-400 flex items-center gap-2">
                     <i class="fa-solid fa-gift"></i> دروستکرنا بۆکسا دیاریا نهێنی
@@ -99,7 +103,7 @@
                 
                 <div class="space-y-3 text-xs">
                     <div>
-                        <label class="block text-slate-400 light:text-slate-600 mb-1">ناڤێ وەرگری (بۆ نموونە):</label>
+                        <label class="block text-slate-400 light:text-slate-600 mb-1">ناڤێ وەرگری:</label>
                         <input type="text" id="giftRecipient" placeholder="ناڤێ کەسێ بەرانبەر..." class="w-full bg-slate-950/80 dark:bg-slate-950/80 light:bg-slate-100 border border-slate-800 dark:border-slate-800 light:border-slate-300 rounded-xl px-3 py-2 text-slate-200 dark:text-slate-200 light:text-slate-800 focus:outline-none focus:border-emerald-500">
                     </div>
                     <div>
@@ -112,12 +116,10 @@
                 </div>
             </div>
 
-            <!-- ئەگەر وەرگر لینک ڤەکەربیت (دیاریا ئامادەکری) -->
             <div id="giftReceiverView" class="hidden text-center space-y-4 py-4">
                 <h2 id="giftTitle" class="text-sm font-bold text-amber-400">دیاریەک بۆ تە هاتییە! 🎁</h2>
                 <p class="text-xs text-slate-300 light:text-slate-700">کلیکێ ل سەر بۆکسێ بکە دا دیاریا خۆ ڤەکەی:</p>
                 
-                <!-- بۆکسا دیاریێ یا جووڵاو -->
                 <div onclick="openTheGiftBox()" class="gift-box cursor-pointer inline-block bg-gradient-to-tr from-emerald-600 to-cyan-600 p-6 rounded-3xl shadow-2xl border-4 border-amber-300 text-slate-950 my-2">
                     <i class="fa-solid fa-gift text-5xl text-amber-200"></i>
                 </div>
@@ -129,36 +131,74 @@
 
         </div>
 
-        <!-- بەشێ ٣: پلانا ڕۆژانە -->
-        <div id="tabPlanner" class="tab-content hidden bg-slate-900/90 dark:bg-slate-900/90 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-300 rounded-3xl p-5 shadow-2xl space-y-3">
-            <h2 class="text-sm font-bold text-cyan-400 flex items-center gap-2">
-                <i class="fa-solid fa-calendar-days"></i> خشتەیێ پلانا ڕۆژانە یێ تایبەت
-            </h2>
-            <p class="text-[11px] text-slate-400 light:text-slate-600">ل خوارێ پلانا خۆ بۆ هەر دەمەکێ بنڤیسە:</p>
+        <!-- بەشێ ٣: خشتەیا مەزن و ڕۆژانە دگەل سێستەمێ ✅ Streak -->
+        <div id="tabPlanner" class="tab-content hidden bg-slate-900/90 dark:bg-slate-900/90 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-300 rounded-3xl p-5 shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                <h2 class="text-sm font-bold text-cyan-400 flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-check"></i> خشتەیا مەزن و ڕۆژانە
+                </h2>
+                <span class="text-[10px] bg-cyan-500/10 text-cyan-400 px-2 py-0.5 rounded-lg border border-cyan-500/20">هەر ڕۆژەک ✅ خۆ تۆمار بکە</span>
+            </div>
+            <p class="text-[11px] text-slate-400 light:text-slate-600">پلانا خۆ بنڤیسە و ئەگەر تە ب جهـ ئینا، کلیکێ ل سەر ✅ بکە:</p>
             
-            <div class="space-y-2.5 text-xs">
-                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-2.5 rounded-xl border border-slate-800 dark:border-slate-800 light:border-slate-300">
-                    <span class="text-emerald-400 font-bold block mb-1">🌅 سبەهی:</span>
-                    <input type="text" id="planMorning" placeholder="پلانا سبەهیا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none">
+            <div class="space-y-3 text-xs">
+                <!-- سبەهی -->
+                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-3 rounded-2xl border border-slate-800 dark:border-slate-800 light:border-slate-300 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-emerald-400 font-bold"><i class="fa-solid fa-sun"></i> سبەهی:</span>
+                        <button onclick="toggleCheck('morning')" id="checkBtn_morning" class="w-7 h-7 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center transition border border-slate-700 shadow-sm">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                    <input type="text" id="planMorning" placeholder="پلانا سبەهیا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none focus:border-emerald-500">
                 </div>
-                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-2.5 rounded-xl border border-slate-800 dark:border-slate-800 light:border-slate-300">
-                    <span class="text-cyan-400 font-bold block mb-1">☀️ نیوەڕۆ:</span>
-                    <input type="text" id="planNoon" placeholder="پلانا نیوەڕۆیا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none">
+
+                <!-- نیوەڕۆ -->
+                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-3 rounded-2xl border border-slate-800 dark:border-slate-800 light:border-slate-300 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-cyan-400 font-bold"><i class="fa-solid fa-cloud-sun"></i> نیوەڕۆ:</span>
+                        <button onclick="toggleCheck('noon')" id="checkBtn_noon" class="w-7 h-7 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center transition border border-slate-700 shadow-sm">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                    <input type="text" id="planNoon" placeholder="پلانا نیوەڕۆیا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none focus:border-cyan-500">
                 </div>
-                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-2.5 rounded-xl border border-slate-800 dark:border-slate-800 light:border-slate-300">
-                    <span class="text-amber-400 font-bold block mb-1">🌇 ئێڤاری:</span>
-                    <input type="text" id="planEvening" placeholder="پلانا ئێڤاریا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none">
+
+                <!-- ئێڤاری -->
+                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-3 rounded-2xl border border-slate-800 dark:border-slate-800 light:border-slate-300 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-amber-400 font-bold"><i class="fa-solid fa-cloud-moon"></i> ئێڤاری:</span>
+                        <button onclick="toggleCheck('evening')" id="checkBtn_evening" class="w-7 h-7 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center transition border border-slate-700 shadow-sm">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                    <input type="text" id="planEvening" placeholder="پلانا ئێڤاریا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none focus:border-amber-500">
                 </div>
-                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-2.5 rounded-xl border border-slate-800 dark:border-slate-800 light:border-slate-300">
-                    <span class="text-purple-400 font-bold block mb-1">🌆 مەغرەب:</span>
-                    <input type="text" id="planMaghrib" placeholder="پلانا مەغرەبا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none">
+
+                <!-- مەغرەب -->
+                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-3 rounded-2xl border border-slate-800 dark:border-slate-800 light:border-slate-300 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-purple-400 font-bold"><i class="fa-solid fa-moon"></i> مەغرەب:</span>
+                        <button onclick="toggleCheck('maghrib')" id="checkBtn_maghrib" class="w-7 h-7 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center transition border border-slate-700 shadow-sm">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                    <input type="text" id="planMaghrib" placeholder="پلانا مەغرەبا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none focus:border-purple-500">
                 </div>
-                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-2.5 rounded-xl border border-slate-800 dark:border-slate-800 light:border-slate-300">
-                    <span class="text-blue-400 font-bold block mb-1">🌙 شەڤ:</span>
-                    <input type="text" id="planNight" placeholder="پلانا شەڤا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none">
+
+                <!-- شەڤ -->
+                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-3 rounded-2xl border border-slate-800 dark:border-slate-800 light:border-slate-300 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="text-blue-400 font-bold"><i class="fa-solid fa-star-and-crescent"></i> شەڤ:</span>
+                        <button onclick="toggleCheck('night')" id="checkBtn_night" class="w-7 h-7 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center transition border border-slate-700 shadow-sm">
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                    <input type="text" id="planNight" placeholder="پلانا شەڤا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-xl p-2.5 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none focus:border-blue-500">
                 </div>
-                <button onclick="saveMyPlanner()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-2.5 rounded-xl text-xs shadow-md transition">
-                    <i class="fa-solid fa-floppy-disk"></i> پاشەکەفتکرنا خشتەیێ من
+
+                <button onclick="saveMyPlanner()" class="w-full bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold py-3 rounded-xl text-xs shadow-lg transition hover:opacity-90 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-floppy-disk text-sm"></i> پاشەکەفتکرنا خشتەیا ڕۆژانە
                 </button>
             </div>
         </div>
@@ -248,9 +288,13 @@
 
         let currentQuote = quotes[0];
         let favorites = JSON.parse(localStorage.getItem('badinan_favs')) || [];
-        updateFavUI();
+        let plannerChecks = JSON.parse(localStorage.getItem('badinan_checks')) || { morning: false, noon: false, evening: false, maghrib: false, night: false };
+        let streak = parseInt(localStorage.getItem('badinan_streak')) || 1;
 
-        // پشکشکنینا ئایا لینکێ دیاریێ هاتییە ڤەکرن یان نە؟
+        document.getElementById('streakCount').innerText = streak;
+        updateFavUI();
+        updateCheckUI();
+
         window.addEventListener('load', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const giftMsg = urlParams.get('gift');
@@ -265,7 +309,45 @@
                 window.encodedGiftMessage = decodeURIComponent(giftMsg);
                 switchTab('secrets');
             }
+
+            const savedPlanner = JSON.parse(localStorage.getItem('badinan_planner'));
+            if(savedPlanner) {
+                document.getElementById('planMorning').value = savedPlanner.morning || '';
+                document.getElementById('planNoon').value = savedPlanner.noon || '';
+                document.getElementById('planEvening').value = savedPlanner.evening || '';
+                document.getElementById('planMaghrib').value = savedPlanner.maghrib || '';
+                document.getElementById('planNight').value = savedPlanner.night || '';
+            }
         });
+
+        function toggleCheck(timeKey) {
+            plannerChecks[timeKey] = !plannerChecks[timeKey];
+            localStorage.setItem('badinan_checks', JSON.stringify(plannerChecks));
+            updateCheckUI();
+            
+            // ئەگەر هەمی تشت ب هێنە ب جەهـ ئینان، سەتريک بلند دبیت
+            if(Object.values(plannerChecks).every(v => v)) {
+                streak += 1;
+                localStorage.setItem('badinan_streak', streak);
+                document.getElementById('streakCount').innerText = streak;
+                alert('پیرۆزە! تە هەمی پلانا ئەڤرۆ ب سەرکەفتن ب جەهـ ئینا، Streak زێدە بوو! 🔥');
+            }
+        }
+
+        function updateCheckUI() {
+            for (const key in plannerChecks) {
+                const btn = document.getElementById(`checkBtn_${key}`);
+                if (btn) {
+                    if (plannerChecks[key]) {
+                        btn.classList.remove('bg-slate-800', 'text-slate-500');
+                        btn.classList.add('bg-emerald-500', 'text-slate-950', 'shadow-md', 'shadow-emerald-500/30');
+                    } else {
+                        btn.classList.remove('bg-emerald-500', 'text-slate-950', 'shadow-md', 'shadow-emerald-500/30');
+                        btn.classList.add('bg-slate-800', 'text-slate-500');
+                    }
+                }
+            }
+        }
 
         function generateGiftLink() {
             const recipient = document.getElementById('giftRecipient').value;
@@ -352,7 +434,6 @@
             openFavoritesModal();
         }
 
-        // پاشەکەفتکرنا پلانا ڕۆژانە
         function saveMyPlanner() {
             const plannerData = {
                 morning: document.getElementById('planMorning').value,
@@ -362,19 +443,8 @@
                 night: document.getElementById('planNight').value
             };
             localStorage.setItem('badinan_planner', JSON.stringify(plannerData));
-            alert('پلانا ڕۆژانە ب سەرکەفتن هاتە پاشەکەفتکرن! 📅');
+            alert('خشتەیا ڕۆژانە ب سەرکەفتن هاتە پاشەکەفتکرن! 📅');
         }
-
-        window.addEventListener('load', () => {
-            const savedPlanner = JSON.parse(localStorage.getItem('badinan_planner'));
-            if(savedPlanner) {
-                document.getElementById('planMorning').value = savedPlanner.morning || '';
-                document.getElementById('planNoon').value = savedPlanner.noon || '';
-                document.getElementById('planEvening').value = savedPlanner.evening || '';
-                document.getElementById('planMaghrib').value = savedPlanner.maghrib || '';
-                document.getElementById('planNight').value = savedPlanner.night || '';
-            }
-        });
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -418,3 +488,4 @@
     </script>
 </body>
 </html>
+

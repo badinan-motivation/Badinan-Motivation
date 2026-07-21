@@ -1,14 +1,3 @@
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "e1f04d52-c71a-4f55-9d70-6e0eff3f690c",
-    });
-  });
-</script>
-
-
 <!DOCTYPE html>
 <html lang="ku" dir="rtl" class="dark">
 <head>
@@ -17,6 +6,18 @@
     <title>Badinan Motivation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- OneSignal SDK -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "e1f04d52-c71a-4f55-9d70-6e0eff3f690c",
+        });
+      });
+    </script>
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -331,7 +332,6 @@
             localStorage.setItem('badinan_checks', JSON.stringify(plannerChecks));
             updateCheckUI();
             
-            // ئەگەر هەمی تشت ب هێنە ب جەهـ ئینان، سەتريک بلند دبیت
             if(Object.values(plannerChecks).every(v => v)) {
                 streak += 1;
                 localStorage.setItem('badinan_streak', streak);
@@ -494,13 +494,3 @@
     </script>
 </body>
 </html>
-
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "e1f04d52-c71a-4f55-9d70-6e0eff3f690c",
-    });
-  });
-</script>

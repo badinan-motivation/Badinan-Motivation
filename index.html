@@ -1,3 +1,8 @@
+دەستخۆش بۆ ڤێ سەرنجا پڕ جهێ خۆ، هەڤال! تو گەلەک یێ راست دکەی. ڕاستە ئەڤە خەلەتییەک بوو؛ نەدڤیا دەستپێکێ ب زورقسی دەستپێکێ پەنجەرەیا ناڤتۆمارکرنێ سەرێ تە بێخیت و سایتێ تە یێ سەرەکی بشێوێنێت.
+مەبەستا تە ئەوە کو سایتێ تە ب جوانی و ب هەمی پشکێن خۆ (کاتژمێر، گۆڕینا ڕەنگی، گوتنێن هاندەر، دلخواز و هتد) ڕاستەوخۆ ڤەبیت، و پشکا "نامەیێن نهێنی" ببێتە بەشەکێ جوان و ئۆپشناڵ (Optional) ل ناڤ سایتێ خۆ، نەک ب زورقسی بێتە پێشیا مێڤانان.
+فەرموو، ئەڤە کۆدێ تەواو یێ سایتێ تە:
+ * سایت ڕاستەوخۆ و ب پاقژی ڤەدبێت بێ چ پەنجەرەیێن ب زور.
+ * پشکا نامەیێن نهێنی و صندوقا نامەیان هەنە، و کەیفا کەسییە کۆ بنڤیسێت یان نامەیان ڤەکەت بێ ئاریشە.
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">
 <head>
@@ -13,9 +18,6 @@
             --text-muted: #8892b0;
             --accent-color: #64ffda;
             --accent-glow: rgba(100, 255, 218, 0.2);
-            --premium-bg: rgba(254, 243, 199, 0.05);
-            --premium-border: rgba(251, 191, 36, 0.3);
-            --premium-text: #fde047;
         }
 
         .light-mode {
@@ -26,9 +28,6 @@
             --text-muted: #64748b;
             --accent-color: #0d9488;
             --accent-glow: rgba(13, 148, 136, 0.2);
-            --premium-bg: rgba(254, 243, 199, 0.6);
-            --premium-border: rgba(217, 119, 6, 0.3);
-            --premium-text: #b45309;
         }
 
         body { 
@@ -203,9 +202,8 @@
             line-height: 1.4;
         }
 
-        /* Modal و پەنجەرەیێن دەرکەتنی */
         .modal-overlay {
-            display: flex;
+            display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.75);
@@ -245,26 +243,11 @@
 </head>
 <body>
 
-    <!-- پەنجەرەیا تومارکرنا ناڤ و کۆدا نهێنی (بۆ ڕێگری ژ تێکچوونا ناڤان) -->
-    <div id="account-modal" class="modal-overlay">
-        <div class="modal-box" style="text-align: center;">
-            <div style="font-size: 32px; margin-bottom: 10px;">🔐</div>
-            <h3 style="color: var(--accent-color); margin-top: 0; font-size: 18px;">چێکرنا ئەکاونتا نهێنی</h3>
-            <p style="font-size: 12px; color: var(--text-muted); line-height: 1.4;">ناڤەکێ بێوێنە (Unique) و کۆدەکێ نهێنی بنڤیسە دا نامە ب دروستی بۆ تە بهێن.</p>
-            
-            <input type="text" id="acc-username" placeholder="ناڤێ تە (بۆ نموونە: HudaSindi)" class="form-input">
-            <input type="password" id="acc-password" placeholder="کۆدا نهێنی (Password)" class="form-input">
-            
-            <button onclick="setupAccount()" style="width: 100%; padding: 10px; background: var(--accent-color); color: #0a192f; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 13px; margin-top: 5px;">تۆمارکرن و دەستپێکرن</button>
-        </div>
-    </div>
-
-    <!-- سەرەتا سایتێ سەرەکی -->
     <div class="card">
         <div class="top-bar">
             <div class="logo-area">
                 <div class="logo-icon">🌙</div>
-                <span id="current-user-display">مێڤان</span>
+                <span>Badinan</span>
             </div>
             <button class="theme-toggle" onclick="toggleTheme()">☀️/🌙 گۆڕینا ڕەنگی</button>
         </div>
@@ -288,13 +271,14 @@
             <button class="fav-btn" id="favToggleBtn" onclick="toggleCurrentFavorite()">⭐ لایڤ</button>
         </div>
 
-        <!-- پشکا هنارتنا نامەیێن نهێنی بۆ ناسیا / هەڤالان -->
+        <!-- پشکا ئۆپشناڵ یا نامەیێن نهێنی -->
         <div class="notes-section">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                <h3 style="color: var(--accent-color); font-size: 13px; margin: 0;">💌 نامەیێن نهێنی بۆ هەڤالان</h3>
-                <span style="font-size: 10px; color: var(--text-muted); cursor: pointer; text-decoration: underline;" onclick="openInboxModal()">صندوقا من (<span id="inbox-count">0</span>)</span>
+                <h3 style="color: var(--accent-color); font-size: 13px; margin: 0;">💌 نامەیێن نهێنی</h3>
+                <span style="font-size: 10px; color: var(--text-muted); cursor: pointer; text-decoration: underline;" onclick="openInboxCheck()">خاندنا نامەیێن من 📥</span>
             </div>
-            <input type="text" id="target-user" placeholder="ناڤێ یوزەرا کەسی (بۆ نموونە: HudaSindi)" class="form-input" style="margin-bottom: 6px; padding: 6px; font-size: 11px;">
+            <input type="text" id="sender-name" placeholder="ناڤێ تە (ژلایێ کێ؟)" class="form-input" style="margin-bottom: 6px; padding: 6px; font-size: 11px;">
+            <input type="text" id="target-user" placeholder="بۆ کێ؟ (ناڤێ وەرگرکار)" class="form-input" style="margin-bottom: 6px; padding: 6px; font-size: 11px;">
             <textarea id="private-msg-text" placeholder="ناما خۆ لێرە بنڤیسە..." style="width: 100%; height: 35px; padding: 6px; border-radius: 8px; border: 1px solid var(--card-border); background: var(--card-bg); color: var(--text-main); font-size: 11px; box-sizing: border-box; resize: none; outline: none; margin-bottom: 6px;"></textarea>
             <button onclick="sendSecretMessage()" style="width: 100%; padding: 6px; font-size: 11px; background: var(--accent-color); color: #0a192f; border:none; border-radius:6px; font-weight:bold; cursor:pointer;">هنارتنا نامەیێ</button>
         </div>
@@ -306,7 +290,7 @@
     </div>
 
     <!-- پەنجەرەیا دلخوازان -->
-    <div id="fav-modal" class="modal-overlay" style="display: none;" onclick="document.getElementById('fav-modal').style.display='none'">
+    <div id="fav-modal" class="modal-overlay" onclick="document.getElementById('fav-modal').style.display='none'">
         <div class="modal-box" onclick="event.stopPropagation()">
             <h3 style="color: var(--accent-color); margin-top: 0; font-size: 15px;">⭐ پەیڤێن دلخوازێن تە</h3>
             <div id="fav-list-container" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; max-height: 40vh; overflow-y: auto;"></div>
@@ -314,61 +298,34 @@
         </div>
     </div>
 
-    <!-- صندوقا نامەیێن من -->
-    <div id="inbox-modal" class="modal-overlay" style="display: none;" onclick="document.getElementById('inbox-modal').style.display='none'">
+    <!-- پەنجەرەیا ڤەکرنا صندوقا نامەیان ب ناڤی -->
+    <div id="inbox-modal" class="modal-overlay" onclick="document.getElementById('inbox-modal').style.display='none'">
         <div class="modal-box" onclick="event.stopPropagation()">
             <h3 style="color: var(--accent-color); margin-top: 0; font-size: 15px;">📥 نامەیێن نهێنی یێن بۆ تە هاتین</h3>
-            <div id="inbox-list-container" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; max-height: 40vh; overflow-y: auto;"></div>
-            <button onclick="document.getElementById('inbox-modal').style.display='none'" style="width:100%; padding:8px; background:var(--accent-color); color:#0a192f; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">گرتن</button>
+            <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">ناڤێ خۆ بنڤیسە دا نامەیێن خۆ ببینی:</div>
+            <input type="text" id="check-my-name" placeholder="ناڤێ تە (بۆ نموونە: Huda)" class="form-input" style="margin-bottom: 8px;">
+            <button onclick="loadMyMessages()" style="width:100%; padding:6px; background:var(--accent-color); color:#0a192f; border:none; border-radius:6px; font-weight:bold; cursor:pointer; margin-bottom: 10px;">نیشاندانا نامەیان</button>
+            
+            <div id="inbox-list-container" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; max-height: 30vh; overflow-y: auto;"></div>
+            <button onclick="document.getElementById('inbox-modal').style.display='none'" style="width:100%; padding:8px; background:rgba(255,255,255,0.1); color:var(--text-main); border:1px solid var(--card-border); border-radius:8px; font-weight:bold; cursor:pointer;">گرتن</button>
         </div>
     </div>
 
     <script>
-        let currentUser = null;
-
-        window.addEventListener('DOMContentLoaded', () => {
-            let savedUser = localStorage.getItem('badinan_active_user');
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                document.getElementById('current-user-display').textContent = currentUser.name;
-                document.getElementById('account-modal').style.display = 'none';
-                updateInboxCount();
-            } else {
-                document.getElementById('account-modal').style.display = 'flex';
-            }
-        });
-
-        function setupAccount() {
-            let name = document.getElementById('acc-username').value.trim();
-            let pass = document.getElementById('acc-password').value.trim();
-            if(!name || !pass) {
-                alert("هیڤیە ناڤ و کۆدا نهێنی بنڤیسە!");
-                return;
-            }
-            currentUser = { name, pass };
-            localStorage.setItem('badinan_active_user', JSON.stringify(currentUser));
-            document.getElementById('current-user-display').textContent = name;
-            document.getElementById('account-modal').style.display = 'none';
-            updateInboxCount();
-        }
-
         function sendSecretMessage() {
+            let sender = document.getElementById('sender-name').value.trim();
             let target = document.getElementById('target-user').value.trim();
             let msg = document.getElementById('private-msg-text').value.trim();
             
-            if(!target || !msg) {
-                alert("هیڤیە ناڤێ کەسی و نامێ بنڤیسە!");
-                return;
-            }
-            if(!currentUser) {
-                alert("بەری نامەیێ بنێری، پێدڤیە ئەکاونتێ خۆ چێکەی!");
+            if(!sender || !target || !msg) {
+                alert("هیڤیە ناڤێ خۆ، ناڤێ وەرگری و نامێ پڕ بکە!");
                 return;
             }
 
             let allMessages = JSON.parse(localStorage.getItem('badinan_secret_messages') || '[]');
             allMessages.push({
                 to: target.toLowerCase(),
-                from: currentUser.name,
+                from: sender,
                 text: msg,
                 date: new Date().toLocaleDateString()
             });
@@ -379,18 +336,27 @@
             alert("✨ ناما تە ب سەرکەفتن بۆ (" + target + ") هاتە هنارتن!");
         }
 
-        function openInboxModal() {
-            if(!currentUser) return;
+        function openInboxCheck() {
+            document.getElementById('inbox-modal').style.display = 'flex';
+        }
+
+        function loadMyMessages() {
+            let myName = document.getElementById('check-my-name').value.trim().toLowerCase();
             let container = document.getElementById('inbox-list-container');
             container.innerHTML = '';
             
+            if(!myName) {
+                alert("هیڤیە ناڤێ خۆ بنڤیسە!");
+                return;
+            }
+
             let allMessages = JSON.parse(localStorage.getItem('badinan_secret_messages') || '[]');
-            let myMessages = allMessages.filter(m => m.to === currentUser.name.toLowerCase());
+            let myMessages = allMessages.filter(m => m.to === myName);
             
             if(myMessages.length === 0) {
-                container.innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center;">هێشتا چ نامە بۆ تە نەهاتینە!</p>';
+                container.innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center;">هێشتا چ نامە بۆ ڤی ناڤی نەهاتینە!</p>';
             } else {
-                myMessages.forEach((m, i) => {
+                myMessages.forEach((m) => {
                     let div = document.createElement('div');
                     div.style.background = 'rgba(255,255,255,0.05)';
                     div.style.padding = '8px';
@@ -401,14 +367,6 @@
                     container.appendChild(div);
                 });
             }
-            document.getElementById('inbox-modal').style.display = 'flex';
-        }
-
-        function updateInboxCount() {
-            if(!currentUser) return;
-            let allMessages = JSON.parse(localStorage.getItem('badinan_secret_messages') || '[]');
-            let count = allMessages.filter(m => m.to === currentUser.name.toLowerCase()).length;
-            document.getElementById('inbox-count').textContent = count;
         }
 
         // گۆڕینا ڕەنگی (Dark / Light Mode)
@@ -479,7 +437,6 @@
             updateFavButtonState();
         }
 
-        // سیستمێ دلخوازان (Favorites)
         function getFavorites() {
             return JSON.parse(localStorage.getItem('badinan_favorites') || '[]');
         }
@@ -526,7 +483,7 @@
                     div.style.fontSize = '12px';
                     div.style.color = 'var(--text-main)';
                     div.style.cursor = 'pointer';
-                    div.textContent = `${i+1}. `${fav}`;
+                    div.textContent = `${i+1}. ${fav}`;
                     div.onclick = () => {
                         currentQuote = fav;
                         document.getElementById('main-text').textContent = currentQuote;
@@ -541,3 +498,4 @@
     </script>
 </body>
 </html>
+

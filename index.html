@@ -447,59 +447,7 @@
             <option value="#ff6b6b">ڕەنگێ سۆر (Coral)</option>
             <option value="#a29bfe">ڕەنگێ مۆرتک (Purple)</option>
         </select>
-        <button onclick="saveUserNote()" class="noti-btn" style="flex: 1; margin: 0; padding: 8px;">ناما خۆ بینڤە</button>
-    </div>
 
-    <!-- دیمەنێ نامێن خەلکی -->
-    <div id="notes-container" style="max-height: 150px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-top: 15px;">
-        <!-- نامە لێرە دێ هێنە نیشاندان -->
-    </div>
-</div>
-
-<script>
-    // بارکرنا نامەیان دەمێ سایت دەکەڤیت
-    window.addEventListener('DOMContentLoaded', loadNotes);
-
-    function saveUserNote() {
-        const text = document.getElementById('user-note-text').value.trim();
-        const color = document.getElementById('note-color').value;
-        
-        if (!text) {
-            alert("هیڤیە نامەیەکێ بنڤیسە!");
-            return;
-        }
-
-        const notes = JSON.parse(localStorage.getItem('badinan_notes') || '[]');
-        notes.unshift({ text, color, date: new Date().toLocaleDateString() });
-        
-        localStorage.setItem('badinan_notes', JSON.stringify(notes));
-        document.getElementById('user-note-text').value = '';
-        loadNotes();
-    }
-
-    function loadNotes() {
-        const container = document.getElementById('notes-container');
-        container.innerHTML = '';
-        const notes = JSON.parse(localStorage.getItem('badinan_notes') || '[]');
-
-        if (notes.length === 0) {
-            container.innerHTML = '<p style="font-size: 12px; color: var(--text-muted); text-align: center;">هێشتا چ نامە نینن، یەکەم کەس بی!</p>';
-            return;
-        }
-
-        notes.forEach(note => {
-            const div = document.createElement('div');
-            div.style.background = 'rgba(0, 0, 0, 0.15)';
-            div.style.borderRight = `4px solid ${note.color}`;
-            div.style.padding = '10px';
-            div.style.borderRadius = '8px';
-            div.style.fontSize = '13px';
-            div.style.color = 'var(--text-main)';
-            div.style.textAlign = 'right';
-            div.innerHTML = `<strong>ناما هێلای:</strong> ${note.text} <div style="font-size: 10px; color: var(--text-muted); margin-top: 4px;">${note.date}</div>`;
-            container.appendChild(div);
-        });
-    }
 </script>
 <div class="card" style="margin-top: 25px; text-align: right; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--card-border); border-radius: 24px; padding: 25px;">
     <h3 style="color: var(--accent-color); font-size: 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">

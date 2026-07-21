@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Badinan Motivation</title>
 
-    <!-- OneSignal SDK Integration -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
       window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -20,190 +19,56 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap');
-        body { font-family: 'Vazirmatn', sans-serif; }
+        body { font-family: 'Vazirmatn', sans-serif; transition: background 0.3s, color 0.3s; }
+        
+        /* Light Theme Styles */
+        body.light-theme {
+            background-color: #f8fafc !important;
+            color: #0f172a !important;
+        }
+        body.light-theme .card-bg {
+            background-color: #ffffff !important;
+            border-color: #e2e8f0 !important;
+            color: #0f172a !important;
+        }
+        body.light-theme .box-bg {
+            background-color: #f1f5f9 !important;
+            border-color: #cbd5e1 !important;
+            color: #334155 !important;
+        }
+        body.light-theme input, body.light-theme textarea {
+            background-color: #ffffff !important;
+            border-color: #cbd5e1 !important;
+            color: #0f172a !important;
+        }
+        body.light-theme .text-slate-200, body.light-theme .text-slate-300, body.light-theme .text-slate-400 {
+            color: #475569 !important;
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-white min-h-screen flex flex-col items-center justify-center p-4">
-    <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
+
+    <div id="introSlide" class="fixed inset-0 bg-slate-950 z-50 flex flex-col items-center justify-center p-6 text-center transition-opacity duration-700">
+        <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl animate-pulse">
+            <div class="w-16 h-16 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-seedling"></i>
+            </div>
+            <h2 id="slideTitle" class="text-2xl font-bold text-white mb-3">بەخێر هاتن بۆ Badinan Motivation</h2>
+            <p id="slideDesc" class="text-sm text-slate-300 mb-6 leading-relaxed">گەشتەکا بەرەف هێز، ئارامی و سەرکەفتنێ... ئامادە بە بۆ گۆهۆڕینێ!</p>
+            <button id="nextSlideBtn" class="bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-bold py-3 px-6 rounded-2xl w-full transition shadow-lg">
+                دەستپێکرنا گەشتێ ✨
+            </button>
+        </div>
+    </div>
+
+    <div class="max-w-md w-full card-bg bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
         
-        <!-- Header / Theme & Favorites -->
         <div class="flex justify-between items-center mb-6">
-            <button id="themeToggle" class="bg-slate-800 hover:bg-slate-700 text-xs px-3 py-2 rounded-full transition flex items-center gap-2">
+            <button id="themeToggle" class="box-bg bg-slate-800 hover:bg-slate-700 text-xs px-3 py-2 rounded-full transition flex items-center gap-2">
                 <i class="fa-solid fa-moon text-yellow-400" id="themeIcon"></i>
-                <span id="themeText">گۆڕینا ڕەنگی</span>
+                <span id="themeText">تاریک / ڕۆن</span>
             </button>
             <h1 class="text-lg font-bold tracking-wide">Badinan Motivation</h1>
             <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
-                <i class="fa-solid fa-moon"></i>
+                <i class="fa-solid fa-bolt"></i>
             </div>
-        </div>
-
-        <!-- Streak Counter & Favorites link -->
-        <div class="flex justify-between items-center text-sm text-slate-400 mb-4 px-2">
-            <span>🔥 ڕۆژێن بەردەوام: <strong id="streakCount" class="text-white">1</strong> ڕۆژ</span>
-            <button id="favoritesBtn" class="text-amber-400 hover:underline">
-                <i class="fa-solid fa-star"></i> دلخواز (<span id="favCount">0</span>)
-            </button>
-        </div>
-
-        <!-- Realtime Clock Box -->
-        <div class="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-5 text-center mb-6">
-            <div id="liveClock" class="text-4xl font-mono font-bold tracking-wider text-cyan-400 mb-1">00:00:00</div>
-            <div id="timeGreeting" class="text-xs text-slate-400">بارکردن...</div>
-        </div>
-
-        <!-- Daily Motivation Quote -->
-        <div class="text-center mb-6 min-h-[70px] flex items-center justify-center">
-            <p id="quoteText" class="text-sm font-medium text-slate-200 leading-relaxed px-2">"ئەڤرۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!"</p>
-        </div>
-
-        <!-- Actions -->
-        <div class="flex gap-3 mb-6">
-            <button id="likeBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-4 py-3 rounded-xl transition flex items-center justify-center gap-2">
-                <i class="fa-regular fa-star text-amber-400" id="likeIcon"></i> لایف
-            </button>
-            <button id="newQuoteBtn" class="flex-1 bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
-                پەیڤین هاندەر
-            </button>
-        </div>
-
-        <!-- Secret Anonymous Message Box -->
-        <div class="bg-slate-950/40 border border-slate-800/60 rounded-2xl p-4">
-            <div class="flex justify-between items-center mb-3">
-                <span class="text-xs font-semibold text-slate-300">💌 نامەیێن نهێنی</span>
-                <button id="viewMessagesBtn" class="text-[11px] text-cyan-400 hover:underline">خاندنا نامەیێن من</button>
-            </div>
-            <div class="space-y-3">
-                <input type="text" id="senderName" placeholder="ناڤێ تە (ژلایی کی؟)" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
-                <input type="text" id="receiverName" placeholder="بۆ کی؟ (ناڤێ وەردەگرار)" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
-                <textarea id="secretMessage" placeholder="ناما خۆ لێرە بنڤیسە..." rows="2" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 resize-none"></textarea>
-                <button id="sendSecretBtn" class="w-full bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-bold py-2.5 rounded-xl text-xs transition shadow-md">هنارتنا نامەیێ</button>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="text-center mt-6 text-[10px] text-slate-500">
-            Created by: <span class="text-slate-400 font-medium">Huda Shahin sindi</span><br>
-            هەمی ماف پاراستینە © 2026
-        </div>
-
-    </div>
-
-    <script>
-        // Real-time Clock & Greeting logic
-        function updateClock() {
-            const now = new Date();
-            const hours = now.getHours();
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            
-            document.getElementById('liveClock').innerText = `${String(hours).padStart(2, '0')}:${minutes}:${seconds}`;
-            
-            let greeting = "ڕۆژا تە ب خێر ✨";
-            if (hours >= 5 && hours < 12) {
-                greeting = "سبێدەکە تەمامە، ب هێز دەست پێ بکە! 🌅";
-            } else if (hours >= 12 && hours < 17) {
-                greeting = "نیڤڕۆ باش، بەردەوام بە لە سەرکەفتنێ! ☀️";
-            } else if (hours >= 17 && hours < 21) {
-                greeting = "ئێڤاریا تە پڕی هێز و ئارامی بێت! 🌇";
-            } else {
-                greeting = "شەڤەکا ئارام بۆ تە، پشووەکە شایستە یە! 🌙";
-            }
-            document.getElementById('timeGreeting').innerText = greeting;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // Complete Quotes Array (Includes all requested motivational lines)
-        const quotes = [
-            "ئەڤرۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!",
-            "تو گەلەک ژ هندێ ب هێزتری تو دەستا ب داهێلی.",
-            "بخۆ بژی، نە بۆ ڕازیکرنا خەڵکی.",
-            "هەر نوکە دەست پێ بکە، چ جاران درەنگ نینە.",
-            "تو یا ب هێزی، باوەریێ ب شیانێن خۆ بینە.",
-            "ئەڤرۆ دەرفەتەکا نووی یە بۆ هندێ تو بگەهیە حەزێن خۆ.",
-            "خەونێن تە مەزنن، هەولدانێن خۆ ژی مەزنتر لێ بکە.",
-            "تو داهێنەرا ژیانا خۆیی، جوان ڕەنگ بکە.",
-            "هەر تشتەکێ ئەڤرۆ دکەی، سوبە دێ پێ کەیفخۆش بی.",
-            "تو ب تنێ دشێی ژیانا خۆ بگۆهۆڕی، دەست پێ بکە.",
-            "ئارام بە، خودێ دێ دەرگەهێن خێڕێ بۆ تە ڤەکەت.",
-            "پێنگاڤەکا بچووک باشترە ژ ڕاوەستانێ.",
-            "تو ژ هەژی باشترین تشتی د ژیانێ دا.",
-            "دەست ژ هیڤیێن خۆ بەرنەدە، تو کەسەک خودان شیانی.",
-            "ئەڤرۆ کار بکە، دا کو سوبە شانازیێ ب خۆ بەی.",
-            "ترسێ ژ دلێ خۆ دەر بێخە و بەرەف پێش هەرە.",
-            "ماندیبوونا ئەڤرۆ، دێ بیتە کەیفخۆشیا سوبەهی.",
-            "کەسەک نینە شوینا تە شەڕی بۆ خەونێن تە بکەت.",
-            "بڕیارێ بدە و چو جاران سستیێ تێدا نەکە.",
-            "هەر دەمەکێ تو تێدا دژی، دەمەکێ زێڕینە.",
-            "ژ دەستپێکرنا نوو نەترسە، ئەڤە دەرفەتا تە یە.",
-            "ئەڤرۆ یا پڕە ژ وزە و هێزێ، بکاربینە!",
-            "تو یا بڕیاردەری، چو هێز نەشێن تە ڕاگرن.",
-            "هەول بدە ئەڤرۆ باشتر بی ژ دوهی.",
-            "سەبر کلیلا هەر دەرگەهەکەکێ داخستی یە.",
-            "ب دڵسۆزی کار بکە، ئەنجام دێ تە مەندەهوش کەن.",
-            "تو یا تایبەتی، چو کەس وەک تە نین.",
-            "ژیان یا کورتە، ب کەیف و سەرکەفتن دەرباز بکە.",
-            "سەرکەفتن ناهێت، پێدڤییە تو بۆ بچی.",
-            "خودێ دگەل تە یە، چ خەمان نەخۆ.",
-            "تو خودان ئیرادەیەکا بهێزی.",
-            "بێدەنگ کار بکە، بهێڵە دەنگێ سەرکەفتنا تە بڵند ببیت.",
-            "هەر ڕۆژەکا نوو، شانسەک نوو یە بۆ سەرکەفتنێ.",
-            "پاشەڕۆژ یا وان کەسانە یێن باوەری ب خەونێن خۆ هەی.",
-            "ئارمانجێن مەزن قوربانیێن مەزن دڤێن.",
-            "تو ژ وێ ب هێزتری یا دیار دکەی.",
-            "ئارمانج بێ پلان، تنێ خەونەکە.",
-            "بچووکترین پێنگاڤ ژی باشترە ژ جهەکێ دیار.",
-            "کەسێ نەکە خودانێ بریارێن خۆ؛ ژیانا تە یا تە یە و کەس ماف نینە تێک بدەت.",
-            "تو نە مەجبووری کەسەکێ ژ خۆ ڕازیکەی، گرنگ ئەوە تو ژ خۆ ڕازی بی و ئەڤە بەسە.",
-            "هندەک جار دوورکەفتنا ژ خەلکی، مەزنترین دیارییە تو ددەیه‌ گیانێ خۆ.",
-            "تو گەلەک ژ هندێ بهاتری کو دەمێ خۆ بۆ کەسێن بێ مفا تەرخان بکەی.",
-            "تشتێ هەر گرنگ ل ڤێ جیهانێ، ئارامیا مێشکێ تە یە؛ هەر تشتێ وی تێک بدەت، ژێ دوور بکەڤە.",
-            "کەسێن نەرێنی تنێ دڤێن هێزا تە ببڕن؛ نەهێلە ئارامیا ڕۆژا تە تێک بدەن.",
-            "هەر دەمێ تو هەول ددەی هەمی کەسی ڕازی بکەی، وی دەمی تو یێ خۆ ژ دەست ددەی.",
-            "دەمێ خۆ بۆ کەسێن بێ مفا تەرخان نەکە.",
-            "تشتێ هەرە خراب ئەوە تو ژیانا خۆ ب ڕازیکرنا خەلکی ڤە بۆرینی.",
-            "دوورکەفتنا ژ کەسێن نەرێنی، نیڤا سەرکەفتن و ئارامیا تە یە.",
-            "خەونێن تە ژ ڕایێن خەلکی گرانبەها ترن؛ لدووڤ دەنگێ دلێ خوە هەرە نەک بۆچونا خەلکی.",
-            "گۆتنا \"نەخێر\" بۆ هەر ژینگەهەکا کو ڕەخنەیێن نەدرۆست ل تە بگرن و باوەرییا تە ب خۆ بشکینن.",
-            "دانانا سنورێن توند دگەل دەوروبەرێن نەرێنی بۆ هندێ ڕۆژا تە ب کەیف و بێ کێشە دەرباز ببێت."
-        ];
-
-        document.getElementById('newQuoteBtn').addEventListener('click', () => {
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            document.getElementById('quoteText').innerText = `"${quotes[randomIndex]}"`;
-        });
-
-        // Simple Favorites toggle
-        let isFav = false;
-        document.getElementById('likeBtn').addEventListener('click', () => {
-            isFav = !isFav;
-            const icon = document.getElementById('likeIcon');
-            const favCount = document.getElementById('favCount');
-            if(isFav) {
-                icon.className = "fa-solid fa-star text-amber-400";
-                favCount.innerText = "1";
-            } else {
-                icon.className = "fa-regular fa-star text-amber-400";
-                favCount.innerText = "0";
-            }
-        });
-
-        // Secret message action simulation
-        document.getElementById('sendSecretBtn').addEventListener('click', () => {
-            const sender = document.getElementById('senderName').value;
-            const receiver = document.getElementById('receiverName').value;
-            const msg = document.getElementById('secretMessage').value;
-            
-            if(!sender || !receiver || !msg) {
-                alert('هیچ خانەیەک بێ ڤالا نەهێلە، هەمیان تژی بکە!');
-                return;
-            }
-            alert('ناما تە ب سەرکەفتیانە هاتە هنارتن! 💌');
-            document.getElementById('senderName').value = '';
-            document.getElementById('receiverName').value = '';
-            document.getElementById('secretMessage').value = '';
-        });
-    </script>
-</body>
-</html>

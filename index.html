@@ -86,32 +86,33 @@
             </button>
         </div>
 
-        <div class="box-bg bg-slate-950/40 border border-slate-800/60 rounded-2xl p-4 mb-6">
-            <div class="flex justify-between items-center mb-3">
-                <span class="text-xs font-semibold">💌 نامەیێن نهێنی (ب ناڤێ سەنتەری یۆزەرنەیم)</span>
-                <span id="userStatus" class="text-[10px] text-emerald-400">تۆ نە تۆمارکری یی</span>
+        <div class="box-bg bg-slate-950/40 border border-slate-800/60 rounded-2xl p-3 mb-6">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-xs font-semibold">💌 نامەیێن نهێنی (پێدڤییە هەردو کەس تۆمارکری بن)</span>
+                <span id="userStatus" class="text-[10px] text-emerald-400">نە تۆمارکری</span>
             </div>
             
-            <div id="accountBox" class="mb-3 p-2 bg-slate-900/50 rounded-xl border border-slate-800">
-                <input type="text" id="myUsernameInput" placeholder="يۆزەرنەیمێ خۆ بنڤیسە (بۆ نموونە: huda_sindi)" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2 py-1.5 text-xs text-white mb-2">
-                <button id="registerUserBtn" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-1.5 rounded-lg text-xs transition">چێکرنا حسابەکێ بۆ خۆ</button>
+            <div id="accountBox" class="mb-2 p-2 bg-slate-900/50 rounded-xl border border-slate-800">
+                <input type="text" id="myUsernameInput" placeholder="يۆزەرنەیمێ خۆ بنڤیسە (بۆ نموونە: huda_sindi)" class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2 py-1 text-xs text-white mb-1.5">
+                <button id="registerUserBtn" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-1 rounded-lg text-xs transition">تۆمارکرنا حسابا من</button>
             </div>
 
-            <div class="space-y-3">
-                <input type="text" id="receiverUsername" placeholder="يۆزەرنەیمێ وەرگری (بۆ کی؟)" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500">
-                <textarea id="secretMessage" placeholder="ناما خۆ ل ڤێرێ بنڤیسە..." rows="2" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 resize-none"></textarea>
-                <button id="sendSecretBtn" class="w-full bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-bold py-2.5 rounded-xl text-xs transition shadow-md">هنارتنا نامەیێ ب سەلامەتی</button>
+            <div class="space-y-2">
+                <input type="text" id="receiverUsername" placeholder="يۆزەرنەیمێ وەرگری (بۆ کی؟)" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500">
+                <textarea id="secretMessage" placeholder="ناما خۆ ل ڤێرێ بنڤیسە..." rows="1" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500 resize-none"></textarea>
+                <button id="sendSecretBtn" class="w-full bg-emerald-400 hover:bg-emerald-500 text-slate-950 font-bold py-2 rounded-xl text-xs transition shadow-md">هنارتنا نامەیێ</button>
             </div>
         </div>
 
-        <div class="box-bg bg-slate-950/50 border border-slate-800/80 rounded-2xl p-4 text-center">
-            <div class="flex items-center justify-center gap-2 text-emerald-400 font-bold text-xs mb-1">
-                <i class="fa-solid fa-feather"></i> گوتنێن هاندەر بۆ تە
+        <!-- Premium Feature Section -->
+        <div class="box-bg bg-slate-950/40 border border-slate-800/60 rounded-2xl p-3 mb-4 text-center">
+            <div class="flex items-center justify-center gap-2 text-amber-400 font-bold text-xs mb-1">
+                <i class="fa-solid fa-crown"></i> بەشێ پریمیوم (تايبەت)
             </div>
-            <p class="text-[11px] text-slate-300 leading-relaxed">"ئارامیا ڕۆژا تە مەزنترین دەستکەفتە؛ دوورکەڤە ژ کەسێن نەرێنی و ب تنێ گرنگی ب خەونێن خۆ بدە."</p>
+            <p class="text-[11px] text-slate-400 italic">هێشتا نە هاتیە جێبە جێکرن</p>
         </div>
 
-        <div class="text-center mt-6 text-[10px] text-slate-500">
+        <div class="text-center mt-4 text-[10px] text-slate-500">
             Created by: <span class="text-slate-400 font-medium">Huda Shahin Sindi</span><br>
             هەمی ماف پاراستینە © 2026
         </div>
@@ -128,10 +129,10 @@
             document.body.classList.toggle('light-theme');
             if(document.body.classList.contains('light-theme')) {
                 themeIcon.className = "fa-solid fa-sun text-orange-400";
-                themeText.innerText = " ڕۆن";
+                themeText.innerText = "ڕۆن";
             } else {
                 themeIcon.className = "fa-solid fa-moon text-yellow-400";
-                themeText.innerText = "تاری / ڕۆن";
+                themeText.innerText = "تاریک / ڕۆن";
             }
         });
 
@@ -159,7 +160,7 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Pure Badini Motivation Quotes Array
+        // Complete Pure Badini Motivation Quotes Array (Combined & Cleaned)
         const quotes = [
             "ئەڤڕۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!",
             "بخۆ بژی، نە بۆ ڕازیکرنا خەڵکی.",
@@ -244,29 +245,29 @@
         if(myRegisteredUser) {
             myUsernameInput.value = myRegisteredUser;
             myUsernameInput.disabled = true;
-            registerUserBtn.innerText = "حسابێ تە فعالە (" + myRegisteredUser + ")";
+            registerUserBtn.innerText = "حساب فعالە (" + myRegisteredUser + ")";
             registerUserBtn.classList.replace('bg-cyan-600', 'bg-emerald-600');
-            userStatus.innerText = "تۆ تۆمارکری یی";
+            userStatus.innerText = "تۆمارکری یی";
         }
 
         registerUserBtn.addEventListener('click', () => {
             const uName = myUsernameInput.value.trim().toLowerCase();
             if(!uName) {
-                alert('چ یۆزەرنەیم نین! یۆزەرنەیمەکی بنڤیسە.');
+                alert('يۆزەرنەیمەکێ دروست بنڤیسە!');
                 return;
             }
             localStorage.setItem('badinan_user', uName);
             myRegisteredUser = uName;
             myUsernameInput.disabled = true;
-            registerUserBtn.innerText = "حسابێ تە فعالە (" + uName + ")";
+            registerUserBtn.innerText = "حساب فعالە (" + uName + ")";
             registerUserBtn.classList.replace('bg-cyan-600', 'bg-emerald-600');
-            userStatus.innerText = "تۆ تۆمارکری یی";
-            alert('حسابا تە ب سەرکەفتیانە هاتە دروستکرن و یۆزەرنەیمێ تە هاتە گرتن! 🎉');
+            userStatus.innerText = "تۆمارکری یی";
+            alert('حسابا تە ب سەرکەفتیانە هاتە تۆمارکرن! 🎉');
         });
 
         document.getElementById('sendSecretBtn').addEventListener('click', () => {
             if(!myRegisteredUser) {
-                alert('ژبەری هنارتنا نامەیێ، پێدڤییە دەستپێکێ حسابەکێ بۆ خۆ ل ژوور دروست کەی!');
+                alert('ژبەری هنارتنا نامەیێ، پێدڤییە دەستپێکێ حسابا خۆ ل ژوور تۆمار کەی!');
                 return;
             }
             const receiver = document.getElementById('receiverUsername').value.trim().toLowerCase();
@@ -277,7 +278,7 @@
                 return;
             }
 
-            alert(`پەیام ب سەرکەفتیانە و ب دڵنیایی گەهشتە يۆزەرنەیمێ (${receiver})! پشتڕاست بە کو نامە گەهشتیە دەستێ وی. 💌`);
+            alert(`پەیام ب سەرکەفتیانە گەهشتە يۆزەرنەیمێ (${receiver})! 💌`);
             document.getElementById('receiverUsername').value = '';
             document.getElementById('secretMessage').value = '';
         });

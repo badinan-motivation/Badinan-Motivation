@@ -21,12 +21,17 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap');
         body { font-family: 'Vazirmatn', sans-serif; }
+        .gift-box { animation: bounce 2s infinite; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-slate-100 dark:from-slate-950 dark:via-blue-950 dark:to-slate-900 light:from-slate-50 light:via-blue-50 light:to-slate-100 light:text-slate-900 min-h-screen flex flex-col items-center justify-between p-4 transition-colors duration-300">
+<body class="bg-slate-950 text-slate-100 dark:bg-slate-950 dark:text-slate-100 light:bg-slate-100 light:text-slate-900 min-h-screen flex flex-col items-center justify-between p-4 transition-colors duration-300">
 
     <!-- سەرێ سایت & Streak -->
-    <header class="max-w-md w-full flex items-center justify-between bg-slate-900/80 dark:bg-slate-900/80 light:bg-white/80 backdrop-blur-md border border-slate-800 dark:border-slate-800 light:border-slate-200 px-4 py-3 rounded-2xl shadow-lg mb-4">
+    <header class="max-w-md w-full flex items-center justify-between bg-slate-900/90 dark:bg-slate-900/90 light:bg-white backdrop-blur-md border border-slate-800 dark:border-slate-800 light:border-slate-300 px-4 py-3 rounded-2xl shadow-lg mb-4">
         <div class="flex items-center gap-2">
             <span class="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-500 text-slate-950 flex items-center justify-center text-xs font-bold shadow-md">BM</span>
             <span class="text-xs font-bold tracking-wide">Badinan Motivation</span>
@@ -35,7 +40,7 @@
             <div class="flex items-center gap-1 text-[11px] bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-xl border border-emerald-500/20">
                 <i class="fa-solid fa-fire"></i> <span id="streakCount">1</span> ڕۆژ
             </div>
-            <button id="themeToggleBtn" class="w-9 h-9 rounded-xl bg-slate-800 dark:bg-slate-800 light:bg-slate-200 text-amber-400 flex items-center justify-center text-xs transition">
+            <button id="themeToggleBtn" class="w-9 h-9 rounded-xl bg-slate-800 text-amber-400 dark:bg-slate-800 light:bg-slate-200 light:text-amber-600 flex items-center justify-center text-xs transition">
                 <i class="fa-solid fa-moon" id="themeIcon"></i>
             </button>
         </div>
@@ -49,29 +54,25 @@
             <button onclick="switchTab('quotes')" id="btnQuotes" class="tab-btn bg-emerald-500 text-slate-950 font-bold py-2.5 px-2 rounded-xl text-xs transition shadow-md shadow-emerald-500/20 flex flex-col items-center gap-1">
                 <i class="fa-solid fa-bolt text-sm"></i> گۆتنێن هاندەر
             </button>
-            <button onclick="switchTab('secrets')" id="btnSecrets" class="tab-btn bg-slate-800 dark:bg-slate-800 light:bg-slate-200 text-slate-300 dark:text-slate-300 light:text-slate-700 font-bold py-2.5 px-2 rounded-xl text-xs transition flex flex-col items-center gap-1">
-                <i class="fa-solid fa-user-secret text-sm"></i> نامێن نهێنی
+            <button onclick="switchTab('secrets')" id="btnSecrets" class="tab-btn bg-slate-800 text-slate-300 dark:bg-slate-800 dark:text-slate-300 light:bg-slate-200 light:text-slate-700 font-bold py-2.5 px-2 rounded-xl text-xs transition flex flex-col items-center gap-1">
+                <i class="fa-solid fa-gift text-sm"></i> دیاریا نهێنی
             </button>
-            <button onclick="switchTab('planner')" id="btnPlanner" class="tab-btn bg-slate-800 dark:bg-slate-800 light:bg-slate-200 text-slate-300 dark:text-slate-300 light:text-slate-700 font-bold py-2.5 px-2 rounded-xl text-xs transition flex flex-col items-center gap-1">
+            <button onclick="switchTab('planner')" id="btnPlanner" class="tab-btn bg-slate-800 text-slate-300 dark:bg-slate-800 dark:text-slate-300 light:bg-slate-200 light:text-slate-700 font-bold py-2.5 px-2 rounded-xl text-xs transition flex flex-col items-center gap-1">
                 <i class="fa-solid fa-calendar-days text-sm"></i> پلانا ڕۆژانە
             </button>
         </div>
 
         <!-- بەشێ ١: گۆتنێن هاندەر -->
-        <div id="tabQuotes" class="tab-content bg-slate-900/90 dark:bg-slate-900/90 light:bg-white/90 border border-slate-800 dark:border-slate-800 light:border-slate-200 rounded-3xl p-5 shadow-2xl space-y-4">
-            
-            <!-- کاتژمێرا نوکە دگەل پەیڤێن هێز و ئارامی -->
-            <div class="bg-gradient-to-r from-blue-950/60 to-emerald-950/60 border border-cyan-500/20 rounded-2xl p-3 text-center">
-                <div id="liveClock" class="text-xl font-extrabold text-cyan-400 tracking-wider">00:00:00</div>
-                <p id="clockMessage" class="text-[11px] text-slate-300 mt-1">ئەڤڕۆ ڕۆژا تە یە، پڕ هێز و ئارامی بیت! 🌅</p>
+        <div id="tabQuotes" class="tab-content bg-slate-900/90 dark:bg-slate-900/90 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-300 rounded-3xl p-5 shadow-2xl space-y-4">
+            <div class="bg-gradient-to-r from-blue-950/60 to-emerald-950/60 light:from-blue-100 light:to-emerald-100 border border-cyan-500/20 rounded-2xl p-3 text-center">
+                <div id="liveClock" class="text-xl font-extrabold text-cyan-400 light:text-cyan-600 tracking-wider">00:00:00</div>
+                <p id="clockMessage" class="text-[11px] text-slate-300 light:text-slate-700 mt-1">ئەڤڕۆ ڕۆژا تە یە، پڕ هێز و ئارامی بیت! 🌅</p>
             </div>
 
-            <!-- کارتا گۆتنێ -->
-            <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 border border-slate-800 dark:border-slate-800 light:border-slate-200 rounded-2xl p-5 text-center min-h-[120px] flex flex-col justify-center items-center relative shadow-inner">
+            <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-50 border border-slate-800 dark:border-slate-800 light:border-slate-200 rounded-2xl p-5 text-center min-h-[120px] flex flex-col justify-center items-center relative shadow-inner">
                 <p id="quoteText" class="text-xs font-medium leading-relaxed">"ئەڤڕۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!"</p>
             </div>
 
-            <!-- دوگمەیێن کۆنتڕۆلکرنا گۆتنان -->
             <div class="flex gap-2">
                 <button id="newQuoteBtn" class="flex-1 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:opacity-90 text-slate-950 font-bold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs">
                     <i class="fa-solid fa-shuffle"></i> گۆتنا هاندەر
@@ -81,58 +82,90 @@
                 </button>
             </div>
 
-            <!-- دوگمەیا چوونە ناڤ گۆتنێن دڵخواز (تۆتمەیا دڵخوازان) -->
-            <button onclick="openFavoritesModal()" class="w-full bg-gradient-to-r from-cyan-500/10 to-emerald-500/10 border border-cyan-500/30 hover:border-cyan-500/60 text-cyan-300 font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm">
+            <button onclick="openFavoritesModal()" class="w-full bg-gradient-to-r from-cyan-500/10 to-emerald-500/10 border border-cyan-500/30 hover:border-cyan-500/60 text-cyan-300 light:text-cyan-700 font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-2 shadow-sm">
                 <i class="fa-solid fa-bookmark text-amber-400"></i> دیتنا گۆتنێن دڵخواز (<span id="favListCount">0</span>)
             </button>
         </div>
 
-        <!-- بەشێ ٢: نامێن نهێنی (وه‌ک بۆکسەکا هنارتنێ بۆ کەسەکی) -->
-        <div id="tabSecrets" class="tab-content hidden bg-slate-900/90 dark:bg-slate-900/90 light:bg-white/90 border border-slate-800 dark:border-slate-800 light:border-slate-200 rounded-3xl p-5 shadow-2xl space-y-4">
-            <h2 class="text-sm font-bold text-emerald-400 flex items-center gap-2">
-                <i class="fa-solid fa-user-secret"></i> بۆکسێ نامێن نهێنی
-            </h2>
-            <p class="text-[11px] text-slate-400">نامەیەکا نهێنی یان هاندەر بنڤیسە و بۆ کەسەکێ تایبەت بنێرە:</p>
+        <!-- بەشێ ٢: دیاریا نهێنی (بۆکسەکا دیاریێ و ڤەکرنا وێ) -->
+        <div id="tabSecrets" class="tab-content hidden bg-slate-900/90 dark:bg-slate-900/90 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-300 rounded-3xl p-5 shadow-2xl space-y-4">
             
-            <div class="space-y-3 text-xs">
-                <div>
-                    <label class="block text-slate-400 mb-1">ناڤێ وەرگری (بۆ نموونە: هەڤالێ من):</label>
-                    <input type="text" id="secretRecipient" placeholder="ناڤێ کەسێ بەرانبەر..." class="w-full bg-slate-950/80 border border-slate-800 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-emerald-500">
+            <!-- ئەگەر لینکا دیاریێ نەهاتبیتە ڤەکرن (فۆرمێ دروستکرنا دیاریێ) -->
+            <div id="giftCreatorView" class="space-y-4">
+                <h2 class="text-sm font-bold text-emerald-400 flex items-center gap-2">
+                    <i class="fa-solid fa-gift"></i> دروستکرنا بۆکسا دیاریا نهێنی
+                </h2>
+                <p class="text-[11px] text-slate-400 light:text-slate-600">نامەیەکا تایبەت د ناڤ بۆسکەکا دیاریێ دا بهێلە و بۆ کەسێ بەرانبەر بنێرە:</p>
+                
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <label class="block text-slate-400 light:text-slate-600 mb-1">ناڤێ وەرگری (بۆ نموونە):</label>
+                        <input type="text" id="giftRecipient" placeholder="ناڤێ کەسێ بەرانبەر..." class="w-full bg-slate-950/80 dark:bg-slate-950/80 light:bg-slate-100 border border-slate-800 dark:border-slate-800 light:border-slate-300 rounded-xl px-3 py-2 text-slate-200 dark:text-slate-200 light:text-slate-800 focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 light:text-slate-600 mb-1">پەیڤا دیاریێ / نامە:</label>
+                        <textarea id="giftMessageText" rows="3" class="w-full bg-slate-950/80 dark:bg-slate-950/80 light:bg-slate-100 border border-slate-800 dark:border-slate-800 light:border-slate-300 rounded-xl p-3 text-slate-200 dark:text-slate-200 light:text-slate-800 focus:outline-none focus:border-emerald-500 resize-none">"تو کەسەک هەژیی و شایستەی سەرکەفتنێ ی، هەر دەم بەهێز بمێنە!"</textarea>
+                    </div>
+                    <button onclick="generateGiftLink()" class="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-bold py-2.5 rounded-xl text-xs shadow-md transition hover:opacity-90 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-link text-sm"></i> دروستکرن و کۆپیکرنا لینکا دیاریێ
+                    </button>
                 </div>
-                <div>
-                    <label class="block text-slate-400 mb-1">تەڤگەرا نامەیێ / پەیڤ:</label>
-                    <textarea id="secretMessageText" rows="3" placeholder="پەیڤا خۆ لێرە بنڤیسە..." class="w-full bg-slate-950/80 border border-slate-800 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-emerald-500 resize-none">"تو کەسەک هەژیی و شایستەی سەرکەفتنێ ی، هەر دەم بەهێز بمێنە!"</textarea>
+            </div>
+
+            <!-- ئەگەر وەرگر لینک ڤەکەربیت (دیاریا ئامادەکری) -->
+            <div id="giftReceiverView" class="hidden text-center space-y-4 py-4">
+                <h2 id="giftTitle" class="text-sm font-bold text-amber-400">دیاریەک بۆ تە هاتییە! 🎁</h2>
+                <p class="text-xs text-slate-300 light:text-slate-700">کلیکێ ل سەر بۆکسێ بکە دا دیاریا خۆ ڤەکەی:</p>
+                
+                <!-- بۆکسا دیاریێ یا جووڵاو -->
+                <div onclick="openTheGiftBox()" class="gift-box cursor-pointer inline-block bg-gradient-to-tr from-emerald-600 to-cyan-600 p-6 rounded-3xl shadow-2xl border-4 border-amber-300 text-slate-950 my-2">
+                    <i class="fa-solid fa-gift text-5xl text-amber-200"></i>
                 </div>
-                <button onclick="sendSecretBox()" class="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-bold py-2.5 rounded-xl text-xs shadow-md transition hover:opacity-90">
-                    <i class="fa-solid fa-paper-plane"></i> دروستکرن و کۆپیکرنا بۆکسا نامەیێ
+                <div id="openedMessageBox" class="hidden bg-slate-950/80 dark:bg-slate-950/80 light:bg-slate-100 border border-emerald-500/50 p-4 rounded-2xl text-xs text-slate-100 light:text-slate-900 space-y-2 animate-pulse">
+                    <p class="font-bold text-emerald-400">نامەیا تە:</p>
+                    <p id="finalGiftText" class="italic leading-relaxed"></p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- بەشێ ٣: پلانا ڕۆژانە -->
+        <div id="tabPlanner" class="tab-content hidden bg-slate-900/90 dark:bg-slate-900/90 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-300 rounded-3xl p-5 shadow-2xl space-y-3">
+            <h2 class="text-sm font-bold text-cyan-400 flex items-center gap-2">
+                <i class="fa-solid fa-calendar-days"></i> خشتەیێ پلانا ڕۆژانە یێ تایبەت
+            </h2>
+            <p class="text-[11px] text-slate-400 light:text-slate-600">ل خوارێ پلانا خۆ بۆ هەر دەمەکێ بنڤیسە:</p>
+            
+            <div class="space-y-2.5 text-xs">
+                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-2.5 rounded-xl border border-slate-800 dark:border-slate-800 light:border-slate-300">
+                    <span class="text-emerald-400 font-bold block mb-1">🌅 سبەهی:</span>
+                    <input type="text" id="planMorning" placeholder="پلانا سبەهیا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none">
+                </div>
+                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-2.5 rounded-xl border border-slate-800 dark:border-slate-800 light:border-slate-300">
+                    <span class="text-cyan-400 font-bold block mb-1">☀️ نیوەڕۆ:</span>
+                    <input type="text" id="planNoon" placeholder="پلانا نیوەڕۆیا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none">
+                </div>
+                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-2.5 rounded-xl border border-slate-800 dark:border-slate-800 light:border-slate-300">
+                    <span class="text-amber-400 font-bold block mb-1">🌇 ئێڤاری:</span>
+                    <input type="text" id="planEvening" placeholder="پلانا ئێڤاریا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none">
+                </div>
+                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-2.5 rounded-xl border border-slate-800 dark:border-slate-800 light:border-slate-300">
+                    <span class="text-purple-400 font-bold block mb-1">🌆 مەغرەب:</span>
+                    <input type="text" id="planMaghrib" placeholder="پلانا مەغرەبا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none">
+                </div>
+                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 p-2.5 rounded-xl border border-slate-800 dark:border-slate-800 light:border-slate-300">
+                    <span class="text-blue-400 font-bold block mb-1">🌙 شەڤ:</span>
+                    <input type="text" id="planNight" placeholder="پلانا شەڤا خۆ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-slate-800 rounded-lg p-2 text-slate-200 light:bg-white light:text-slate-900 text-xs focus:outline-none">
+                </div>
+                <button onclick="saveMyPlanner()" class="w-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold py-2.5 rounded-xl text-xs shadow-md transition">
+                    <i class="fa-solid fa-floppy-disk"></i> پاشەکەفتکرنا خشتەیێ من
                 </button>
             </div>
         </div>
 
-        <!-- بەشێ ٣: پلان و جەدوەلا ڕۆژانە -->
-        <div id="tabPlanner" class="tab-content hidden bg-slate-900/90 dark:bg-slate-900/90 light:bg-white/90 border border-slate-800 dark:border-slate-800 light:border-slate-200 rounded-3xl p-5 shadow-2xl space-y-3">
-            <h2 class="text-sm font-bold text-cyan-400 flex items-center gap-2">
-                <i class="fa-solid fa-calendar-days"></i> جەدوەلا پلانا ڕۆژانە
-            </h2>
-            <div class="space-y-2 text-xs">
-                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 border border-slate-800 dark:border-slate-800 light:border-slate-200 p-3 rounded-xl flex items-center justify-between">
-                    <span>🌅 08:00 سبێ - قاوە و وەرگرتنا هێزا هاندەر</span>
-                    <span class="text-emerald-400 font-bold">ب سەرکەفتن</span>
-                </div>
-                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 border border-slate-800 dark:border-slate-800 light:border-slate-200 p-3 rounded-xl flex items-center justify-between">
-                    <span>☕ 02:00 نیوەڕۆ - ڤەدانا قەهوێ و ڕاوەستانەکا ئارام</span>
-                    <span class="text-cyan-400 font-bold">بەردەوامە</span>
-                </div>
-                <div class="bg-slate-950/60 dark:bg-slate-950/60 light:bg-slate-100 border border-slate-800 dark:border-slate-800 light:border-slate-200 p-3 rounded-xl flex items-center justify-between">
-                    <span>🌙 08:00 ئێڤاری - خواندنا گۆتنان و ئارامیا مێشکی</span>
-                    <span class="text-slate-400 font-bold">چاڤەڕێ</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- بەشێ پریمۆم (هێشتا نەهاتییە جێبەجێکرن) -->
-        <div class="bg-slate-900/50 dark:bg-slate-900/50 light:bg-slate-200/50 border border-slate-800/80 dark:border-slate-800/80 light:border-slate-300 rounded-2xl p-3 text-center flex items-center justify-between">
-            <div class="flex items-center gap-2 text-xs text-slate-400">
+        <!-- بەشێ پریمۆم -->
+        <div class="bg-slate-900/50 dark:bg-slate-900/50 light:bg-slate-200/50 border border-slate-800/80 rounded-2xl p-3 text-center flex items-center justify-between">
+            <div class="flex items-center gap-2 text-xs text-slate-400 light:text-slate-600">
                 <i class="fa-solid fa-lock text-amber-400"></i>
                 <span>بەشێ پریمۆم (تایبەتمەندیێن پێشکەفتی)</span>
             </div>
@@ -141,27 +174,24 @@
 
     </main>
 
-    <!-- پەنجەرا دڵخوازان (Favorites Modal) -->
+    <!-- پەنجەرا دڵخوازان -->
     <div id="favModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 dark:bg-slate-900 light:bg-white border border-slate-800 dark:border-slate-800 light:border-slate-200 rounded-3xl p-5 max-w-sm w-full shadow-2xl space-y-4 relative max-h-[80vh] flex flex-col">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="bg-slate-900 dark:bg-slate-900 light:bg-white border border-slate-800 light:border-slate-300 rounded-3xl p-5 max-w-sm w-full shadow-2xl space-y-4 relative max-h-[80vh] flex flex-col">
+            <div class="flex items-center justify-between border-b border-slate-800 light:border-slate-200 pb-3">
                 <h3 class="text-sm font-bold text-amber-400 flex items-center gap-2"><i class="fa-solid fa-star"></i> گۆتنێن دڵخوازێن من</h3>
-                <button onclick="closeFavoritesModal()" class="text-slate-400 hover:text-white text-xs"><i class="fa-solid fa-xmark text-base"></i></button>
+                <button onclick="closeFavoritesModal()" class="text-slate-400 hover:text-white light:text-slate-600 text-xs"><i class="fa-solid fa-xmark text-base"></i></button>
             </div>
-            <div id="favModalList" class="overflow-y-auto space-y-2 flex-1 text-xs text-slate-300 dark:text-slate-300 light:text-slate-700">
-                <!-- لێرە گۆتنێن دڵخواز ددەنە دیارکرن -->
-            </div>
+            <div id="favModalList" class="overflow-y-auto space-y-2 flex-1 text-xs text-slate-300 light:text-slate-700"></div>
         </div>
     </div>
 
-    <!-- فۆتەر (ماف و ئاڤاکەر) -->
+    <!-- فۆتەر -->
     <footer class="text-center text-[10px] text-slate-500 space-y-1 mt-4">
         Created by: <span class="text-slate-400 font-medium">Huda Shahin Sindi</span><br>
         3026 @ هەمی ماف پاراستینە
     </footer>
 
     <script>
-        // لیستا ٥٢ گۆتنێن هاندەر
         const quotes = [
             "ئەڤرۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!",
             "تو گەلەک ژ هندێ ب هێزتری تو دەستا ب داهێلی.",
@@ -218,15 +248,48 @@
 
         let currentQuote = quotes[0];
         let favorites = JSON.parse(localStorage.getItem('badinan_favs')) || [];
-
         updateFavUI();
 
-        // کاتژمێرا ڕاستەقینە دگەل پەیڤێن تژی هێز و ئارامی
+        // پشکشکنینا ئایا لینکێ دیاریێ هاتییە ڤەکرن یان نە؟
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const giftMsg = urlParams.get('gift');
+            const recipient = urlParams.get('to');
+
+            if (giftMsg) {
+                document.getElementById('giftCreatorView').classList.add('hidden');
+                document.getElementById('giftReceiverView').classList.remove('hidden');
+                if(recipient) {
+                    document.getElementById('giftTitle').innerText = `دیاریەک بۆ (${decodeURIComponent(recipient)}) هاتییە! 🎁`;
+                }
+                window.encodedGiftMessage = decodeURIComponent(giftMsg);
+                switchTab('secrets');
+            }
+        });
+
+        function generateGiftLink() {
+            const recipient = document.getElementById('giftRecipient').value;
+            const msg = document.getElementById('giftMessageText').value;
+            if(!recipient) {
+                alert('لطفاً ناڤێ وەرگری بنڤیسە!');
+                return;
+            }
+            const baseURL = window.location.origin + window.location.pathname;
+            const giftLink = `${baseURL}?to=${encodeURIComponent(recipient)}&gift=${encodeURIComponent(msg)}`;
+            
+            navigator.clipboard.writeText(giftLink);
+            alert('لینکا دیاریا نهێنی هاتە دروستکرن و کۆپیکرن! نوکە بۆ هەڤالێ خۆ بنێرە 🎁');
+        }
+
+        function openTheGiftBox() {
+            document.getElementById('finalGiftText').innerText = `"${window.encodedGiftMessage}"`;
+            document.getElementById('openedMessageBox').classList.remove('hidden');
+        }
+
         function updateClock() {
             const now = new Date();
             const hours = now.getHours();
             document.getElementById('liveClock').innerText = now.toTimeString().split(' ')[0];
-            
             const msgEl = document.getElementById('clockMessage');
             if (hours >= 5 && hours < 12) {
                 msgEl.innerText = "سوبەهیا تە پڕ هێز و ئارامی بیت! 🌅";
@@ -241,22 +304,19 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // گۆهۆرینا گۆتنان
         document.getElementById('newQuoteBtn').addEventListener('click', () => {
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            currentQuote = quotes[randomIndex];
+            currentQuote = quotes[Math.floor(Math.random() * quotes.length)];
             document.getElementById('quoteText').innerText = `"${currentQuote}"`;
         });
 
-        // پاشەکەفتکرنا دڵخوازان ب پشتراستی
         document.getElementById('saveFavBtn').addEventListener('click', () => {
             if (!favorites.includes(currentQuote)) {
                 favorites.push(currentQuote);
                 localStorage.setItem('badinan_favs', JSON.stringify(favorites));
                 updateFavUI();
-                alert('گۆتن ب سەرکەفتن چوو دلیستا دلخوازێن تە دا! ⭐');
+                alert('گۆتن چوو دلیستا دلخوازێن تە دا! ⭐');
             } else {
-                alert('ئەڤ گۆتنە بەری نوکە د دلخوازێن تە دا هەیە.');
+                alert('ئەڤ گۆتنە بەری نوکە د دلخوازێن تە دا هەبوو.');
             }
         });
 
@@ -272,7 +332,7 @@
                 listContainer.innerHTML = '<p class="text-center text-slate-500 py-4">هێشتا چ گۆتن نینن د دڵخوازێن تە دا.</p>';
             } else {
                 favorites.forEach((q, index) => {
-                    listContainer.innerHTML += `<div class="bg-slate-950/40 p-3 rounded-xl border border-slate-800 flex justify-between items-center gap-2">
+                    listContainer.innerHTML += `<div class="bg-slate-950/40 light:bg-slate-100 p-3 rounded-xl border border-slate-800 light:border-slate-300 flex justify-between items-center gap-2">
                         <span>"${q}"</span>
                         <button onclick="removeFav(${index})" class="text-red-400 hover:text-red-300"><i class="fa-solid fa-trash"></i></button>
                     </div>`;
@@ -292,18 +352,30 @@
             openFavoritesModal();
         }
 
-        // بۆکسا هنارتنا ناما نهێنی
-        function sendSecretBox() {
-            const recipient = document.getElementById('secretRecipient').value;
-            const msg = document.getElementById('secretMessageText').value;
-            if(!recipient) {
-                alert('لطفاً ناڤێ وەرگری بنڤیسە!');
-                return;
-            }
-            alert('بۆکسا نامەیا نهێنی بۆ (' + recipient + ') هاتە ئامادەکرن و کۆپی بوو!');
+        // پاشەکەفتکرنا پلانا ڕۆژانە
+        function saveMyPlanner() {
+            const plannerData = {
+                morning: document.getElementById('planMorning').value,
+                noon: document.getElementById('planNoon').value,
+                evening: document.getElementById('planEvening').value,
+                maghrib: document.getElementById('planMaghrib').value,
+                night: document.getElementById('planNight').value
+            };
+            localStorage.setItem('badinan_planner', JSON.stringify(plannerData));
+            alert('پلانا ڕۆژانە ب سەرکەفتن هاتە پاشەکەفتکرن! 📅');
         }
 
-        // ڤەگوهاستنا بەشان (Tabs Switcher)
+        window.addEventListener('load', () => {
+            const savedPlanner = JSON.parse(localStorage.getItem('badinan_planner'));
+            if(savedPlanner) {
+                document.getElementById('planMorning').value = savedPlanner.morning || '';
+                document.getElementById('planNoon').value = savedPlanner.noon || '';
+                document.getElementById('planEvening').value = savedPlanner.evening || '';
+                document.getElementById('planMaghrib').value = savedPlanner.maghrib || '';
+                document.getElementById('planNight').value = savedPlanner.night || '';
+            }
+        });
+
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(el => {
@@ -326,7 +398,6 @@
             }
         }
 
-        // گۆهۆرینا ڕەنگی (Dark / Light Mode)
         const themeToggleBtn = document.getElementById('themeToggleBtn');
         const themeIcon = document.getElementById('themeIcon');
         const htmlElement = document.documentElement;

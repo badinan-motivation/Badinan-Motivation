@@ -71,7 +71,7 @@
             </button>
         </div>
 
-        <!-- بەشێ ١: گۆتنێن هاندەر (ڕەنگێ ئامبەر / زەری) -->
+        <!-- بەشێ ١: گۆتنێن هاندەر -->
         <div id="tabQuotes" class="tab-content space-y-4">
             <div class="glass-card rounded-3xl p-5 shadow-2xl space-y-4 text-center border-t-4 border-amber-500">
                 <div class="glass-card rounded-2xl p-3">
@@ -99,7 +99,7 @@
             </div>
         </div>
 
-        <!-- بەشێ ٢: زکرێن ڕۆژانە (ڕەنگێ کهووک / شین) -->
+        <!-- بەشێ ٢: زکرێن ڕۆژانە -->
         <div id="tabAzkar" class="tab-content hidden space-y-4">
             <div class="glass-card rounded-3xl p-5 shadow-2xl space-y-4 max-h-[70vh] overflow-y-auto border-t-4 border-blue-500">
                 <h2 class="text-sm font-bold flex items-center gap-2 border-b border-white/10 pb-2 text-blue-400">
@@ -115,7 +115,7 @@
             </div>
         </div>
 
-        <!-- بەشێ ٣: رۆتین و خشتە (ڕەنگێ سەوز) -->
+        <!-- بەشێ ٣: رۆتین و خشتە -->
         <div id="tabRoutine" class="tab-content hidden space-y-4">
             <div class="glass-card rounded-3xl p-5 shadow-2xl space-y-4 max-h-[70vh] overflow-y-auto border-t-4 border-emerald-500">
                 <h2 class="text-sm font-bold flex items-center gap-2 border-b border-white/10 pb-2 text-emerald-400">
@@ -158,7 +158,7 @@
             </div>
         </div>
 
-        <!-- بەشێ ٤: Self-Care Pet Dodo (ڕەنگێ مۆر) -->
+        <!-- بەشێ ٤: Self-Care Pet Dodo -->
         <div id="tabDodo" class="tab-content hidden space-y-4">
             <div class="glass-card rounded-3xl p-5 shadow-2xl space-y-4 text-center border-t-4 border-purple-500">
                 <div class="flex items-center justify-between border-b border-white/10 pb-2">
@@ -177,10 +177,10 @@
                 </div>
 
                 <div id="dodoActionBox" class="flex gap-2 text-xs">
-                    <button onclick="answerDodo(true)" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                    <button type="button" onclick="answerDodo(true)" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer z-20">
                         <i class="fa-solid fa-check"></i> بەلێ (✅)
                     </button>
-                    <button onclick="answerDodo(false)" class="flex-1 glass-card hover:bg-purple-500/10 font-bold py-3 px-4 rounded-xl transition flex items-center justify-center gap-2">
+                    <button type="button" onclick="answerDodo(false)" class="flex-1 glass-card hover:bg-purple-500/10 font-bold py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer z-20">
                         <i class="fa-solid fa-xmark"></i> نەخێر
                     </button>
                 </div>
@@ -207,6 +207,16 @@
     </footer>
 
     <script>
+        // Live Clock
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toTimeString().split(' ')[0];
+            const clockEl = document.getElementById('liveClock');
+            if(clockEl) clockEl.innerText = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
         // Streak Logic
         let lastVisit = localStorage.getItem('badinan_last_visit');
         let streak = parseInt(localStorage.getItem('badinan_streak')) || 1;
@@ -301,7 +311,7 @@
             "دەمێ خۆ بۆ کەسێن بێ مفا تەرخان نەکە.",
             "تشتێ هەرە خراب ئەوە تو ژیانا خۆ ب ڕازیکرنا خەلکی ڤە بۆرینی.",
             "دوورکەفتنا ژ کەسێن نەرێنی، نیڤا سەرکەفتن و ئارامیا تە یە.",
-            "خەونێن تە ژ ڕایێن خەلکی گرانبەها ترن؛ لدووڤ دەنگێ دلێ خوە هەرە نەک بۆچونا خەلکی.",
+            "خەونێن تە ژ ڕایێن خەلکی گرانبەها ترن؛ لدووڤ دەنگێ دلێ خوە هەرە نە بۆچونا خەلکی.",
             "گۆتنا 'نەخێر' بۆ هەر ژینگەهەکا کو ڕەخنەیێن نەدرۆست ل تە بگرن و باوەرییا تە ب خۆ بشکینن.",
             "دانانا سنورێن توند دگەل دەوروبەرێن نەرێنی بۆ هندێ ڕۆژا تە ب کەیف و بێ کێشە دەرباز ببێت."
         ];
@@ -405,25 +415,26 @@
         }
         function saveMyPlanner() { alert('خشتە و پلانێن ڕۆژانە هاتنە پاشەکەفتکرن! 📅'); }
 
-        // Dodo Logic
-        function answerDodo(isSuccess) {
+        // Dodo Logic (Fixed)
+        window.answerDodo = function(isSuccess) {
             let msgBox = document.getElementById('dodoMessage');
             let actionBox = document.getElementById('dodoActionBox');
             if (isSuccess) {
                 msgBox.innerText = "🎉 پـیـرۆزە! تو کەسەک سەرکەفتی ! شانازیێ ب تە دکەم! 💖";
-                actionBox.innerHTML = `<button onclick="resetDodo()" class="w-full bg-purple-600 text-white font-bold py-2.5 rounded-xl text-xs">دووبارە ڤەگەرە</button>`;
+                actionBox.innerHTML = `<button type="button" onclick="resetDodo()" class="w-full bg-purple-600 text-white font-bold py-2.5 rounded-xl text-xs cursor-pointer">دووبارە ڤەگەرە</button>`;
             } else {
                 msgBox.innerText = "چ خەمان نەخۆ هەڤالا من، سوبە ڕۆژەكا نوو و پڕ دەرفەتە بۆ تە! ✨";
-                actionBox.innerHTML = `<button onclick="resetDodo()" class="w-full bg-purple-600 text-white font-bold py-2.5 rounded-xl text-xs">دووبارە ڤەگەرە</button>`;
+                actionBox.innerHTML = `<button type="button" onclick="resetDodo()" class="w-full bg-purple-600 text-white font-bold py-2.5 rounded-xl text-xs cursor-pointer">دووبارە ڤەگەرە</button>`;
             }
         }
-        function resetDodo() {
+
+        window.resetDodo = function() {
             document.getElementById('dodoMessage').innerText = `"سلاڤ هەڤال! تە روتینێ خو ب سەرکەفتینا بوراند؟"`;
             document.getElementById('dodoActionBox').innerHTML = `
-                <button onclick="answerDodo(true)" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                <button type="button" onclick="answerDodo(true)" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer z-20">
                     <i class="fa-solid fa-check"></i> بەلێ (✅)
                 </button>
-                <button onclick="answerDodo(false)" class="flex-1 glass-card hover:bg-purple-500/10 font-bold py-3 px-4 rounded-xl transition flex items-center justify-center gap-2">
+                <button type="button" onclick="answerDodo(false)" class="flex-1 glass-card hover:bg-purple-500/10 font-bold py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer z-20">
                     <i class="fa-solid fa-xmark"></i> نەخێر
                 </button>
             `;

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ku" dir="rtl" class="dark">
 <head>
@@ -421,12 +420,16 @@
         }
         function closeFavoritesModal() { document.getElementById('favModal').classList.add('hidden'); }
 
-        // Routine Toggle Check Logic (Fixed)
+        // Routine Toggle Check Logic (Fixed Green)
         window.toggleCheck = function(key) {
             let btn = document.getElementById('checkBtn_' + key);
-            btn.classList.toggle('bg-emerald-600');
-            btn.classList.toggle('text-white');
-            btn.classList.toggle('opacity-70');
+            if (btn.classList.contains('bg-emerald-600')) {
+                btn.classList.remove('bg-emerald-600', 'text-white');
+                btn.classList.add('opacity-70');
+            } else {
+                btn.classList.remove('opacity-70');
+                btn.classList.add('bg-emerald-600', 'text-white');
+            }
         }
 
         window.saveMyPlanner = function() { 
@@ -460,4 +463,3 @@
     </script>
 </body>
 </html>
-

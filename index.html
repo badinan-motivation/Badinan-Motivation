@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dodocare</title>
+    <meta name="theme-color" content="#0b0f19">
+    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Dodocare%22%2C%22short_name%22%3A%22Dodocare%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230b0f19%22%2C%22theme_color%22%3A%22%2322c55e%22%7D">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -37,7 +40,6 @@
 </head>
 <body class="dark min-h-screen flex flex-col items-center justify-between p-4 selection:bg-purple-500 selection:text-white">
 
-    <!-- سەرێ سایت -->
     <header class="max-w-md w-full flex items-center justify-between glass-card p-4 rounded-2xl shadow-xl mb-4 border-t-4 border-kask">
         <div class="flex items-center gap-2.5">
             <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-kask to-emerald-700 flex items-center justify-center text-white font-bold text-xs shadow-lg">DC</div>
@@ -56,10 +58,8 @@
         </div>
     </header>
 
-    <!-- ناوەندا سەرەکی -->
     <main class="max-w-md w-full space-y-4">
         
-        <!-- مینیویا سێکتەران (پێنج بەش: گۆتن، زکر، ئایەت، خشتە، دۆدۆ) -->
         <div class="grid grid-cols-5 gap-1 glass-card p-1.5 rounded-2xl">
             <button onclick="switchTab('quotes')" id="btnQuotes" class="tab-btn py-2 rounded-xl text-[9px] font-bold transition flex flex-col items-center gap-1 bg-amber-500 text-slate-950 shadow-md cursor-pointer">
                 <i class="fa-solid fa-bolt"></i> گۆتن
@@ -78,20 +78,8 @@
             </button>
         </div>
 
-        <!-- بەشێ ١: گۆتنێن هاندەر بو رۆژانە و ڕێنمایێن PWA -->
         <div id="tabQuotes" class="tab-content space-y-4">
             <div class="glass-card rounded-3xl p-5 shadow-2xl space-y-4 text-center border-t-4 border-amber-500">
-                
-                <!-- پەیاما PWA و هاندانا هۆسەری -->
-                <div class="glass-card rounded-2xl p-4 text-right space-y-2 border-r-4 border-amber-400 bg-amber-500/5">
-                    <p class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
-                        <i class="fa-solid fa-circle-info"></i> پەیاما هاندەر و زانیاری:
-                    </p>
-                    <p class="text-[11px] leading-relaxed opacity-90">
-                        نەکەی خەمێ بخۆی یان بێ ئۆمێد ببه‌ی 💆🏼‍♀️. کارێ تە یێ ئەلەکترۆنی یێ تەمامە. ل دەستپێکێ، ڕێکا PWA یان فرێکرنا فایلا APK بۆ هەڤال و خێزانا تە باشترین دەستپێکا بێ مەسره‌فە. ئەگەر تە دڤێت ڕێکا ئێکێ (PWA) بکەی دا کو سایتێ تە ببیتە ئەپەکێ پرۆفیشناڵ: بێژە من کا تە فایلا index.html یا سایتێ خۆ یا هەی؟ ئەز دکارم کۆدێ پێدڤی یێ PWA بۆ تە بنڤیسم دا کو بتنێ کۆپی بکەی و د سایتێ خۆ دا دانی! دەستپێ بکەین؟
-                    </p>
-                </div>
-
                 <div class="glass-card rounded-2xl p-3">
                     <div id="liveClock" class="text-xl font-extrabold tracking-wider">00:00:00</div>
                     <p id="clockMessage" class="text-[11px] opacity-70 mt-1">ئەڤرۆ ڕۆژا تە یە، هیڤیا من ئەوە پڕ هێز و ئارامی بیت! 🌅</p>
@@ -117,23 +105,22 @@
             </div>
         </div>
 
-        <!-- بەشێ ٢: زکرێن ڕۆژانە -->
         <div id="tabAzkar" class="tab-content hidden space-y-4">
             <div class="glass-card rounded-3xl p-5 shadow-2xl space-y-4 max-h-[70vh] overflow-y-auto border-t-4 border-blue-500">
                 <h2 class="text-sm font-bold flex items-center gap-2 border-b border-white/10 pb-2 text-blue-400">
                     <i class="fa-solid fa-book-quran"></i> زکرێن ڕۆژانە
                 </h2>
-                <div class="grid grid-cols-4 gap-1 glass-card p-1 rounded-xl text-[11px]">
+                <div class="grid grid-cols-5 gap-1 glass-card p-1 rounded-xl text-[10px]">
                     <button onclick="renderAzkar('m')" id="azkarBtn_m" class="azkar-nav-btn bg-blue-600 text-white font-bold py-1.5 rounded-lg cursor-pointer">سپێدە</button>
-                    <button onclick="renderAzkar('n')" id="azkarBtn_n" class="azkar-nav-btn opacity-70 font-bold py-1.5 rounded-lg cursor-pointer">نیڤرو</button>
+                    <button onclick="renderAzkar('n')" id="azkarBtn_n" class="azkar-nav-btn opacity-70 font-bold py-1.5 rounded-lg cursor-pointer">نیڤرۆ</button>
                     <button onclick="renderAzkar('e')" id="azkarBtn_e" class="azkar-nav-btn opacity-70 font-bold py-1.5 rounded-lg cursor-pointer">ئێڤاری</button>
+                    <button onclick="renderAzkar('mg')" id="azkarBtn_mg" class="azkar-nav-btn opacity-70 font-bold py-1.5 rounded-lg cursor-pointer">مەغریب</button>
                     <button onclick="renderAzkar('ni')" id="azkarBtn_ni" class="azkar-nav-btn opacity-70 font-bold py-1.5 rounded-lg cursor-pointer">شەڤ</button>
                 </div>
                 <div id="azkar_content_box" class="space-y-2.5 text-xs"></div>
             </div>
         </div>
 
-        <!-- بەشێ ٣: ئایەتێن پیرۆز (پەناگەها ئارامیێ - ب پتر ژ 20 ئایەت و رامانا بادینی یا راستڤەکری) -->
         <div id="tabAyat" class="tab-content hidden space-y-4">
             <div class="glass-card rounded-3xl p-5 shadow-2xl space-y-4 max-h-[75vh] overflow-y-auto border-t-4 border-kask">
                 <div class="flex items-center justify-between border-b border-white/10 pb-2">
@@ -146,7 +133,6 @@
             </div>
         </div>
 
-        <!-- بەشێ ٤: رۆتین و خشتەیێن ڕەنگاورەنگ (پیڤازی، خەمر، کەسک، سۆر) -->
         <div id="tabRoutine" class="tab-content hidden space-y-4">
             <div id="routineCardContainer" class="rounded-3xl p-5 shadow-2xl space-y-4 max-h-[75vh] overflow-y-auto border-t-4 border-kask bg-kask/5 transition-all duration-300">
                 <div class="flex items-center justify-between border-b border-white/10 pb-2">
@@ -156,7 +142,6 @@
                     <span class="text-[10px] opacity-75">ڕەنگەکێ جوان هەڵبژێرە 🌸</span>
                 </div>
 
-                <!-- دەستپێکا هەلبژاردنا ڕەنگان -->
                 <div class="space-y-1.5">
                     <label class="text-[11px] font-bold opacity-80">ڕەنگێ خشتەی هەڵبژێرە:</label>
                     <div class="grid grid-cols-4 gap-1.5">
@@ -175,7 +160,6 @@
                     </div>
                 </div>
 
-                <!-- تابلۆیا خشتەی -->
                 <div class="space-y-3 text-xs pt-1">
                     <div class="glass-card p-3.5 rounded-2xl space-y-2 border-r-4 border-amber-400">
                         <div class="flex items-center justify-between">
@@ -222,7 +206,6 @@
             </div>
         </div>
 
-        <!-- بەشێ ٥: Self-Care Pet Dodo -->
         <div id="tabDodo" class="tab-content hidden space-y-4">
             <div class="glass-card rounded-3xl p-5 shadow-2xl space-y-4 text-center border-t-4 border-purple-500">
                 <div class="flex items-center justify-between border-b border-white/10 pb-2">
@@ -245,7 +228,7 @@
                         <i class="fa-solid fa-check"></i> بەلێ (✅)
                     </button>
                     <button type="button" onclick="answerDodo(false)" class="flex-1 glass-card hover:bg-purple-500/10 font-bold py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer z-20">
-                        <i class="fa-solid fa-xmark"></i> نەخێر(🚫)
+                        <i class="fa-solid fa-xmark"></i> نەخێر (🚫)
                     </button>
                 </div>
             </div>
@@ -253,7 +236,6 @@
 
     </main>
 
-    <!-- پەنجەرا دڵخوازان -->
     <div id="favModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="glass-card rounded-3xl p-5 max-w-sm w-full shadow-2xl space-y-4 relative max-h-[80vh] flex flex-col">
             <div class="flex items-center justify-between border-b border-white/10 pb-3">
@@ -264,7 +246,6 @@
         </div>
     </div>
 
-    <!-- فۆتەر -->
     <footer class="text-center text-[10px] opacity-60 space-y-1 mt-4">
         Created by: <span class="font-medium">Huda Shahin Sindi</span><br>
         2026 @ هەمی ماف پاراستینە
@@ -325,7 +306,7 @@
             document.getElementById('themeIcon').className = 'fa-solid fa-sun text-xs';
         }
 
-        // Quotes Array (گۆتنێن هاندەر بو رۆژانە )
+        // Quotes Array
         const quotes = [
             "ئەڤرۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!",
             "تو گەلەک ژ هندێ ب هێزتری تو دەستا ب داهێلی.",
@@ -380,30 +361,38 @@
         let currentQuote = quotes[0];
         let favorites = JSON.parse(localStorage.getItem('dodocare_favs')) || [];
 
-        // Ayat Data (پتر ژ 20 ئایەت دگەل رامانا بادینی یا راستڤەکری)
+        // Ayat Data (30 ئایەتێن نوی)
         const ayatList = [
-            { arabic: "وَأَقِيمُوا الصَّلَوةَ وَءَاتُواْ ٱلزَّكَوْةَ وَأَرْكَعُواْ مَعَ الرَّكِعِينَ", badini: "نڤێژێ بکن، زەکاتێ بدەن، و دگەل نڤێژکەران نڤێژێ بکن." },
-            { arabic: "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا", badini: "ب ڕاستی دگەل تەنگاڤیێ ئاسانکاری هەیە؛ بەلێ بێگومان دگەل تەنگاڤیێ ئاسانکاری هەیە." },
-            { arabic: "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا", badini: "خودێ چ کەسان بار ناکەت ژ بلی کو ئەوە ڕادەستکراوی شیانا وێ هەبیت." },
-            { arabic: "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ", badini: "ئاگادار بن، ب زکرێ خودێ دل ئارام دبن." },
-            { arabic: "وَاصْبِرْ لِحُكْمِ رَبِّكَ فَإِنَّكَ بِأَعْيُنِنَا", badini: "سەبرێ ل سەر حوکمێ پەروەردگارێ خۆ بکن، چنکو تو د بن چاڤدێریا مە دایی." },
-            { arabic: "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا", badini: "هەر کەسەکێ ژ خودێ بترسیت، خودێ دەرگەهەکێ رزگاربوونێ بۆ دەتە دیارکرن." },
-            { arabic: "وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ", badini: "و خودێ رزقێ وی ددەت ژ جهەکێ کو هزر تێدا نەدکر." },
-            { arabic: "وَتَوَكَّلْ عَلَى الْحَيِّ الَّذِي لَا يَمُوتُ", badini: "و خۆ بسپێرە ئەوی خودایێ هەمیشە زندی کو هەرگیز نامریت." },
-            { arabic: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَتَوَفَّنَا مُسْلِمِينَ", badini: "پەروەردگارێ مە، سەبرەکا مەزن رێژە سەر مە و مە ب مری بمرینە د حالەتەکێ دا کو تو موسلمان بی." },
-            { arabic: "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", badini: "ب ڕاستی خودێ دگەل کەسێن سەبردارە." },
-            { arabic: "قُل لَّن يُصِيبَنَا إِلَّا مَا كَتَبَ اللَّهُ لَنَا", badini: "بێژە: چ تشت ژ مە را ناهێت، ژ بلی ئەوی تشتێ خودێ ل مە نڤیسی." },
-            { arabic: "وَادْعُونِي أَسْتَجِبْ لَكُمْ", badini: "داخوازا ژ من بکن، دا وەڵاما داخوازا وە بدەم." },
-            { arabic: "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ", badini: "دەمێ بەندەیێن من ژ تە دپرسن ل بارا من، ب ڕاستی ئەز نێزیکم." },
-            { arabic: "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي", badini: "پەروەردگارێ من، سنگی بۆ من فراوان بکە و کارێ من بۆ من ئاسان بکە." },
-            { arabic: "فَصَبْرٌ جَمِيلٌ وَاللَّهُ الْمُسْتَعَانُ", badini: "پس سەبرەکا جوان یا پێدڤی هەیە، و خودێ هاریکارە." },
-            { arabic: "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ", badini: "خودێ بۆ مە بسە، و ئەو باشترین پشتەڤانە." },
-            { arabic: "وَاللَّهُ يُحِبُّ الصَّابِرِينَ", badini: "و خودێ حەز ژ کەسێن سەبردار دکەت." },
-            { arabic: "وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ", badini: "و هەر کەسەکێ خۆ بسپێرەتە خودێ، ئەڤجا خودێ ب تنێ بۆ وی بسە." },
-            { arabic: "رَبَّنَا آتِنَا مِنْ لَدُنْكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا", badini: "پەروەردگارێ مە، ژ لایێ خۆ ڤە رەحمەتەکێ بدە مە و بۆ مە ژ کارێ مە رێیا ڕاست ئاسان بکە." },
-            { arabic: "سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ", badini: "پەروەردگار تۆ بێگۆناهی، ب ڕاستی من ژ ستەمکاران بووم (ل سەر خۆ)." },
-            { arabic: "رَبِّ هَبْ لِي مِنَ الصَّالِحِينَ", badini: "پەروەردگارێ من، ژ زارۆک و کەسێن چاک بدە من." },
-            { arabic: "إِنَّ رَبِّي لَقَرِيبٌ مُّجِيبٌ", badini: "ب ڕاستی پەروەردگارێ من نێزیکە و بەرسڤا داخوازان ددەت." }
+            { arabic: "فَاذْكُرُونِي أَذْكُرْكُمْ", ref: "البقرة: ١٥٢", badini: "ڤیجا هوین من ب بیر بینن (ب عیبادەتی)، ئەز ژی دێ هەوە ب بیر ئینم (ب خێران)." },
+            { arabic: "إِنَّ مَعَ الْعُسْرِ يُسْرًا", ref: "الشرح: ٦", badini: "ب دروستی دگەل هەر ته‌نگاڤیه‌كێ، ساناهیبوونەک هەیە." },
+            { arabic: "وَقُلْ رَبِّ زِدْنِي عِلْمًا", ref: "طه: ١١٤", badini: "و بێژە: خودایێ من، زانینا من زێدە بکە." },
+            { arabic: "وَأَحْسِنُوا إِنَّ اللَّهَ يُحِبُّ الْمُحْسِنِينَ", ref: "البقرة: ١٩٥", badini: "و چاکیێ بکەن، چونکی ب راستی خودێ حەز ژ چاکەکاران دکەت." },
+            { arabic: "وَالَّذِينَ جَاهَدُوا فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا", ref: "العنكبوت: ٦٩", badini: "و ئەوێن د رێکا مەدا جیهاد و کۆشش کرین، دێ هدايەتێ دەینە وان بۆ رێکێن خۆ." },
+            { arabic: "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", ref: "البقرة: ١٥٣", badini: "ب راستی خودێ دگەل تەحملکەران (سەبرکێشان)ە." },
+            { arabic: "وَقُولُوا لِلنَّاسِ حُسْنًا", ref: "البقرة: ٨٣", badini: "و ئاخفتنا جوان و باش دگەل مرۆڤان بێژن." },
+            { arabic: "وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَى", ref: "المائدة: ٢", badini: "و هاریکاریا ئێک و دوو بکەن ل سەر چاکیێ و پارێزگاریێ (تەقوایێ)." },
+            { arabic: "إِنَّ الْحَسَنَاتِ يُذْهِبْنَ السَّيِّئَاتِ", ref: "هود: ١١٤", badini: "ب راستی کارێن چاک، گونەهـ و تشتێن خراب ژ ناڤ دبەن." },
+            { arabic: "وَمَا تَفْعَلُوا مِنْ خَيْرٍ يَعْلَمْهُ اللَّهُ", ref: "البقرة: ١٩٧", badini: "و هوین هەر چاکەیەکا بکەن، خودێ پێ دزانیت." },
+            { arabic: "ادْعُونِي أَسْتَجِبْ لَكُمْ", ref: "غافر: ٦٠", badini: "دوعایان ژ من بکەن، ئەز دێ بەرسڤا هەوە دەم." },
+            { arabic: "وَمَا رَبُّكَ بِظَلَّامٍ لِلْعَبِيدِ", ref: "فصلت: ٤٦", badini: "و خودایێ تە چ جاران زۆلمێ ل عەبدێن خۆ ناکەت." },
+            { arabic: "وَخَلَقْنَاكُمْ أَزْوَاجًا", ref: "النبأ: ٨", badini: "و مە هوین ب جووت (نێر و مێ) بەدیهێناینە." },
+            { arabic: "لَئِنْ شَكَرْتُمْ لَأَزِيدَنَّكُمْ", ref: "إبراهيم: ٧", badini: "ئەگەر هوین شوکریا (نیعمەتێن من) بکەن، ئەز دێ بۆ هەوە زێدە کەم." },
+            { arabic: "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ", ref: "الرعد: ٢٨", badini: "هشیار بن، ب تنێ ب زیکرێ خودێ دل ئارام دبن." },
+            { arabic: "وَاللَّهُ بِمَا تَعْمَلُونَ بَصِيرٌ", ref: "البقرة: ٢٦٥", badini: "و خودێ ب وێ تشتێ هوین دکەن یێ بینایە (دبینیت)." },
+            { arabic: "هَلْ جَزَاءُ الْإِحْسَانِ إِلَّا الْإِحْسَانُ", ref: "الرحمن: ٦٠", badini: "ئەرێ جەزایێ چاکیێ پێ دچیت، ژبلی چاکیێ؟" },
+            { arabic: "إِنَّ رَبِّي قَرِيبٌ مُجِيبٌ", ref: "هود: ٦١", badini: "ب راستی خودایێ من یێ نێزیکە و بەرسڤدەرە." },
+            { arabic: "وَهُو مَعَكُمْ أَيْنَ مَا كُنْتُمْ", ref: "الحديد: ٤", badini: "و ئەو دگەل هەوەیە ل هەر جهەکێ هوین لێ بن." },
+            { arabic: "وَعَسَى أَنْ تَكْرَهُوا شَيْئًا وَهُوَ خَيْرٌ لَكُمْ", ref: "البقرة: ٢١٦", badini: "و بەلکی هوین حەز ژ تشتەکی نەکەن، لێ ئەو خێر و باشی بیت بۆ هەوە." },
+            { arabic: "وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ", ref: "الشعراء: ٨٠", badini: "و دەمێ ئەز نەخۆش دکەوم، هەر ئەو (خودێ) شیفایێ ددەتە من." },
+            { arabic: "فَاصْبِرْ صَبْرًا جَمِيلًا", ref: "المعارج: ٥", badini: "ڤیجا سەبرەکا جوان بکێشە." },
+            { arabic: "إِنَّ اللَّهَ غَفُورٌ رَحِيمٌ", ref: "البقرة: ١٧٣", badini: "ب راستی خودێ یێ لێبوریندار و دۆلوڤانە." },
+            { arabic: "وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ", ref: "الأنبياء: ٣٠", badini: "و مە هەر تشتەکێ زیندی ژ ئاڤێ دروستکریە." },
+            { arabic: "فَاصْفَحِ الصَّفْحَ الْجَمِيلَ", ref: "الحجر: ٨٥", badini: "ڤیجا ببورە ب لێبورینەکا جوان (بێ عاجزبون)." },
+            { arabic: "وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ", ref: "البقرة: ٤٣", badini: "و نڤێژێ راکەن (بکەن) و زەکاتێ بدەن." },
+            { arabic: "وَتَوَكَّلْ عَلَى الْحَيِّ الَّذِي لَا يَمُوتُ", ref: "الفرقان: ٥٨", badini: "و پشت بەستنێ (تەوەکولێ) بێخە سەر وی یێ زیندی، ئەوێ چ جاران نمریت." },
+            { arabic: "إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ", ref: "التوبة: ١٢٠", badini: "ب راستی خودێ خێرا چاکەکاران بەرزە ناکەت." },
+            { arabic: "لَا تُكَلَّفُ نَفْسٌ إِلَّا وُسْعَهَا", ref: "البقرة: ٢٣٣", badini: "چ نه‌فس و مرۆڤ ناهێنە پەرپۆتکرن (ئەرکدارکرن) مەگەر ب قەدەر شیانا وێ بیت." },
+            { arabic: "إِنَّ أَكْرَمَكُمْ عِنْدَ اللَّهِ أَتْقَاكُمْ", ref: "الحجرات: ١٣", badini: "ب راستی رێزدارترینێ هەوە ل دەڤ خودێ، خودێ ترس‌ترینێ هەوەیە." }
         ];
 
         function renderAyat() {
@@ -412,7 +401,10 @@
             ayatList.forEach((item, index) => {
                 container.innerHTML += `
                     <div class="glass-card p-3.5 rounded-2xl space-y-1.5 border-r-4 border-kask">
-                        <span class="text-[10px] text-kask font-bold">ئایەتا (${index + 1})</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] text-kask font-bold">ئایەتا (${index + 1})</span>
+                            <span class="text-[9px] opacity-60 bg-white/5 px-2 py-0.5 rounded-full">${item.ref}</span>
+                        </div>
                         <p class="font-bold text-xs tracking-wide leading-relaxed text-right font-serif" dir="rtl">${item.arabic}</p>
                         <p class="text-[11px] opacity-90 border-t border-white/5 pt-1.5"><strong>رامان:</strong> ${item.badini}</p>
                     </div>
@@ -421,26 +413,37 @@
         }
         renderAyat();
 
+        // Azkar Data Updated
         const azkarData = {
             m: [
-                "1. (أصبحنا وأصبح الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له...) [١ جار]",
-                "2. (اللهم بك أصبحنا، وبك أمسينا، وبك نحيا، وبك نموت، وإليك النشور) [١ جار]",
-                "3. آية الكرسي: (الله لا إله إلا هو الحي القيوم...) [١ جار]",
-                "4. سورة الإخلاص، الفلق، الناس [٣ جار]"
+                "<strong>1. ئایەت کورسی:</strong> (اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ...) [١ جار]<br><span class='opacity-75 text-[10px]'>رامان: خودێ یێ ب تنێ یە... بۆ پاراستنا ژ جن و شەیتانان تا ئێڤاری.</span>",
+                "<strong>2. سورەتێن (الإخلاص، الفلق، الناس):</strong> [٣ جاران]<br><span class='opacity-75 text-[10px]'>رامان: پەنابرن ب خودێ ژ شەرێ هەمی مەخلوقان، حەسودیێ، و وەسوەسێن شەیتانی.</span>",
+                "<strong>3. (أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ...):</strong> [١ جار]<br><span class='opacity-75 text-[10px]'>رامان: مە سپێدە کر و مولک هەمی بۆ خودێ یە، و حەمد و سەنا بۆ وی بن.</span>",
+                "<strong>4. (بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ...):</strong> [٣ جاران]<br><span class='opacity-75 text-[10px]'>رامان: ب ناڤێ وی خودایێ کو ب ناڤێ وی چ تشت ل ئەرد و عەسمانی زیانێ ناگەهینن.</span>",
+                "<strong>5. (حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ...):</strong> [٧ جاران]<br><span class='opacity-75 text-[10px]'>رامان: خودێ بەسی منە، چ خودا ژبلی وی نینن، من پشت بەستن ب وی کریە.</span>",
+                "<strong>6. (سُبْحَانَ اللَّهِ وَبِحَمْدِهِ: عَدَدَ خَلْقِهِ...):</strong> [٣ جاران]<br><span class='opacity-75 text-[10px]'>رامان: پاکی و حەمد بۆ خودێ بن ب قەدەر ژمارا مەخلوقێن وی و رازیبوونا وی.</span>"
             ],
             n: [
-                "1. (اللهم ما أصبح بي من نعمة أو بأحد من خلقك فمنك وحده لا شريك لك...) [١ جار]",
-                "2. سبحان الله وبحمده (١٠٠ جار)"
+                "<strong>1. سەلواتدان ل سەر پێغەمبەری:</strong> (اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ) [١٠ جاران یان پتر]<br><span class='opacity-75 text-[10px]'>رامان: خودایێ من، تو رەحمەت و سلامەتیێ ببارینی ل سەر پێغەمبەرێ مە محمد.</span>",
+                "<strong>2. (لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ...):</strong> [١٠ یا ١٠٠ جاران]<br><span class='opacity-75 text-[10px]'>رامان: چ خودا نینن ژبلی خودێ، یێ ب تنێ یە و چ شەریک بۆ نینن.</span>",
+                "<strong>3. ئستغفار:</strong> (أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ) [١٠٠ جاران]<br><span class='opacity-75 text-[10px]'>رامان: ئەز داخوازا لێبورینێ ژ خودێ دکەم و بەرەو وی ڤە دزێڕیم (تۆبە دکەم).</span>"
             ],
             e: [
-                "1. (أمسينا وأصبح الملك لله، والحمد لله...) [١ جار]",
-                "2. (اللهم بك أمسينا، وبك نحيا، وبك نموت، وإليك المصير) [١ جار]",
-                "3. سورة الإخلاص، الفلق، الناس [٣ جار]"
+                "<strong>1. ئایەت کورسی و سورەتێن (الإخلاص، الفلق، الناس):</strong> [١ جار کورسی، ٣ جاران سورەت]<br><span class='opacity-75 text-[10px]'>رامان: بۆ پاراستنا کۆتاییا رۆژێ و پێشوازیکرنا شەڤێ.</span>",
+                "<strong>2. (أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ...):</strong> [١ جار]<br><span class='opacity-75 text-[10px]'>رامان: مە ئێڤاری کر و مولک هەمی بۆ خودێ یە، و سوپاسی بۆ وی بن.</span>",
+                "<strong>3. (اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا...):</strong> [١ جار]<br><span class='opacity-75 text-[10px]'>رامان: خودایێ من، مە ب تە ئێڤاری کر، و ب تە مە سپێدە کر.</span>",
+                "<strong>4. (أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ):</strong> [٣ جاران]<br><span class='opacity-75 text-[10px]'>رامان: ئەز پەنایێ دبەم ب پەیڤێن خودێ یێن تەمام ژ شەرێ هەر تشتەکێ وی بەدیهێنای.</span>"
+            ],
+            mg: [
+                "<strong>1. (اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ):</strong> [٧ جاران]<br><span class='opacity-75 text-[10px]'>رامان: خودایێ من، تو من ژ ئاگرێ جەهنەمێ بپارێزی.</span>",
+                "<strong>2. (لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ...):</strong> [١٠ جاران]<br><span class='opacity-75 text-[10px]'>رامان: پشتی نڤێژا مەغریبێ پێش کو مرۆڤ پێیێن خۆ بلەڤینیت.</span>",
+                "<strong>3. تەسبیحاتێن پشتی نڤێژێ:</strong> (سبحان الله ٣٣، الحمد لله ٣٣، الله أكبر ٣٣)<br><span class='opacity-75 text-[10px]'>رامان: پاکی بۆ خودێ، سوپاسی بۆ خودێ، خودێ ژ هەمی تشتی مەزنترە.</span>"
             ],
             ni: [
-                "1. قراءة آية الكرسي قبل النوم.",
-                "2. قراءة خواتيم سورة البقرة من آية 285.",
-                "3. (باسمك ربي وضعت جنبي وبك أرفعه...) [١ جار]"
+                "<strong>1. خۆندنا دوو ئایەتێن دوماهییێ ژ سورەتا البقرة:</strong> (آمن الرسول...) [١ جار]<br><span class='opacity-75 text-[10px]'>رامان: هەر کەسێ شەڤێ بخوینیت، دێ بەسی وی بن ژ هەر خرابتر و نەخۆشیەکێ.</span>",
+                "<strong>2. (بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي...):</strong> [١ جار]<br><span class='opacity-75 text-[10px]'>رامان: خودایێ من، ب ناڤێ تە من تەنیشتا خۆ دانا (راکشام).</span>",
+                "<strong>3. (اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ):</strong> [٣ جاران]<br><span class='opacity-75 text-[10px]'>رامان: خودایێ من، تو من ژ عەزاب و سزایێ خۆ بپارێزی ل ڕۆژا قیامەتێ.</span>",
+                "<strong>4. تەسبیحێن پێش نڤستنێ:</strong> (سبحان الله ٣٣، الحمد لله ٣٣، الله أكبر ٣٤)"
             ]
         };
 
@@ -512,7 +515,6 @@
         }
         function closeFavoritesModal() { document.getElementById('favModal').classList.add('hidden'); }
 
-        // Routine Theme Selector Logic (پیڤازی، خەمر، کەسک، سۆر)
         window.setRoutineTheme = function(theme) {
             let container = document.getElementById('routineCardContainer');
             let btnPivazi = document.getElementById('themeBtn_pivazi');
@@ -520,7 +522,6 @@
             let btnKask = document.getElementById('themeBtn_kask');
             let btnSor = document.getElementById('themeBtn_sor');
 
-            // Reset buttons
             [btnPivazi, btnKhamar, btnKask, btnSor].forEach(b => {
                 b.className = "p-2 rounded-xl text-[10px] font-bold border-2 border-transparent glass-card opacity-75 hover:opacity-100 flex items-center justify-center gap-1 cursor-pointer transition";
             });
@@ -541,11 +542,9 @@
             localStorage.setItem('dodocare_routine_theme', theme);
         }
 
-        // Load saved routine theme
         let savedTheme = localStorage.getItem('dodocare_routine_theme');
         if(savedTheme) { setRoutineTheme(savedTheme); }
 
-        // Routine Toggle Check Logic - ب تەمامی ڕەنگێ کەسک
         window.toggleCheck = function(key) {
             let btn = document.getElementById('checkBtn_' + key);
             if (btn.classList.contains('bg-kask')) {
@@ -561,12 +560,11 @@
             alert('خشتە و پلانێن ڕۆژانە هاتنە پاشەکەفتکرن! 📅'); 
         }
 
-        // Dodo Logic
         window.answerDodo = function(isSuccess) {
             let msgBox = document.getElementById('dodoMessage');
             let actionBox = document.getElementById('dodoActionBox');
             if (isSuccess) {
-                msgBox.innerText = "🎉 پـیـرۆزە! تو گەلەک یێ ب سەرکەفتن بی، بەردەوام بە! ✨";
+                msgBox.innerText = "🎉 پـیـرۆزە! هەڤالێ من، تو گەلەک ب هێزی و ژیانا خۆ ب جوانترین شێوە برێڤە دبەی!";
                 actionBox.innerHTML = `<button type="button" onclick="resetDodo()" class="w-full bg-purple-600 text-white font-bold py-2.5 rounded-xl text-xs cursor-pointer">دووبارە ڤەگەرە</button>`;
             } else {
                 msgBox.innerText = "چ خەمان نەخۆ هەڤال، سوبە ڕۆژەكا نوو و پڕ دەرفەتە بۆ تە! ✨";

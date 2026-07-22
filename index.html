@@ -78,16 +78,27 @@
             </button>
         </div>
 
-        <!-- بەشێ ١: گۆتنێن هاندەر و رۆژانە -->
+        <!-- بەشێ ١: گۆتنێن هاندەر بو رۆژانە و ڕێنمایێن PWA -->
         <div id="tabQuotes" class="tab-content space-y-4">
             <div class="glass-card rounded-3xl p-5 shadow-2xl space-y-4 text-center border-t-4 border-amber-500">
+                
+                <!-- پەیاما PWA و هاندانا هۆسەری -->
+                <div class="glass-card rounded-2xl p-4 text-right space-y-2 border-r-4 border-amber-400 bg-amber-500/5">
+                    <p class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-info"></i> پەیاما هاندەر و زانیاری:
+                    </p>
+                    <p class="text-[11px] leading-relaxed opacity-90">
+                        نەکەی خەمێ بخۆی یان بێ ئۆمێد ببه‌ی 💆🏼‍♀️. کارێ تە یێ ئەلەکترۆنی یێ تەمامە. ل دەستپێکێ، ڕێکا PWA یان فرێکرنا فایلا APK بۆ هەڤال و خێزانا تە باشترین دەستپێکا بێ مەسره‌فە. ئەگەر تە دڤێت ڕێکا ئێکێ (PWA) بکەی دا کو سایتێ تە ببیتە ئەپەکێ پرۆفیشناڵ: بێژە من کا تە فایلا index.html یا سایتێ خۆ یا هەی؟ ئەز دکارم کۆدێ پێدڤی یێ PWA بۆ تە بنڤیسم دا کو بتنێ کۆپی بکەی و د سایتێ خۆ دا دانی! دەستپێ بکەین؟
+                    </p>
+                </div>
+
                 <div class="glass-card rounded-2xl p-3">
                     <div id="liveClock" class="text-xl font-extrabold tracking-wider">00:00:00</div>
-                    <p id="clockMessage" class="text-[11px] opacity-70 mt-1">ئەڤرۆ ڕۆژا تە یە، پڕ هێز و ئارامی بیت! 🌅</p>
+                    <p id="clockMessage" class="text-[11px] opacity-70 mt-1">ئەڤرۆ ڕۆژا تە یە، هیڤیا من ئەوە پڕ هێز و ئارامی بیت! 🌅</p>
                 </div>
 
                 <div class="glass-card rounded-2xl p-6 min-h-[140px] flex flex-col justify-center items-center relative shadow-inner">
-                    <span class="absolute top-3 right-3 text-[10px] px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 font-bold">گۆتنا هاندەر و ڕۆژانە</span>
+                    <span class="absolute top-3 right-3 text-[10px] px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 font-bold">گۆتنا هاندەر بو ڕۆژانە</span>
                     <p id="quoteText" class="text-xs font-medium leading-relaxed mt-2">"ئەڤرۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!"</p>
                 </div>
 
@@ -122,7 +133,7 @@
             </div>
         </div>
 
-        <!-- بەشێ ٣: ئایەتێن پیرۆز (پەناگەها ئارامیێ - ب پتر ژ 20 ئایەت و رامانا بادینی) -->
+        <!-- بەشێ ٣: ئایەتێن پیرۆز (پەناگەها ئارامیێ - ب پتر ژ 20 ئایەت و رامانا بادینی یا راستڤەکری) -->
         <div id="tabAyat" class="tab-content hidden space-y-4">
             <div class="glass-card rounded-3xl p-5 shadow-2xl space-y-4 max-h-[75vh] overflow-y-auto border-t-4 border-kask">
                 <div class="flex items-center justify-between border-b border-white/10 pb-2">
@@ -131,9 +142,7 @@
                     </h2>
                     <span class="text-[10px] px-2 py-0.5 rounded-full bg-kask/20 text-kask font-bold">بەر چاڤکرنا بادینی</span>
                 </div>
-                <div id="ayatContainer" class="space-y-3 text-xs">
-                    <!-- لێرە ئایەت ب ڕێکا جافاسکریپتی دێ هێنە پڕکرن (پتر ژ 20 ئایەت دگەل رامانا بادینی) -->
-                </div>
+                <div id="ayatContainer" class="space-y-3 text-xs"></div>
             </div>
         </div>
 
@@ -149,13 +158,13 @@
 
                 <!-- دەستپێکا هەلبژاردنا ڕەنگان -->
                 <div class="space-y-1.5">
-                    <label class="text-[11px] font-bold opacity-80">ڕەنگێ جەدەلێ هەڵبژێرە:</label>
+                    <label class="text-[11px] font-bold opacity-80">ڕەنگێ خشتەی هەڵبژێرە:</label>
                     <div class="grid grid-cols-4 gap-1.5">
                         <button type="button" onclick="setRoutineTheme('pivazi')" id="themeBtn_pivazi" class="p-2 rounded-xl text-[10px] font-bold border-2 border-transparent glass-card opacity-75 hover:opacity-100 flex items-center justify-center gap-1 cursor-pointer transition">
                             <span class="w-2 h-2 rounded-full bg-pink-300"></span> پیڤازی
                         </button>
                         <button type="button" onclick="setRoutineTheme('khamar')" id="themeBtn_khamar" class="p-2 rounded-xl text-[10px] font-bold border-2 border-transparent glass-card opacity-75 hover:opacity-100 flex items-center justify-center gap-1 cursor-pointer transition">
-                            <span class="w-2 h-2 rounded-full bg-rose-900"></span> خەمر
+                            <span class="w-2 h-2 rounded-full bg-rose-900"></span> مۆر
                         </button>
                         <button type="button" onclick="setRoutineTheme('kask')" id="themeBtn_kask" class="p-2 rounded-xl text-[10px] font-bold border-2 border-kask bg-kask/20 text-kask flex items-center justify-center gap-1 cursor-pointer transition">
                             <span class="w-2 h-2 rounded-full bg-kask"></span> کەسک
@@ -168,19 +177,16 @@
 
                 <!-- تابلۆیا خشتەی -->
                 <div class="space-y-3 text-xs pt-1">
-                    <!-- سپێدە -->
                     <div class="glass-card p-3.5 rounded-2xl space-y-2 border-r-4 border-amber-400">
                         <div class="flex items-center justify-between">
                             <span class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-sun text-amber-400"></i> سپێدە</span>
-                            <!-- دوگمەیا کلیک کرن ب تەمامی ڕەنگێ کەسک -->
                             <button type="button" onclick="toggleCheck('morning')" id="checkBtn_morning" class="w-7 h-7 rounded-lg glass-card flex items-center justify-center opacity-70 hover:opacity-100 cursor-pointer transition">
                                 <i class="fa-solid fa-check text-[10px]"></i>
                             </button>
                         </div>
-                        <input type="text" id="planMorning" placeholder="پلانا سپێدێ لێرە بنڤیسە..." class="w-full glass-card rounded-xl p-2.5 text-xs focus:outline-none">
+                        <input type="text" id="planMorning" placeholder="پلانا سپێدێ لڤێرێ بنڤیسە..." class="w-full glass-card rounded-xl p-2.5 text-xs focus:outline-none">
                     </div>
 
-                    <!-- نیڤرۆ -->
                     <div class="glass-card p-3.5 rounded-2xl space-y-2 border-r-4 border-orange-400">
                         <div class="flex items-center justify-between">
                             <span class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-cloud-sun text-orange-400"></i> نیڤرۆ</span>
@@ -188,10 +194,9 @@
                                 <i class="fa-solid fa-check text-[10px]"></i>
                             </button>
                         </div>
-                        <input type="text" id="planNoon" placeholder="پلانا نیڤرۆ لێرە بنڤیسە..." class="w-full glass-card rounded-xl p-2.5 text-xs focus:outline-none">
+                        <input type="text" id="planNoon" placeholder="پلانا نیڤرۆ لڤێرێ بنڤیسە..." class="w-full glass-card rounded-xl p-2.5 text-xs focus:outline-none">
                     </div>
 
-                    <!-- ئێڤاری -->
                     <div class="glass-card p-3.5 rounded-2xl space-y-2 border-r-4 border-indigo-400">
                         <div class="flex items-center justify-between">
                             <span class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-cloud-moon text-indigo-400"></i> ئێڤاری</span>
@@ -199,10 +204,9 @@
                                 <i class="fa-solid fa-check text-[10px]"></i>
                             </button>
                         </div>
-                        <input type="text" id="planEvening" placeholder="پلانا ئێڤاری لێرە بنڤیسە..." class="w-full glass-card rounded-xl p-2.5 text-xs focus:outline-none">
+                        <input type="text" id="planEvening" placeholder="پلانا ئێڤاری لڤێرێ بنڤیسە..." class="w-full glass-card rounded-xl p-2.5 text-xs focus:outline-none">
                     </div>
 
-                    <!-- شەڤ -->
                     <div class="glass-card p-3.5 rounded-2xl space-y-2 border-r-4 border-purple-400">
                         <div class="flex items-center justify-between">
                             <span class="font-bold flex items-center gap-1.5"><i class="fa-solid fa-moon text-purple-400"></i> شەڤ</span>
@@ -210,7 +214,7 @@
                                 <i class="fa-solid fa-check text-[10px]"></i>
                             </button>
                         </div>
-                        <input type="text" id="planNight" placeholder="پلانا شەڤێ لێرە بنڤیسە..." class="w-full glass-card rounded-xl p-2.5 text-xs focus:outline-none">
+                        <input type="text" id="planNight" placeholder="پلانا شەڤێ لڤێرێ بنڤیسە..." class="w-full glass-card rounded-xl p-2.5 text-xs focus:outline-none">
                     </div>
                 </div>
 
@@ -241,7 +245,7 @@
                         <i class="fa-solid fa-check"></i> بەلێ (✅)
                     </button>
                     <button type="button" onclick="answerDodo(false)" class="flex-1 glass-card hover:bg-purple-500/10 font-bold py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer z-20">
-                        <i class="fa-solid fa-xmark"></i> نەخێر
+                        <i class="fa-solid fa-xmark"></i> نەخێر(🚫)
                     </button>
                 </div>
             </div>
@@ -321,7 +325,7 @@
             document.getElementById('themeIcon').className = 'fa-solid fa-sun text-xs';
         }
 
-        // Quotes Array (گۆتنێن هاندەر و رۆژانە - پتر و نوو)
+        // Quotes Array (گۆتنێن هاندەر بو رۆژانە )
         const quotes = [
             "ئەڤرۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!",
             "تو گەلەک ژ هندێ ب هێزتری تو دەستا ب داهێلی.",
@@ -376,29 +380,29 @@
         let currentQuote = quotes[0];
         let favorites = JSON.parse(localStorage.getItem('dodocare_favs')) || [];
 
-        // Ayat Data (پتر ژ 20 ئایەت دگەل رامانا بادینی)
+        // Ayat Data (پتر ژ 20 ئایەت دگەل رامانا بادینی یا راستڤەکری)
         const ayatList = [
-            { arabic: "وَأَقِيمُوا الصَّلَوةَ وَءَاتُواْ ٱلزَّكَوْةَ وَأَرْكَعُواْ مَعَ الرَّكِعِينَ", badini: "نڤێژێ بکن، زەکاتێ بدەن، و دگەل رۆکەران (نڤێژکەران) رۆکەری بکن." },
-            { arabic: "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا", arabic2: "", badini: "ب ڕاستی دگەل ماندبوون و تەنگاڤیێ، ئاسانکاری هەیە؛ بەلێ دگەل ماندبوونێ، ئاسانکاری هەیە." },
-            { arabic: "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا", badini: "خودێ چ کەسان بار ناکەت ژ بلی کو ئەو شیانا وێ هەبیت." },
+            { arabic: "وَأَقِيمُوا الصَّلَوةَ وَءَاتُواْ ٱلزَّكَوْةَ وَأَرْكَعُواْ مَعَ الرَّكِعِينَ", badini: "نڤێژێ بکن، زەکاتێ بدەن، و دگەل نڤێژکەران نڤێژێ بکن." },
+            { arabic: "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا", badini: "ب ڕاستی دگەل تەنگاڤیێ ئاسانکاری هەیە؛ بەلێ بێگومان دگەل تەنگاڤیێ ئاسانکاری هەیە." },
+            { arabic: "لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا", badini: "خودێ چ کەسان بار ناکەت ژ بلی کو ئەوە ڕادەستکراوی شیانا وێ هەبیت." },
             { arabic: "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ", badini: "ئاگادار بن، ب زکرێ خودێ دل ئارام دبن." },
             { arabic: "وَاصْبِرْ لِحُكْمِ رَبِّكَ فَإِنَّكَ بِأَعْيُنِنَا", badini: "سەبرێ ل سەر حوکمێ پەروەردگارێ خۆ بکن، چنکو تو د بن چاڤدێریا مە دایی." },
-            { arabic: "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا", badini: "هەر کەسەکێ ژ خودێ بترسیت و خۆ بپارێزیت، خودێ رێیەکا رزگاربوونێ بۆ دەتە دیارکرن." },
-            { arabic: "وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ", badini: "و خودێ رزقێ وی ددەت ژ جهەکێ کو ژێ بێهیڤی بیت (باوەر نەدکەت)." },
-            { arabic: "وَتَوَكَّلْ عَلَى الْحَيِّ الَّذِي لَا يَمُوتُ", badini: "و پشتراست بە و خۆ بسپێرە ئەوی خودایێ هەمیشە زندی کو هەرگیز نامریت." },
-            { arabic: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَتَوَفَّنَا مُسْلِمِينَ", badini: "پەروەردگارێ مە، سەبرەکا مەزن رێژە سەر مە و مە ب مری بمرینە کو تو موسلمان بی." },
+            { arabic: "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا", badini: "هەر کەسەکێ ژ خودێ بترسیت، خودێ دەرگەهەکێ رزگاربوونێ بۆ دەتە دیارکرن." },
+            { arabic: "وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ", badini: "و خودێ رزقێ وی ددەت ژ جهەکێ کو هزر تێدا نەدکر." },
+            { arabic: "وَتَوَكَّلْ عَلَى الْحَيِّ الَّذِي لَا يَمُوتُ", badini: "و خۆ بسپێرە ئەوی خودایێ هەمیشە زندی کو هەرگیز نامریت." },
+            { arabic: "رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَتَوَفَّنَا مُسْلِمِينَ", badini: "پەروەردگارێ مە، سەبرەکا مەزن رێژە سەر مە و مە ب مری بمرینە د حالەتەکێ دا کو تو موسلمان بی." },
             { arabic: "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", badini: "ب ڕاستی خودێ دگەل کەسێن سەبردارە." },
             { arabic: "قُل لَّن يُصِيبَنَا إِلَّا مَا كَتَبَ اللَّهُ لَنَا", badini: "بێژە: چ تشت ژ مە را ناهێت، ژ بلی ئەوی تشتێ خودێ ل مە نڤیسی." },
-            { arabic: "وَادْعُونِي أَسْتَجِبْ لَكُمْ", badini: "داخوازا ژ من بکن، داوەتا تە وەڵام بدەم." },
+            { arabic: "وَادْعُونِي أَسْتَجِبْ لَكُمْ", badini: "داخوازا ژ من بکن، دا وەڵاما داخوازا وە بدەم." },
             { arabic: "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ", badini: "دەمێ بەندەیێن من ژ تە دپرسن ل بارا من، ب ڕاستی ئەز نێزیکم." },
             { arabic: "رَبِّ اشْرَحْ لِي صَدْرِي وَيَسِّرْ لِي أَمْرِي", badini: "پەروەردگارێ من، سنگی بۆ من فراوان بکە و کارێ من بۆ من ئاسان بکە." },
-            { arabic: "فَصَبْرٌ جَمِيلٌ وَاللَّهُ الْمُسْتَعَانُ", badini: "پس سەبرەکا جوان یا جوانتری هەیە، و خودێ هاریکارە." },
-            { arabic: "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ", badini: "خودێ بۆ مە بسە، و ئەو باشترین پشتەڤان و رێڤەبەرە." },
-            { arabic: "وَاللَّهُ يُحِبُّ الصَّابِرِينَ", badini: "و خودێ کەسێن سەبردار دخوازیت و حەز ژێ دکەت." },
-            { arabic: "وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ", badini: "و هەر کەسەکێ خۆ بسپێرەتە خودێ، ئەو خودێ ب تنێ بۆ وی بسە." },
-            { arabic: "رَبَّنَا آتِنَا مِنْ لَدُنْكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا", badini: "پەروەردگارێ مە، ژ لایێ خۆ ڤە رەحمەتەکێ بدە مە و بۆ مە ژ کارێ مە رێیا رەشتێ و راستیێ ئاسان بکە." },
-            { arabic: "سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ", badini: "پەروەردگار تۆ بێگۆناهی، ب ڕاستی من ژ ستەمکاران بووم." },
-            { arabic: "رَبِّ هَبْ لِي مِنَ الصَّالِحِينَ", badini: "پەروەردگارێ من، ژ زارۆک و کەسێن صالح و چاک بدە من." },
+            { arabic: "فَصَبْرٌ جَمِيلٌ وَاللَّهُ الْمُسْتَعَانُ", badini: "پس سەبرەکا جوان یا پێدڤی هەیە، و خودێ هاریکارە." },
+            { arabic: "حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ", badini: "خودێ بۆ مە بسە، و ئەو باشترین پشتەڤانە." },
+            { arabic: "وَاللَّهُ يُحِبُّ الصَّابِرِينَ", badini: "و خودێ حەز ژ کەسێن سەبردار دکەت." },
+            { arabic: "وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ", badini: "و هەر کەسەکێ خۆ بسپێرەتە خودێ، ئەڤجا خودێ ب تنێ بۆ وی بسە." },
+            { arabic: "رَبَّنَا آتِنَا مِنْ لَدُنْكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا", badini: "پەروەردگارێ مە، ژ لایێ خۆ ڤە رەحمەتەکێ بدە مە و بۆ مە ژ کارێ مە رێیا ڕاست ئاسان بکە." },
+            { arabic: "سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ", badini: "پەروەردگار تۆ بێگۆناهی، ب ڕاستی من ژ ستەمکاران بووم (ل سەر خۆ)." },
+            { arabic: "رَبِّ هَبْ لِي مِنَ الصَّالِحِينَ", badini: "پەروەردگارێ من، ژ زارۆک و کەسێن چاک بدە من." },
             { arabic: "إِنَّ رَبِّي لَقَرِيبٌ مُّجِيبٌ", badini: "ب ڕاستی پەروەردگارێ من نێزیکە و بەرسڤا داخوازان ددەت." }
         ];
 
@@ -562,10 +566,10 @@
             let msgBox = document.getElementById('dodoMessage');
             let actionBox = document.getElementById('dodoActionBox');
             if (isSuccess) {
-                msgBox.innerText = "🎉 پـیـرۆزە! تو کەسەک سەرکەفتی ! شانازیێ ب تە دکەم! 💖";
+                msgBox.innerText = "🎉 پـیـرۆزە! تو گەلەک یێ ب سەرکەفتن بی، بەردەوام بە! ✨";
                 actionBox.innerHTML = `<button type="button" onclick="resetDodo()" class="w-full bg-purple-600 text-white font-bold py-2.5 rounded-xl text-xs cursor-pointer">دووبارە ڤەگەرە</button>`;
             } else {
-                msgBox.innerText = "چ خەمان نەخۆ هەڤالا من، سوبە ڕۆژەكا نوو و پڕ دەرفەتە بۆ تە! ✨";
+                msgBox.innerText = "چ خەمان نەخۆ هەڤال، سوبە ڕۆژەكا نوو و پڕ دەرفەتە بۆ تە! ✨";
                 actionBox.innerHTML = `<button type="button" onclick="resetDodo()" class="w-full bg-purple-600 text-white font-bold py-2.5 rounded-xl text-xs cursor-pointer">دووبارە ڤەگەرە</button>`;
             }
         }
@@ -577,7 +581,7 @@
                     <i class="fa-solid fa-check"></i> بەلێ (✅)
                 </button>
                 <button type="button" onclick="answerDodo(false)" class="flex-1 glass-card hover:bg-purple-500/10 font-bold py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 cursor-pointer z-20">
-                    <i class="fa-solid fa-xmark"></i> نەخێر
+                    <i class="fa-solid fa-xmark"></i> نەخێر (🚫)
                 </button>
             `;
         }

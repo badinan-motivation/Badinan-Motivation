@@ -18,7 +18,7 @@
                         darkBg: '#0b0f19',
                         cardBg: '#131c2e',
                         pivazi: '#ffc0cb',
-                        khamar: '#800020',
+                        khamar: '#9333ea',
                         kask: '#22c55e',
                         sor: '#ef4444'
                     }
@@ -60,6 +60,17 @@
 
     <main class="max-w-md w-full space-y-4">
         
+        <div class="glass-card p-3 rounded-2xl text-center space-y-2 border-r-4 border-emerald-500">
+            <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-emerald-400 flex items-center gap-1.5"><i class="fa-solid fa-mobile-screen"></i> زێدەکرنا ئەپلیکەیشن بۆ شاشەیا سەرەکی</span>
+                <button onclick="toggleHomeGuide()" class="text-[11px] underline opacity-80 hover:opacity-100 cursor-pointer">رێنمایی</button>
+            </div>
+            <div id="homeGuideBox" class="hidden text-[11px] opacity-90 space-y-1 text-right pt-2 border-t border-white/10">
+                <p><strong>بۆ ئایفۆنی (Safari):</strong> کلیک لکاڤەگرتنێ بکە <i class="fa-solid fa-arrow-up-from-bracket text-blue-400"></i> پاشان <strong>Add to Home Screen</strong> هەڵبژێرە.</p>
+                <p><strong>بۆ ئاندرۆید (Chrome):</strong> سێ خالێن سەرێ لایێ راست کلیک بکە <i class="fa-solid fa-ellipsis-vertical text-amber-400"></i> پاشان <strong>Add to Home screen</strong> هەڵبژێرە.</p>
+            </div>
+        </div>
+
         <div class="grid grid-cols-5 gap-1 glass-card p-1.5 rounded-2xl">
             <button onclick="switchTab('quotes')" id="btnQuotes" class="tab-btn py-2 rounded-xl text-[9px] font-bold transition flex flex-col items-center gap-1 bg-amber-500 text-slate-950 shadow-md cursor-pointer">
                 <i class="fa-solid fa-bolt"></i> گۆتن
@@ -149,7 +160,7 @@
                             <span class="w-2 h-2 rounded-full bg-pink-300"></span> پیڤازی
                         </button>
                         <button type="button" onclick="setRoutineTheme('khamar')" id="themeBtn_khamar" class="p-2 rounded-xl text-[10px] font-bold border-2 border-transparent glass-card opacity-75 hover:opacity-100 flex items-center justify-center gap-1 cursor-pointer transition">
-                            <span class="w-2 h-2 rounded-full bg-rose-900"></span> مۆر
+                            <span class="w-2 h-2 rounded-full bg-purple-600"></span> مۆر
                         </button>
                         <button type="button" onclick="setRoutineTheme('kask')" id="themeBtn_kask" class="p-2 rounded-xl text-[10px] font-bold border-2 border-kask bg-kask/20 text-kask flex items-center justify-center gap-1 cursor-pointer transition">
                             <span class="w-2 h-2 rounded-full bg-kask"></span> کەسک
@@ -262,6 +273,11 @@
         setInterval(updateClock, 1000);
         updateClock();
 
+        function toggleHomeGuide() {
+            let box = document.getElementById('homeGuideBox');
+            box.classList.toggle('hidden');
+        }
+
         // Streak & Calendar Logic
         let lastVisit = localStorage.getItem('badinan_last_visit');
         let streak = parseInt(localStorage.getItem('badinan_streak')) || 1;
@@ -361,7 +377,7 @@
         let currentQuote = quotes[0];
         let favorites = JSON.parse(localStorage.getItem('dodocare_favs')) || [];
 
-        // Ayat Data (30 ئایەتێن نوی)
+        // Ayat Data
         const ayatList = [
             { arabic: "فَاذْكُرُونِي أَذْكُرْكُمْ", ref: "البقرة: ١٥٢", badini: "ڤیجا هوین من ب بیر بینن (ب عیبادەتی)، ئەز ژی دێ هەوە ب بیر ئینم (ب خێران)." },
             { arabic: "إِنَّ مَعَ الْعُسْرِ يُسْرًا", ref: "الشرح: ٦", badini: "ب دروستی دگەل هەر ته‌نگاڤیه‌كێ، ساناهیبوونەک هەیە." },
@@ -413,7 +429,7 @@
         }
         renderAyat();
 
-        // Azkar Data Updated
+        // Azkar Data Complete
         const azkarData = {
             m: [
                 "<strong>1. ئایەت کورسی:</strong> (اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ...) [١ جار]<br><span class='opacity-75 text-[10px]'>رامان: خودێ یێ ب تنێ یە... بۆ پاراستنا ژ جن و شەیتانان تا ئێڤاری.</span>",
@@ -530,8 +546,8 @@
                 container.className = "rounded-3xl p-5 shadow-2xl space-y-4 max-h-[75vh] overflow-y-auto border-t-4 border-pink-300 bg-pink-300/5 transition-all duration-300";
                 btnPivazi.className = "p-2 rounded-xl text-[10px] font-bold border-2 border-pink-300 bg-pink-300/20 text-pink-300 flex items-center justify-center gap-1 cursor-pointer transition";
             } else if(theme === 'khamar') {
-                container.className = "rounded-3xl p-5 shadow-2xl space-y-4 max-h-[75vh] overflow-y-auto border-t-4 border-rose-900 bg-rose-900/5 transition-all duration-300";
-                btnKhamar.className = "p-2 rounded-xl text-[10px] font-bold border-2 border-rose-900 bg-rose-900/20 text-rose-300 flex items-center justify-center gap-1 cursor-pointer transition";
+                container.className = "rounded-3xl p-5 shadow-2xl space-y-4 max-h-[75vh] overflow-y-auto border-t-4 border-purple-600 bg-purple-600/5 transition-all duration-300";
+                btnKhamar.className = "p-2 rounded-xl text-[10px] font-bold border-2 border-purple-600 bg-purple-600/20 text-purple-300 flex items-center justify-center gap-1 cursor-pointer transition";
             } else if(theme === 'kask') {
                 container.className = "rounded-3xl p-5 shadow-2xl space-y-4 max-h-[75vh] overflow-y-auto border-t-4 border-kask bg-kask/5 transition-all duration-300";
                 btnKask.className = "p-2 rounded-xl text-[10px] font-bold border-2 border-kask bg-kask/20 text-kask flex items-center justify-center gap-1 cursor-pointer transition";
@@ -545,18 +561,40 @@
         let savedTheme = localStorage.getItem('dodocare_routine_theme');
         if(savedTheme) { setRoutineTheme(savedTheme); }
 
+        // LocalStorage for Routine inputs and checks
+        function loadPlanner() {
+            ['morning', 'noon', 'evening', 'night'].forEach(key => {
+                let savedText = localStorage.getItem('dodocare_plan_' + key);
+                if(savedText) document.getElementById('plan' + key.charAt(0).toUpperCase() + key.slice(1)).value = savedText;
+
+                let savedCheck = localStorage.getItem('dodocare_check_' + key);
+                let btn = document.getElementById('checkBtn_' + key);
+                if(savedCheck === 'true') {
+                    btn.classList.remove('opacity-70');
+                    btn.classList.add('bg-kask', 'text-white');
+                }
+            });
+        }
+        loadPlanner();
+
         window.toggleCheck = function(key) {
             let btn = document.getElementById('checkBtn_' + key);
             if (btn.classList.contains('bg-kask')) {
                 btn.classList.remove('bg-kask', 'text-white');
                 btn.classList.add('opacity-70');
+                localStorage.setItem('dodocare_check_' + key, 'false');
             } else {
                 btn.classList.remove('opacity-70');
                 btn.classList.add('bg-kask', 'text-white');
+                localStorage.setItem('dodocare_check_' + key, 'true');
             }
         }
 
         window.saveMyPlanner = function() { 
+            ['morning', 'noon', 'evening', 'night'].forEach(key => {
+                let val = document.getElementById('plan' + key.charAt(0).toUpperCase() + key.slice(1)).value;
+                localStorage.setItem('dodocare_plan_' + key, val);
+            });
             alert('خشتە و پلانێن ڕۆژانە هاتنە پاشەکەفتکرن! 📅'); 
         }
 
@@ -586,62 +624,3 @@
     </script>
 </body>
 </html>
-<!DOCTYPE html>
-<html lang="ku" dir="rtl" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dodocare - زێدەکرنا ئەپلیکەیشن بۆ شاشەیا سەرەکی</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap');
-        body { font-family: 'Vazirmatn', sans-serif; background-color: #0b0f19; color: #f1f5f9; }
-        .glass-card { background: linear-gradient(135deg, rgba(19, 28, 46, 0.95), rgba(11, 15, 25, 0.98)); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
-    </style>
-</head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4">
-
-    <div class="max-w-md w-full glass-card rounded-3xl p-6 shadow-2xl space-y-6 border-t-4 border-emerald-500">
-        
-        <div class="text-center space-y-2">
-            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 to-emerald-700 flex items-center justify-center text-white text-2xl font-bold mx-auto shadow-lg">
-                DC
-            </div>
-            <h1 class="text-base font-bold">زێدەکرنا Dodocare بۆ شاشەیا سەرەکی</h1>
-            <p class="text-xs opacity-75">دەمێ تو ڤی سایتی دکەیە شاشەیا سەرەکی، دێ وەکی ئەپلیکەیشنه کێ بەردەوام کار کەت!</p>
-        </div>
-
-        <div class="glass-card p-4 rounded-2xl space-y-3 border-r-4 border-blue-500">
-            <div class="flex items-center gap-2 text-blue-400 font-bold text-xs">
-                <i class="fa-brands fa-apple text-base"></i> بۆ ئایفۆنی (iPhone / Safari)
-            </div>
-            <ol class="text-xs space-y-2 opacity-90 pr-4 list-decimal">
-                <li>ڤی سایتی ل سەر برۆسەرێ <strong>Safari</strong> ڤەکە.</li>
-                <li>ل خوارێ شاشێ، دوگمەیا ڤەگوهاستنێ یا پشکڤەکرنێ <i class="fa-solid fa-arrow-up-from-bracket text-blue-400"></i> کلیک بکە.</li>
-                <li>بەرەف خوارێ بچە و گزینه <strong>(Add to Home Screen)</strong> هەڵبژێرە.</li>
-                <li>دواتر ل سەرجەمەکێ <strong>(Add)</strong> کلیک بکە ل ژۆرۆڤە.</li>
-            </ol>
-        </div>
-
-        <div class="glass-card p-4 rounded-2xl space-y-3 border-r-4 border-amber-500">
-            <div class="flex items-center gap-2 text-amber-400 font-bold text-xs">
-                <i class="fa-brands fa-android text-base"></i> بۆ سامسۆنگ و ئاندرۆید (Chrome / Samsung Internet)
-            </div>
-            <ol class="text-xs space-y-2 opacity-90 pr-4 list-decimal">
-                <li>ڤی سایتی ل سەر برۆسەرێ <strong>Chrome</strong> یان <strong>Samsung Internet</strong> ڤەکە.</li>
-                <li>ل سەرێ شاشێ ل لایێ راست یان چەپ، دوگمەیا سێ خالان <i class="fa-solid fa-ellipsis-vertical text-amber-400"></i> کلیک بکە.</li>
-                <li>گزینکا <strong>(Add to Home screen)</strong> یان <strong>(Install app)</strong> هەڵبژێرە.</li>
-                <li>دوو جاران کلیک ل سەر <strong>(Add / Install)</strong> بکە دا ل سەر شاشا موبایلا تە بێتە زێدەکرن.</li>
-            </ol>
-        </div>
-
-        <a href="index.html" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold py-3 rounded-xl text-xs shadow-lg flex items-center justify-center gap-2 transition cursor-pointer">
-            <i class="fa-solid fa-house"></i> ڤەگەرە بو سەر سایتی
-        </a>
-
-    </div>
-
-</body>
-</html>
-

@@ -52,20 +52,23 @@
         </div>
     </header>
 
-    <!-- ناوەندا سەرەکی -->
+    <!-- ناوەندا سەرەکی (٣ بژاردەیێن سەرەکی: گۆتن، زکر، ڕۆتین) -->
     <main class="max-w-md w-full space-y-4">
         
-        <!-- ٢ دوگمەیێن سەرەکی (ڕەنگاوڕەنگ) -->
-        <div class="grid grid-cols-2 gap-2">
-            <button onclick="switchTab('quotes')" id="btnQuotes" class="tab-btn bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold py-2.5 px-3 rounded-xl text-xs transition shadow-md shadow-indigo-500/20 flex flex-col items-center gap-1">
-                <i class="fa-solid fa-bolt text-sm"></i> گۆتنێن هاندەر
+        <!-- ٣ دوگمەیێن سەرەکی -->
+        <div class="grid grid-cols-3 gap-1.5">
+            <button onclick="switchTab('quotes')" id="btnQuotes" class="tab-btn bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold py-2 px-2 rounded-xl text-[11px] transition shadow-md flex flex-col items-center gap-1">
+                <i class="fa-solid fa-bolt text-xs"></i> گۆتنێن ڕۆژانە
             </button>
-            <button onclick="switchTab('routine')" id="btnRoutine" class="tab-btn bg-slate-800 text-slate-300 font-bold py-2.5 px-3 rounded-xl text-xs transition flex flex-col items-center gap-1">
-                <i class="fa-solid fa-list-check text-sm"></i> ڕۆتین و خشتە
+            <button onclick="switchTab('azkar')" id="btnAzkar" class="tab-btn bg-slate-800 text-slate-300 font-bold py-2 px-2 rounded-xl text-[11px] transition flex flex-col items-center gap-1">
+                <i class="fa-solid fa-book-quran text-xs"></i> زکرێ ڕۆژانە
+            </button>
+            <button onclick="switchTab('routine')" id="btnRoutine" class="tab-btn bg-slate-800 text-slate-300 font-bold py-2 px-2 rounded-xl text-[11px] transition flex flex-col items-center gap-1">
+                <i class="fa-solid fa-list-check text-xs"></i> رۆتینا ڕۆژانە
             </button>
         </div>
 
-        <!-- بەشێ ١: گۆتنێن هاندەر (ڕەنگێ تایبەت - Indigo / Violet) -->
+        <!-- بەشێ ١: گۆتنێن ڕۆژانە -->
         <div id="tabQuotes" class="tab-content bg-slate-900/90 dark:bg-slate-900/90 bg-white border border-indigo-500/30 rounded-3xl p-5 shadow-2xl space-y-4">
             <div class="bg-gradient-to-r from-indigo-950/80 to-violet-950/80 border border-indigo-500/40 rounded-2xl p-3 text-center shadow-md">
                 <div id="liveClock" class="text-xl font-extrabold text-indigo-300 tracking-wider">00:00:00</div>
@@ -91,16 +94,98 @@
             </button>
         </div>
 
-        <!-- بەشێ ٢: ڕۆتینا ڕۆژانە دگەل خشتەیێن ڕەنگاوڕەنگ -->
-        <div id="tabRoutine" class="tab-content hidden bg-slate-900/90 dark:bg-slate-900/90 bg-white border border-emerald-500/30 rounded-3xl p-5 shadow-2xl space-y-4 max-h-[70vh] overflow-y-auto">
+        <!-- بەشێ ٢: زکرێ ڕۆژانە (ب درێژی و تەمام) -->
+        <div id="tabAzkar" class="tab-content hidden bg-slate-900/90 dark:bg-slate-900/90 bg-white border border-emerald-500/30 rounded-3xl p-5 shadow-2xl space-y-4 max-h-[70vh] overflow-y-auto">
             <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                 <h2 class="text-sm font-bold text-emerald-400 flex items-center gap-2">
-                    <i class="fa-solid fa-list-check"></i> خشتەیێن ڕۆتینا ڕۆژانە و زکر
+                    <i class="fa-solid fa-book-quran"></i> زکرێن ڕۆژانە (ب درێژی)
                 </h2>
             </div>
-            <p class="text-[11px] text-slate-400">هەڤاڵ، خشتەیەکێ ڕەنگاوڕەنگ ژ ڤان خشتەیان هەلبژێرە و پلانا خۆ تێدا بنڤیسە:</p>
+            <p class="text-[11px] text-slate-400">هەڤاڵ، زکرێن تەڤاهی و رەسەن بۆ هەمی دەمێن ڕۆژێ لێرە نە:</p>
             
-            <!-- مینیویا هەلبژارتنا جورێ خشتەی (ڕەنگاوڕەنگ) -->
+            <!-- مینیویا زکران -->
+            <div class="grid grid-cols-4 gap-1 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-[11px]">
+                <button onclick="switchAzkarTab('azkarMorning')" id="btnAzkarMorning" class="azkar-tab-btn bg-emerald-600 text-white font-bold py-1.5 px-1 rounded-lg text-center transition">سپێدە</button>
+                <button onclick="switchAzkarTab('azkarNoon')" id="btnAzkarNoon" class="azkar-tab-btn bg-slate-800 text-slate-300 font-bold py-1.5 px-1 rounded-lg text-center transition">نیڤرو</button>
+                <button onclick="switchAzkarTab('azkarEvening')" id="btnAzkarEvening" class="azkar-tab-btn bg-slate-800 text-slate-300 font-bold py-1.5 px-1 rounded-lg text-center transition">ئێڤاری</button>
+                <button onclick="switchAzkarTab('azkarNight')" id="btnAzkarNight" class="azkar-tab-btn bg-slate-800 text-slate-300 font-bold py-1.5 px-1 rounded-lg text-center transition">شەڤ</button>
+            </div>
+
+            <!-- زکرێن سپێدێ -->
+            <div id="azkarMorning" class="azkar-content space-y-3 text-xs">
+                <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-emerald-500/40 space-y-2">
+                    <p class="text-emerald-400 font-bold"><i class="fa-solid fa-sun"></i> زکرێن سپێدێ (تەمام):</p>
+                    <div class="text-[11px] text-slate-300 space-y-2 bg-emerald-950/30 p-3 rounded-xl border border-emerald-500/20 leading-relaxed">
+                        <p>1. (أصبحنا وأصبح الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير...) <span class="text-amber-300 font-semibold">[1 جار]</span></p>
+                        <hr class="border-emerald-500/20">
+                        <p>2. (اللهم بك أصبحنا، وبك أمسينا، وبك نحيا وبك نموت وإليك النشور) <span class="text-amber-300 font-semibold">[1 جار]</span></p>
+                        <hr class="border-emerald-500/20">
+                        <p>3. (سید الاستغفار: اللهم أنت ربي لا إله إلا أنت، خلقتني وأنا عبدك...) <span class="text-amber-300 font-semibold">[1 جار]</span></p>
+                        <hr class="border-emerald-500/20">
+                        <p>4. (سبحان الله وبحمده: عدد خلقه، ورضا نفسه، وزنة عرشه، ومداد كلماته) <span class="text-amber-300 font-semibold">[3 جار]</span></p>
+                        <hr class="border-emerald-500/20">
+                        <p>5. (بسم الله الذي لا يضر مع اسمه شيء في الأرض ولا في السماء وهو السميع العليم) <span class="text-amber-300 font-semibold">[3 جار]</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- زکرێن نیڤرو -->
+            <div id="azkarNoon" class="azkar-content hidden space-y-3 text-xs">
+                <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-cyan-500/40 space-y-2">
+                    <p class="text-cyan-400 font-bold"><i class="fa-solid fa-cloud-sun"></i> زکرێن نیڤرو و پشوو:</p>
+                    <div class="text-[11px] text-slate-300 space-y-2 bg-cyan-950/30 p-3 rounded-xl border border-cyan-500/20 leading-relaxed">
+                        <p>1. (استغفر الله العظيم الذي لا إله إلا هو الحي القيوم وأتوب إليه) <span class="text-amber-300 font-semibold">[100 جار]</span></p>
+                        <hr class="border-cyan-500/20">
+                        <p>2. (لا حول ولا قوة إلا بالله العلي العظيم) <span class="text-amber-300 font-semibold">[50 جار]</span></p>
+                        <hr class="border-cyan-500/20">
+                        <p>3. (اللهم صل وسلم على نبينا محمد وعلى آله وصحبه أجمعين) <span class="text-amber-300 font-semibold">[10 جار]</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- زکرێن ئێڤاری -->
+            <div id="azkarEvening" class="azkar-content hidden space-y-3 text-xs">
+                <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-amber-500/40 space-y-2">
+                    <p class="text-amber-400 font-bold"><i class="fa-solid fa-cloud-moon"></i> زکرێن ئێڤارێ (تەمام):</p>
+                    <div class="text-[11px] text-slate-300 space-y-2 bg-amber-950/30 p-3 rounded-xl border border-amber-500/20 leading-relaxed">
+                        <p>1. (أمسينا وأمسى الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له...) <span class="text-amber-300 font-semibold">[1 جار]</span></p>
+                        <hr class="border-amber-500/20">
+                        <p>2. (اللهم بك أمسينا، وبك أصبحنا، وبك نحيا وبك نموت وإليك المصير) <span class="text-amber-300 font-semibold">[1 جار]</span></p>
+                        <hr class="border-amber-500/20">
+                        <p>3. (أعوذ بكلمات الله التامات من شر ما خلق) <span class="text-amber-300 font-semibold">[3 جار]</span></p>
+                        <hr class="border-amber-500/20">
+                        <p>4. (اللهم ما أمسى بي من نعمة أو بأحد من خلقك فمنك وحده لا شريك لك...) <span class="text-amber-300 font-semibold">[1 جار]</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- زکرێن شەڤێ -->
+            <div id="azkarNight" class="azkar-content hidden space-y-3 text-xs">
+                <div class="bg-slate-950/80 p-3.5 rounded-2xl border border-blue-500/40 space-y-2">
+                    <p class="text-blue-400 font-bold"><i class="fa-solid fa-moon"></i> زکرێن خەوێ و شەڤێ:</p>
+                    <div class="text-[11px] text-slate-300 space-y-2 bg-blue-950/30 p-3 rounded-xl border border-blue-500/20 leading-relaxed">
+                        <p>1. کۆمکرنا هەردوو دەستان و خواندنا سورەتەل الإخلاص، الفلق و الناس، وپاشان پەخشینا وان ل سەر هەمی لەشێ خۆ. <span class="text-amber-300 font-semibold">[3 جاران]</span></p>
+                        <hr class="border-blue-500/20">
+                        <p>2. خواندنا ئایەتەل کورسی (الله لا إله إلا هو الحي القيوم...). <span class="text-amber-300 font-semibold">[1 جار]</span></p>
+                        <hr class="border-blue-500/20">
+                        <p>3. (باسمك ربي وضعت جنبي وبك أرفعه، إن أمسكت نفسي فارحمها، وإن أرسلتها فاحفظها بما تحفظ به عبادك الصالحين) <span class="text-amber-300 font-semibold">[1 جار]</span></p>
+                        <hr class="border-blue-500/20">
+                        <p>4. (اللهم أسلمت نفسي إليك، ووجهت وجهي إليك، وفوضت أمري إليك...) <span class="text-amber-300 font-semibold">[1 جار]</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بەشێ ٣: رۆتینا ڕۆژانە (خشتە و پلان) -->
+        <div id="tabRoutine" class="tab-content hidden bg-slate-900/90 dark:bg-slate-900/90 bg-white border border-cyan-500/30 rounded-3xl p-5 shadow-2xl space-y-4 max-h-[70vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                <h2 class="text-sm font-bold text-cyan-400 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check"></i> رۆتینا ڕۆژانە و پلان
+                </h2>
+            </div>
+            <p class="text-[11px] text-slate-400">هەڤاڵ، خشتەیەکێ رۆتینێ هەلبژێرە و پلانا خۆ تێدا بنڤیسە:</p>
+            
+            <!-- مینیویا خشتەیان -->
             <div class="grid grid-cols-4 gap-1 bg-slate-950 p-1.5 rounded-xl border border-slate-800 text-[11px]">
                 <button onclick="switchTableTab('tableMorning')" id="btnTableMorning" class="table-tab-btn bg-emerald-600 text-white font-bold py-1.5 px-1 rounded-lg text-center transition">سپێدە</button>
                 <button onclick="switchTableTab('tableNoon')" id="btnTableNoon" class="table-tab-btn bg-slate-800 text-slate-300 font-bold py-1.5 px-1 rounded-lg text-center transition">نیڤرو</button>
@@ -108,90 +193,64 @@
                 <button onclick="switchTableTab('tableNight')" id="btnTableNight" class="table-tab-btn bg-slate-800 text-slate-300 font-bold py-1.5 px-1 rounded-lg text-center transition">شەڤ</button>
             </div>
 
-            <!-- خشتەیا ١: سپێدە (ڕەنگێ کەسک / Emerald) -->
+            <!-- خشتەیا سپێدێ -->
             <div id="tableMorning" class="table-content space-y-3 text-xs">
-                <div class="bg-slate-950/60 p-3.5 rounded-2xl border-2 border-emerald-500/50 space-y-2 shadow-lg shadow-emerald-950/30">
+                <div class="bg-slate-950/60 p-3.5 rounded-2xl border-2 border-emerald-500/50 space-y-2 shadow-lg">
                     <div class="flex items-center justify-between">
-                        <span class="text-emerald-400 font-bold flex items-center gap-1.5"><i class="fa-solid fa-sun text-emerald-400"></i> خشتەیا سپێدێ</span>
+                        <span class="text-emerald-400 font-bold flex items-center gap-1.5"><i class="fa-solid fa-sun"></i> رۆتینا سپێدێ</span>
                         <button onclick="toggleCheck('morning')" id="checkBtn_morning" class="w-7 h-7 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center transition border border-slate-700 shadow-sm">
                             <i class="fa-solid fa-check"></i>
                         </button>
                     </div>
-                    <!-- بەشێ زکر (ڕەنگێ تایبەت بۆ زکران) -->
-                    <div class="text-[11px] text-emerald-100 space-y-1.5 bg-emerald-950/40 p-3 rounded-xl border border-emerald-500/30">
-                        <p class="text-emerald-300 font-semibold">✨ هاندانا سپێدێ: <span class="font-normal text-slate-300">"رۆژەکا نوو، دەرفەتەکا نوو؛ تو دشێی هەمی تشتێن جوان بکەی!"</span></p>
-                        <div class="border-t border-emerald-500/20 pt-1.5 mt-1.5">
-                            <p class="text-amber-300 font-bold flex items-center gap-1 mb-1"><i class="fa-solid fa-hands-praying"></i> زکرێن سپێدێ (تایبەت):</p>
-                            <p class="text-slate-200">• (أصبحنا وأصبح الملك لله...) - 1 جار</p>
-                            <p class="text-slate-200">• (سبحان الله وبحمده) - 100 جار</p>
-                        </div>
-                    </div>
+                    <p class="text-[11px] text-emerald-200">"رۆژەکا نوو، دەرفەتەکا نوو؛ تو دشێی هەمی تشتێن جوان بکەی!"</p>
                     <input type="text" id="planMorning" placeholder="پلانا خۆ یا سپێدێ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-emerald-500/40 rounded-xl p-2.5 text-slate-200 text-xs focus:outline-none focus:border-emerald-400">
                 </div>
             </div>
 
-            <!-- خشتەیا ٢: نیڤرو (ڕەنگێ نیلی / Cyan) -->
+            <!-- خشتەیا نیڤرو -->
             <div id="tableNoon" class="table-content hidden space-y-3 text-xs">
-                <div class="bg-slate-950/60 p-3.5 rounded-2xl border-2 border-cyan-500/50 space-y-2 shadow-lg shadow-cyan-950/30">
+                <div class="bg-slate-950/60 p-3.5 rounded-2xl border-2 border-cyan-500/50 space-y-2 shadow-lg">
                     <div class="flex items-center justify-between">
-                        <span class="text-cyan-400 font-bold flex items-center gap-1.5"><i class="fa-solid fa-cloud-sun text-cyan-400"></i> خشتەیا نیڤرو</span>
+                        <span class="text-cyan-400 font-bold flex items-center gap-1.5"><i class="fa-solid fa-cloud-sun"></i> رۆتینا نیڤرو</span>
                         <button onclick="toggleCheck('noon')" id="checkBtn_noon" class="w-7 h-7 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center transition border border-slate-700 shadow-sm">
                             <i class="fa-solid fa-check"></i>
                         </button>
                     </div>
-                    <div class="text-[11px] text-cyan-100 space-y-1.5 bg-cyan-950/40 p-3 rounded-xl border border-cyan-500/30">
-                        <p class="text-cyan-300 font-semibold">✨ هاندانا نیڤرو: <span class="font-normal text-slate-300">"هێزا خۆ نوو بکە، تو گەلەک نزیکی سەرکەفتنێ بی."</span></p>
-                        <div class="border-t border-cyan-500/20 pt-1.5 mt-1.5">
-                            <p class="text-amber-300 font-bold flex items-center gap-1 mb-1"><i class="fa-solid fa-hands-praying"></i> زکرێن نیڤرو (تایبەت):</p>
-                            <p class="text-slate-200">• (استغفر الله العظيم وأتوب إليه) - 100 جار</p>
-                        </div>
-                    </div>
+                    <p class="text-[11px] text-cyan-200">"هێزا خۆ نوو بکە، تو گەلەک نزیکی سەرکەفتنێ بی."</p>
                     <input type="text" id="planNoon" placeholder="پلانا خۆ یا نیڤرو لێرە بنڤیسە..." class="w-full bg-slate-900 border border-cyan-500/40 rounded-xl p-2.5 text-slate-200 text-xs focus:outline-none focus:border-cyan-400">
                 </div>
             </div>
 
-            <!-- خشتەیا ٣: ئێڤاری (ڕەنگێ نارنجی / Amber) -->
+            <!-- خشتەیا ئێڤاری -->
             <div id="tableEvening" class="table-content hidden space-y-3 text-xs">
-                <div class="bg-slate-950/60 p-3.5 rounded-2xl border-2 border-amber-500/50 space-y-2 shadow-lg shadow-amber-950/30">
+                <div class="bg-slate-950/60 p-3.5 rounded-2xl border-2 border-amber-500/50 space-y-2 shadow-lg">
                     <div class="flex items-center justify-between">
-                        <span class="text-amber-400 font-bold flex items-center gap-1.5"><i class="fa-solid fa-cloud-moon text-amber-400"></i> خشتەیا ئێڤاری</span>
+                        <span class="text-amber-400 font-bold flex items-center gap-1.5"><i class="fa-solid fa-cloud-moon"></i> رۆتینا ئێڤاری</span>
                         <button onclick="toggleCheck('evening')" id="checkBtn_evening" class="w-7 h-7 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center transition border border-slate-700 shadow-sm">
                             <i class="fa-solid fa-check"></i>
                         </button>
                     </div>
-                    <div class="text-[11px] text-amber-100 space-y-1.5 bg-amber-950/40 p-3 rounded-xl border border-amber-500/30">
-                        <p class="text-amber-300 font-semibold">✨ هاندانا ئێڤارێ: <span class="font-normal text-slate-300">"ماندیبوونا ئەڤرۆ دێ بیتە کەیفخۆشیا سوبەهی."</span></p>
-                        <div class="border-t border-amber-500/20 pt-1.5 mt-1.5">
-                            <p class="text-amber-300 font-bold flex items-center gap-1 mb-1"><i class="fa-solid fa-hands-praying"></i> زکرێن ئێڤارێ (تایبەت):</p>
-                            <p class="text-slate-200">• (أمسينا وأمسى الملك لله...) - 1 جار</p>
-                        </div>
-                    </div>
+                    <p class="text-[11px] text-amber-200">"ماندیبوونا ئەڤرۆ دێ بیتە کەیفخۆشیا سوبەهی."</p>
                     <input type="text" id="planEvening" placeholder="پلانا خۆ یا ئێڤاری لێرە بنڤیسە..." class="w-full bg-slate-900 border border-amber-500/40 rounded-xl p-2.5 text-slate-200 text-xs focus:outline-none focus:border-amber-400">
                 </div>
             </div>
 
-            <!-- خشتەیا ٤: شەڤ (ڕەنگێ شین و مووشەکی / Blue) -->
+            <!-- خشتەیا شەڤێ -->
             <div id="tableNight" class="table-content hidden space-y-3 text-xs">
-                <div class="bg-slate-950/60 p-3.5 rounded-2xl border-2 border-blue-500/50 space-y-2 shadow-lg shadow-blue-950/30">
+                <div class="bg-slate-950/60 p-3.5 rounded-2xl border-2 border-blue-500/50 space-y-2 shadow-lg">
                     <div class="flex items-center justify-between">
-                        <span class="text-blue-400 font-bold flex items-center gap-1.5"><i class="fa-solid fa-moon text-blue-400"></i> خشتەیا شەڤێ</span>
+                        <span class="text-blue-400 font-bold flex items-center gap-1.5"><i class="fa-solid fa-moon"></i> رۆتینا شەڤێ</span>
                         <button onclick="toggleCheck('night')" id="checkBtn_night" class="w-7 h-7 rounded-xl bg-slate-800 text-slate-500 flex items-center justify-center transition border border-slate-700 shadow-sm">
                             <i class="fa-solid fa-check"></i>
                         </button>
                     </div>
-                    <div class="text-[11px] text-blue-100 space-y-1.5 bg-blue-950/40 p-3 rounded-xl border border-blue-500/30">
-                        <p class="text-blue-300 font-semibold">✨ هاندانا شەڤێ: <span class="font-normal text-slate-300">"سپاس بۆ خودایێ مە کو ئەڤرۆ ژی دەرباز کر؛ خەونێن مەزن ببینە."</span></p>
-                        <div class="border-t border-blue-500/20 pt-1.5 mt-1.5">
-                            <p class="text-amber-300 font-bold flex items-center gap-1 mb-1"><i class="fa-solid fa-hands-praying"></i> زکرێن خەوێ (تایبەت):</p>
-                            <p class="text-slate-200">• خواندنا سورەتەل الإخلاص، الفلق و الناس (3 جاران)</p>
-                        </div>
-                    </div>
+                    <p class="text-[11px] text-blue-200">"سپاس بۆ خودایێ مە کو ئەڤرۆ ژی دەرباز کر؛ خەونێن مەزن ببینە."</p>
                     <input type="text" id="planNight" placeholder="پلانا خۆ یا شەڤێ لێرە بنڤیسە..." class="w-full bg-slate-900 border border-blue-500/40 rounded-xl p-2.5 text-slate-200 text-xs focus:outline-none focus:border-blue-400">
                 </div>
             </div>
 
-            <button onclick="saveMyPlanner()" class="w-full bg-gradient-to-r from-emerald-500 to-cyan-500 text-slate-950 font-bold py-3 rounded-xl text-xs shadow-lg transition hover:opacity-90 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-floppy-disk text-sm"></i> پاشەکەفتکرنا خشتەیا هەلبژارتی
+            <button onclick="saveMyPlanner()" class="w-full bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 font-bold py-3 rounded-xl text-xs shadow-lg transition hover:opacity-90 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-floppy-disk text-sm"></i> پاشەکەفتکرنا پلانا ڕۆژانە
             </button>
         </div>
 
@@ -390,24 +449,50 @@
                 night: document.getElementById('planNight').value
             };
             localStorage.setItem('badinan_routine_planner', JSON.stringify(plannerData));
-            alert('خشتەیا ڕۆژانە ب سەرکەفتن هاتە پاشەکەفتکرن! 📅');
+            alert('پلانا ڕۆژانە ب سەرکەفتن هاتە پاشەکەفتکرن! 📅');
         }
 
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(el => {
-                el.classList.remove('bg-gradient-to-r', 'from-indigo-600', 'to-violet-600', 'text-white', 'shadow-md');
+                el.classList.remove('bg-gradient-to-r', 'from-indigo-600', 'to-violet-600', 'from-emerald-600', 'to-cyan-600', 'from-cyan-600', 'to-blue-600', 'text-white', 'shadow-md');
                 el.classList.add('bg-slate-800', 'text-slate-300');
             });
 
             if (tabName === 'quotes') {
                 document.getElementById('tabQuotes').classList.remove('hidden');
-                document.getElementById('btnQuotes').classList.remove('bg-slate-800', 'text-slate-300');
-                document.getElementById('btnQuotes').classList.add('bg-gradient-to-r', 'from-indigo-600', 'to-violet-600', 'text-white', 'shadow-md');
+                let btn = document.getElementById('btnQuotes');
+                btn.classList.remove('bg-slate-800', 'text-slate-300');
+                btn.classList.add('bg-gradient-to-r', 'from-indigo-600', 'to-violet-600', 'text-white', 'shadow-md');
+            } else if (tabName === 'azkar') {
+                document.getElementById('tabAzkar').classList.remove('hidden');
+                let btn = document.getElementById('btnAzkar');
+                btn.classList.remove('bg-slate-800', 'text-slate-300');
+                btn.classList.add('bg-gradient-to-r', 'from-emerald-600', 'to-cyan-600', 'text-white', 'shadow-md');
             } else if (tabName === 'routine') {
                 document.getElementById('tabRoutine').classList.remove('hidden');
-                document.getElementById('btnRoutine').classList.remove('bg-slate-800', 'text-slate-300');
-                document.getElementById('btnRoutine').classList.add('bg-gradient-to-r', 'from-emerald-600', 'to-cyan-600', 'text-white', 'shadow-md');
+                let btn = document.getElementById('btnRoutine');
+                btn.classList.remove('bg-slate-800', 'text-slate-300');
+                btn.classList.add('bg-gradient-to-r', 'from-cyan-600', 'to-blue-600', 'text-white', 'shadow-md');
+            }
+        }
+
+        function switchAzkarTab(azkarId) {
+            document.querySelectorAll('.azkar-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.azkar-tab-btn').forEach(el => {
+                el.classList.remove('bg-emerald-600', 'bg-cyan-600', 'bg-amber-600', 'bg-blue-600', 'text-white');
+                el.classList.add('bg-slate-800', 'text-slate-300');
+            });
+
+            document.getElementById(azkarId).classList.remove('hidden');
+            let activeBtnId = 'btn' + azkarId.charAt(0).toUpperCase() + azkarId.slice(1);
+            let activeBtn = document.getElementById(activeBtnId);
+            if(activeBtn) {
+                activeBtn.classList.remove('bg-slate-800', 'text-slate-300');
+                if(azkarId === 'azkarMorning') activeBtn.classList.add('bg-emerald-600', 'text-white');
+                if(azkarId === 'azkarNoon') activeBtn.classList.add('bg-cyan-600', 'text-white');
+                if(azkarId === 'azkarEvening') activeBtn.classList.add('bg-amber-600', 'text-white');
+                if(azkarId === 'azkarNight') activeBtn.classList.add('bg-blue-600', 'text-white');
             }
         }
 
@@ -448,3 +533,4 @@
     </script>
 </body>
 </html>
+

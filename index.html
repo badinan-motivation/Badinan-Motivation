@@ -125,7 +125,7 @@
             padding: 14px 18px;
             border-radius: 14px;
             font-size: 0.95rem;
-            margin-bottom: 5px;
+            margin-bottom: 15px;
             display: inline-block;
             max-width: 90%;
             box-shadow: 0 4px 15px rgba(112,111,211,0.3);
@@ -192,6 +192,20 @@
         }
         textarea { height: 90px; resize: none; }
         textarea:focus, input[type="text"]:focus { border-color: var(--accent-purple); }
+
+        .collapsible-content {
+            display: none;
+            margin-top: 15px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .collapsible-content.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         .planner-section {
             background: rgba(255, 255, 255, 0.03);
@@ -274,7 +288,6 @@
             100% { opacity: 0; transform: scale(0.9) translateY(-20px); filter: blur(6px); }
         }
 
-        /* ستایلێن پشکا ڕێنماییان */
         .install-guide-card {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
@@ -331,48 +344,55 @@
     <!-- گۆتنێن ڕۆژانە -->
     <div class="card">
         <h3>گۆتنێن ڕۆژانە یێن دۆدۆ 💬</h3>
-        <div class="dodo-box">🐱</div>
-        <div class="quote-container">
-            <div class="speech-bubble" id="daily-quote">“ئەڤرۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!”</div>
+        <button class="btn" onclick="toggleSection('quote-content')">💬 ڤەکرنا گۆتنا ڕۆژێ</button>
+        <div id="quote-content" class="collapsible-content">
+            <div class="dodo-box">🐱</div>
+            <div class="quote-container">
+                <div class="speech-bubble" id="daily-quote">“ئەڤرۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!”</div>
+            </div>
         </div>
     </div>
 
     <!-- پلانا ڕۆژانە (Structured Planner) -->
     <div class="card">
         <h3>خشتەیێ ڕۆژانە 🗓️</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center; margin-bottom: 15px;">
-            پلانا خۆ بنڤیسە و هەر دەمەکێ کارەک تەمام کر، ✅ ل بەر بکە!
-        </p>
+        <button class="btn" onclick="toggleSection('planner-content')">📅 ڤەکرنا خشتەیێ ڕۆژانە</button>
+        
+        <div id="planner-content" class="collapsible-content">
+            <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center; margin-bottom: 15px; margin-top: 10px;">
+                پلانا خۆ بنڤیسە و هەر دەمەکێ کارەک تەمام کر، ✅ ل بەر بکە!
+            </p>
 
-        <div class="planner-section">
-            <div class="planner-title">🌅 سپێدەهی</div>
-            <div class="planner-row">
-                <input type="checkbox" class="task-checkbox" id="check-morning" onclick="savePlanner()">
-                <input type="text" class="task-input" id="input-morning" placeholder="کارێ سپێدەهیا خۆ..." oninput="savePlanner()">
+            <div class="planner-section">
+                <div class="planner-title">🌅 سپێدەهی</div>
+                <div class="planner-row">
+                    <input type="checkbox" class="task-checkbox" id="check-morning" onclick="savePlanner()">
+                    <input type="text" class="task-input" id="input-morning" placeholder="کارێ سپێدەهیا خۆ..." oninput="savePlanner()">
+                </div>
             </div>
-        </div>
 
-        <div class="planner-section">
-            <div class="planner-title">☀️ نیڤرۆ</div>
-            <div class="planner-row">
-                <input type="checkbox" class="task-checkbox" id="check-noon" onclick="savePlanner()">
-                <input type="text" class="task-input" id="input-noon" placeholder="کارێ نیڤرۆیا خۆ..." oninput="savePlanner()">
+            <div class="planner-section">
+                <div class="planner-title">☀️ نیڤرۆ</div>
+                <div class="planner-row">
+                    <input type="checkbox" class="task-checkbox" id="check-noon" onclick="savePlanner()">
+                    <input type="text" class="task-input" id="input-noon" placeholder="کارێ نیڤرۆیا خۆ..." oninput="savePlanner()">
+                </div>
             </div>
-        </div>
 
-        <div class="planner-section">
-            <div class="planner-title">🌇 ئێڤاری</div>
-            <div class="planner-row">
-                <input type="checkbox" class="task-checkbox" id="check-afternoon" onclick="savePlanner()">
-                <input type="text" class="task-input" id="input-afternoon" placeholder="کارێ ئێڤاریا خۆ..." oninput="savePlanner()">
+            <div class="planner-section">
+                <div class="planner-title">🌇 ئێڤاری</div>
+                <div class="planner-row">
+                    <input type="checkbox" class="task-checkbox" id="check-afternoon" onclick="savePlanner()">
+                    <input type="text" class="task-input" id="input-afternoon" placeholder="کارێ ئێڤاریا خۆ..." oninput="savePlanner()">
+                </div>
             </div>
-        </div>
 
-        <div class="planner-section">
-            <div class="planner-title">🌙 ب شەڤ</div>
-            <div class="planner-row">
-                <input type="checkbox" class="task-checkbox" id="check-night" onclick="savePlanner()">
-                <input type="text" class="task-input" id="input-night" placeholder="کارێ شەڤا خۆ..." oninput="savePlanner()">
+            <div class="planner-section">
+                <div class="planner-title">🌙 ب شەڤ</div>
+                <div class="planner-row">
+                    <input type="checkbox" class="task-checkbox" id="check-night" onclick="savePlanner()">
+                    <input type="text" class="task-input" id="input-night" placeholder="کارێ شەڤا خۆ..." oninput="savePlanner()">
+                </div>
             </div>
         </div>
     </div>
@@ -380,45 +400,56 @@
     <!-- پشکا هەناسەدانێ -->
     <div class="card">
         <h3>گۆشەیا ئارامیا ناخی 🧘‍♀️</h3>
-        <div class="breathing-box">
-            <p id="breath-text" style="font-size: 0.9rem; color: var(--text-muted);">بۆ ئارامکرنا مێشکی، دگەل جووڵەیا دۆدۆی هەناسەیا کوویر هەلبکێشە</p>
-            <div class="circle-container" id="breath-circle">هەناسە</div>
-            <button class="btn" onclick="startBreathing()">✨ دەست پێکرنا ڕاهێنانا هەناسەدانێ (بەردەوام)</button>
+        <button class="btn" onclick="toggleSection('breath-content')">🧘‍♀️ ڤەکرنا گۆشەیا ئارامیێ</button>
+        
+        <div id="breath-content" class="collapsible-content">
+            <div class="breathing-box">
+                <p id="breath-text" style="font-size: 0.9rem; color: var(--text-muted);">بۆ ئارامکرنا مێشکی، دگەل جووڵەیا دۆدۆی هەناسەیا کوویر هەلبکێشە</p>
+                <div class="circle-container" id="breath-circle">هەناسە</div>
+                <button class="btn" onclick="startBreathing()">✨ دەست پێکرنا ڕاهێنانا هەناسەدانێ</button>
+            </div>
         </div>
     </div>
 
     <!-- دەفتەرا پاقژکرنا مێشکی -->
     <div class="card">
         <h3>دەفتەرا پاقژکرنا مێشکی 🖤</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
-            هزرێن نەرێنی ل ڤێرێ بنڤیسە، بخوینە، و پاشان ژناڤ ببە:
-        </p>
-        <textarea id="journal-input" placeholder="هزرێن خۆ یێن نەرێنی ل ڤێرێ بنڤیسە..." oninput="saveJournal()"></textarea>
-        <button class="btn btn-danger" onclick="burnThoughts()" style="margin-top: 12px;">🗑️ ڤان هزران ژناڤ ببە</button>
+        <button class="btn" onclick="toggleSection('journal-content')">📖 ڤەکرنا دەفتەرا مێشکی</button>
+        
+        <div id="journal-content" class="collapsible-content">
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-top: 10px;">
+                هزرێن نەرێنی ل ڤێرێ بنڤیسە، بخوینە، و پاشان ژناڤ ببە:
+            </p>
+            <textarea id="journal-input" placeholder="هزرێن خۆ یێن نەرێنی ل ڤێرێ بنڤیسە..." oninput="saveJournal()"></textarea>
+            <button class="btn btn-danger" onclick="burnThoughts()" style="margin-top: 12px;">🗑️ ڤان هزران ژناڤ ببە</button>
+        </div>
     </div>
 
     <!-- ڕێنماییێن زێدەکرنا سایت بۆ موبایلێ -->
     <div class="install-guide-card">
-        <h3>📱 چەوانیا زێدەکرنا سایت بۆ سەر شاشەیا موبایلا خۆ</h3>
+        <h3>📱 ڕێنماییێن زێدەکرنا سایت بۆ سەر شاشەیا موبایلا خۆ</h3>
+        <button class="btn" onclick="toggleSection('guide-content')">📱 نیشانیدانا ڕێنماییان</button>
         
-        <div class="guide-box">
-            <h4>بۆ ئایفۆنی (iPhone):</h4>
-            <ol>
-                <li>سایتی ب Safari ڤەکە.</li>
-                <li>دوگمەیا Share (نیشانا ڤەگوهاستنێ ل خوارێ) بکلکە.</li>
-                <li>بگەڕە ل دووڤ Add to Home Screen و بکلکە.</li>
-                <li>Add ل سەرێ ڕاست بکلکە تا ل سەر شاشەیێ پەیدا بیت.</li>
-            </ol>
-        </div>
+        <div id="guide-content" class="collapsible-content" style="text-align: right; margin-top: 15px;">
+            <div class="guide-box">
+                <h4>بۆ ئایفۆنی (iPhone):</h4>
+                <ol>
+                    <li>سایتی ب Safari ڤەکە.</li>
+                    <li>دوگمەیا Share (نیشانا ڤەگوهاستنێ ل خوارێ) بکلکە.</li>
+                    <li>بگەڕە ل دووڤ Add to Home Screen و بکلکە.</li>
+                    <li>Add ل سەرێ ڕاست بکلکە تا ل سەر شاشەیێ پەیدا بیت.</li>
+                </ol>
+            </div>
 
-        <div class="guide-box">
-            <h4>بۆ سامسۆنگی (Samsung / Android):</h4>
-            <ol>
-                <li>سایتی ب Samsung Internet یان Chrome ڤەکە.</li>
-                <li>سێ خاڵێن Menu ل سەرێ ڕاست بکلکە.</li>
-                <li>Add to Home screen یان Install app هەلبژێرە.</li>
-                <li>Add / Install بکلکە دا ڕاستەوخۆ بێتە سەر شاشەیا تە.</li>
-            </ol>
+            <div class="guide-box">
+                <h4>بۆ سامسۆنگی (Samsung / Android):</h4>
+                <ol>
+                    <li>سایتی ب Samsung Internet یان Chrome ڤەکە.</li>
+                    <li>سێ خاڵێن Menu ل سەرێ ڕاست بکلکە.</li>
+                    <li>Add to Home screen یان Install app هەلبژێرە.</li>
+                    <li>Add / Install بکلکە دا ڕاستەوخۆ بێتە سەر شاشەیا تە.</li>
+                </ol>
+            </div>
         </div>
     </div>
 
@@ -428,6 +459,12 @@
 </div>
 
 <script>
+    // کۆنترۆلا ڤەکرن و داخستنا بەشان بە دوگمەیان
+    function toggleSection(sectionId) {
+        const content = document.getElementById(sectionId);
+        content.classList.toggle('show');
+    }
+
     // گۆتنێن ڕۆژانە
     const quotes = [
         "“ئەڤرۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!”",
@@ -522,7 +559,7 @@
         }
     }
 
-    // گۆهۆڕینا مودێ (Dark/Light Mode Fix)
+    // گۆهۆڕینا مودێ (Dark/Light Mode)
     function toggleTheme() {
         const body = document.getElementById('body');
         if (body.getAttribute('data-theme') === 'light') {
@@ -537,7 +574,7 @@
         document.getElementById('body').setAttribute('data-theme', 'light');
     }
 
-    // گۆهۆڕینا ڕەنگێ سەرەکی (Accent Color Dynamic Fix)
+    // گۆهۆڕینا ڕەنگێ سەرەکی
     function changeAccentColor(color) {
         document.documentElement.style.setProperty('--accent-purple', color);
         localStorage.setItem('dodo_color', color);
@@ -603,4 +640,3 @@
 
 </body>
 </html>
-

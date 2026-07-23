@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dodocare - سەکۆیا ئارامیا تە</title>
+    <title>Dodocare -جهێ ئارامیا تە</title>
     <style>
         :root {
             --bg-color: #12121f;
@@ -12,6 +12,14 @@
             --accent-pink: #ff7979;
             --text-main: #ffffff;
             --text-muted: #a4b0be;
+            --success-color: #2ed573;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f1f2f6;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-main: #2f3640;
+            --text-muted: #718093;
         }
 
         body {
@@ -24,9 +32,9 @@
             text-align: center;
             overflow-x: hidden;
             position: relative;
+            transition: background 0.3s, color 0.3s;
         }
 
-‎        /* پاشبنەمایا زیندوو و ئارامکەر */
         .bg-glow {
             position: fixed;
             width: 300px;
@@ -56,6 +64,26 @@
             z-index: 1;
         }
 
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .theme-toggle, .color-picker-wrapper {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         h1 { color: var(--accent-purple); font-size: 2.2rem; margin-bottom: 5px; text-shadow: 0 2px 10px rgba(112,111,211,0.3); }
         .subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 25px; }
 
@@ -67,17 +95,19 @@
             margin-bottom: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
             border: 1px solid rgba(255,255,255,0.06);
+            text-align: right;
             transition: transform 0.3s;
         }
-        .card:hover {
-            transform: translateY(-2px);
-        }
+        .card h3 { text-align: center; }
+        .card:hover { transform: translateY(-2px); }
 
         .dodo-box {
             font-size: 55px;
             animation: bounce 2s infinite ease-in-out;
             display: inline-block;
             margin: 10px 0;
+            text-align: center;
+            width: 100%;
         }
 
         @keyframes bounce {
@@ -87,6 +117,7 @@
 
         .speech-bubble {
             background: var(--accent-purple);
+            color: white;
             padding: 14px 18px;
             border-radius: 14px;
             font-size: 0.95rem;
@@ -95,6 +126,21 @@
             max-width: 90%;
             box-shadow: 0 4px 15px rgba(112,111,211,0.3);
             line-height: 1.6;
+            text-align: center;
+        }
+        .quote-container { text-align: center; }
+
+        /* Streak Badge */
+        .streak-badge {
+            background: rgba(255, 121, 121, 0.15);
+            color: var(--accent-pink);
+            border: 1px solid var(--accent-pink);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
         }
 
         .btn {
@@ -105,35 +151,102 @@
             border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
-            margin: 5px;
+            margin: 5px 0;
             transition: all 0.3s;
             box-shadow: 0 4px 12px rgba(112,111,211,0.3);
+            width: 100%;
         }
-        .btn:hover { opacity: 0.9; transform: scale(1.02); }
+        .btn:hover { opacity: 0.9; transform: scale(1.01); }
         .btn-danger { background: var(--accent-pink); box-shadow: 0 4px 12px rgba(255,121,121,0.3); }
 
-        textarea {
+        textarea, input[type="text"] {
             width: 100%;
-            height: 90px;
-            background: rgba(0,0,0,0.25);
+            background: rgba(0,0,0,0.15);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px;
-            color: white;
+            color: var(--text-main);
             padding: 12px;
             box-sizing: border-box;
-            resize: none;
             font-family: inherit;
             outline: none;
             transition: border-color 0.3s;
         }
-        textarea:focus {
-            border-color: var(--accent-purple);
+        textarea { height: 90px; resize: none; }
+        textarea:focus, input[type="text"]:focus { border-color: var(--accent-purple); }
+
+        /* Structured Planner */
+        .planner-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .planner-title {
+            font-weight: bold;
+            color: var(--accent-purple);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.95rem;
+        }
+        .planner-row { display: flex; gap: 8px; align-items: center; }
+        .task-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--accent-purple);
+            border-radius: 6px;
+            cursor: pointer;
+            background: rgba(0,0,0,0.2);
+            position: relative;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .task-checkbox:checked {
+            background-color: var(--success-color);
+            border-color: var(--success-color);
+        }
+        .task-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .task-input { flex-grow: 1; padding: 8px 12px !important; font-size: 0.9rem !important; }
+
+        /* Breathing Circle */
+        .breathing-box {
+            text-align: center;
+            padding: 15px;
+        }
+        .circle-container {
+            width: 120px;
+            height: 120px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            margin: 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(112,111,211,0.5);
+            transition: transform 4s ease-in-out;
+        }
+        .breathing-active {
+            transform: scale(1.3);
         }
 
         .fade-out {
             animation: fadeSmoke 1.5s forwards ease-out;
         }
-
         @keyframes fadeSmoke {
             0% { opacity: 1; transform: scale(1); filter: blur(0); }
             100% { opacity: 0; transform: scale(0.9) translateY(-20px); filter: blur(6px); }
@@ -142,47 +255,118 @@
         footer {
             margin-top: 40px;
             font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.2);
+            color: var(--text-muted);
             letter-spacing: 1.5px;
+            text-align: center;
         }
     </style>
 </head>
-<body>
+<body id="body">
 
     <div class="bg-glow"></div>
     <div class="bg-glow"></div>
 
 <div class="container">
-    <h1>Dodocare 🐱</h1>
-    <div class="subtitle">سەکۆیا ئارامیا ناخێ تە ✨</div>
+‎    <!-- بەرا سەرێ (Dark/Light & Color Picker) -->
+    <div class="top-bar">
+        <button class="theme-toggle" onclick="toggleTheme()">🌓 گوهۆڕینا مودێ</button>
+        <div class="color-picker-wrapper">
+‎            🎨 ڕەنگ: <input type="color" id="accentColorPicker" value="#706fd3" onchange="changeAccentColor(this.value)" style="border:none; background:none; width:25px; height:25px; cursor:pointer;">
+        </div>
+    </div>
 
+    <h1>Dodocare 🐱</h1>
+    <div class="subtitle">جهێ ئارامیا ناخێ تە ✨</div>
+
+‎    <!-- پشکا ستریکێ -->
+    <div class="streak-badge" id="streak-counter">🔥 ستریک: 1 ڕۆژێن بەردەوام</div>
+
+‎    <!-- گۆتنێن ڕۆژانە -->
     <div class="card">
         <h3>گۆتنێن ڕۆژانە یێن دۆدۆ 💬</h3>
         <div class="dodo-box">🐱</div>
-        <div>
+        <div class="quote-container">
             <div class="speech-bubble" id="daily-quote">“ئەڤرۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!”</div>
         </div>
     </div>
 
+‎    <!-- پلانا ڕۆژانە (Structured Planner ب LocalStorage) -->
+    <div class="card">
+        <h3>خشتەیێ ڕۆژانە 🗓️</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center; margin-bottom: 15px;">
+            پلانا خۆ بنڤیسە و هەر دەمەکێ کارەک تەمام کر، ✅ ل بەر بکە!
+        </p>
+
+‎        <!-- سپێدەهی -->
+        <div class="planner-section">
+            <div class="planner-title">🌅 سپێدەهی</div>
+            <div class="planner-row">
+                <input type="checkbox" class="task-checkbox" id="check-morning" onclick="savePlanner()">
+                <input type="text" class="task-input" id="input-morning" placeholder="کارێ سپێدەهیا خۆ..." oninput="savePlanner()">
+            </div>
+        </div>
+
+‎        <!-- نیڤرۆ -->
+        <div class="planner-section">
+            <div class="planner-title">☀️ نیڤرۆ</div>
+            <div class="planner-row">
+                <input type="checkbox" class="task-checkbox" id="check-noon" onclick="savePlanner()">
+                <input type="text" class="task-input" id="input-noon" placeholder="کارێ نیڤرۆیا خۆ..." oninput="savePlanner()">
+            </div>
+        </div>
+
+‎        <!-- ئێڤاری -->
+        <div class="planner-section">
+            <div class="planner-title">🌇 ئێڤاری</div>
+            <div class="planner-row">
+                <input type="checkbox" class="task-checkbox" id="check-afternoon" onclick="savePlanner()">
+                <input type="text" class="task-input" id="input-afternoon" placeholder="کارێ ئێڤاریا خۆ..." oninput="savePlanner()">
+            </div>
+        </div>
+
+‎        <!-- ب شەڤ -->
+        <div class="planner-section">
+            <div class="planner-title">🌙 ب شەڤ</div>
+            <div class="planner-row">
+                <input type="checkbox" class="task-checkbox" id="check-night" onclick="savePlanner()">
+                <input type="text" class="task-input" id="input-night" placeholder="کارێ شەڤا خۆ..." oninput="savePlanner()">
+            </div>
+        </div>
+    </div>
+
+‎    <!-- پشکا هەناسەدانێ و دەنگێ بارانێ -->
+    <div class="card">
+        <h3>گۆشەیا ئارامیا ناخی 🧘‍♀️</h3>
+        <div class="breathing-box">
+            <p id="breath-text" style="font-size: 0.9rem; color: var(--text-muted);">بۆ ئارامکرنا مێشکی، دگەل جووڵەیا دۆدۆی هەناسەیا کوویر هەلبکێشە</p>
+            <div class="circle-container" id="breath-circle">هەناسە</div>
+            <button class="btn" onclick="startBreathing()">✨ دەست پێکرنا ڕاهێنانا هەناسەدانێ</button>
+        </div>
+
+        <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 15px; text-align: center;">
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">🎧 دەنگێ بارانێ بۆ ئارامیا مێشکی</p>
+            <button class="btn" id="rain-btn" onclick="toggleRain()">🌧️ ڤەکرنا دەنگێ بارانێ</button>
+            <audio id="rain-audio" loop src="https://assets.mixkit.co/active_storage/sfx/1230/1230-preview.mp3"></audio>
+        </div>
+    </div>
+
+‎    <!-- دەفتەرا پاقژکرنا مێشکی -->
     <div class="card">
         <h3>دەفتەرا پاقژکرنا مێشکی 🖤</h3>
         <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
-‎            ئەڤڕۆ تە ڕۆژەک نەخۆش هەیە یان تو بەردەوام هزرێن نەرێنی دکەی؟<br>
-‎            نوکە ل ڤێرێ وان هزرێن خۆ بنڤیسە، بخوینە، و بێژە خۆ: 
-            <strong style="color: var(--accent-pink);">«ئەڤە بتنێ هزرە، ئەڤە بۆچی دێ بیت ئەگەر ئەس ڕۆژا خۆ نەخۆش بکەم؟»</strong><br>
-‎            و هەر زویکا ژێ ببە!
+‎            هزرێن نەرێنی ل ڤێرێ بنڤیسە، بخوینە، و پاشان ژناڤ ببە:
         </p>
-        <textarea id="journal-input" placeholder="هزرێن خۆ یێن نەرێنی ل ڤێرێ بنڤیسە..."></textarea>
-        <button class="btn btn-danger" style="margin-top: 12px;" onclick="burnThoughts()">🗑️ ڤان هزران ژناڤ ببرە و مێشکی ئارام بکە</button>
+        <textarea id="journal-input" placeholder="هزرێن خۆ یێن نەرێنی ل ڤێرێ بنڤیسە..." oninput="saveJournal()"></textarea>
+        <button class="btn btn-danger" onclick="burnThoughts()" style="margin-top: 12px;">🗑️ ڤان هزران ژناڤ ببە</button>
     </div>
 
     <footer>
-        CREATED BY: HUDA SHAHIN SINDI | DODOCARE &copy; 2026
+        CREATED BY: HUDA SHAHIN SINDI | DODOCare &copy; 2026
     </footer>
 </div>
 
 <script>
-‎    // لیستا گۆتنێن ڕۆژانە یێن تە داویتر خاستین (هەمی ب بادینی)
+‎    // گۆتنێن ڕۆژانە
     const quotes = [
 ‎        "“ئەڤرۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!”",
 ‎        "“تو گەلەک ژ هندێ ب هێزتری تو دەستا ب داهێلی.”",
@@ -198,61 +382,135 @@
 ‎        "“پێنگاڤەکا بچووک باشترە ژ ڕاوەستانێ.”",
 ‎        "“تو ژ هەژی باشترین تشتی د ژیانێ دا.”",
 ‎        "“دەست ژ هیڤیێن خۆ بەرنەدە، تو کەسەک خودان شیانی.”",
-‎        "“ئەڤرۆ کار بکە، دا کو سوبە شانازیێ ب خۆ بەی.”",
-‎        "“ترسێ ژ دلێ خۆ دەر بێخە و بەرەف پێش هەرە.”",
-‎        "“ماندیبوونا ئەڤرۆ، دێ بیتە کەیفخۆشیا سوبەهی.”",
-‎        "“کەسەک نینە شوینا تە شەڕی بۆ خەونێن تە بکەت.”",
-‎        "“بڕیارێ بدە و چو جاران سستیێ تێدا نەکە.”",
-‎        "“هەر دەمەکێ تو تێدا دژی، دەمەکێ زێڕینە.”",
-‎        "“ژ دەستپێکرنا نوو نەترسە، ئەڤە دەرفەتا تە یە.”",
-‎        "“ئەڤرۆ یا پڕە ژ وزە و هێزێ، بکاربینە!”",
-‎        "“تو یا بڕیاردەری، چو هێز نەشێن تە ڕاگرن.”",
-‎        "“هەول بدە ئەڤرۆ باشتر بی ژ دوهی.”",
-‎        "“سەبر کلیلا هەر دەرگەهەکەکێ داخستی یە.”",
-‎        "“ب دڵسۆزی کار بکە، ئەنجام دێ تە مەندەهوش کەن.”",
-‎        "“تو یا تایبەتی، چو کەس وەک تە نین.”",
-‎        "“ژیان یا کورتە، ب کەیف و سەرکەفتن دەرباز بکە.”",
-‎        "“سەرکەفتن ناهێت، پێدڤییە تو بۆ بچی.”",
-‎        "“خودێ دگەل تە یە، چ خەمان نەخۆ.”",
-‎        "“تو خودان ئیرادەیەکا بهێزی.”",
-‎        "“بێدەنگ کار بکە، بهێڵە دەنگێ سەرکەفتنا تە بڵند ببیت.”",
-‎        "“هەر ڕۆژەکا نوو، شانسەک نوو یە بۆ سەرکەفتنێ.”",
-‎        "“پاشەڕۆژ یا وان کەسانە یێن باوەری ب خەونێن خۆ هەی.”",
-‎        "“ئارمانجێن مەزن قوربانیێن مەزن دڤێن.”",
-‎        "“تو ژ وێ ب هێزتری یا دیار دکەی.”",
-‎        "“ئارمانج بێ پلان، تنێ خەونەکە.”",
-‎        "“بچووکترین پێنگاڤ ژی باشترە ژ جهەکێ دیار.”",
-‎        "“کەسێ نەکە خودانێ بریارێن خۆ؛ ژیانا تە یا تە یە و کەس ماف نینە تێک بدەت.”",
-‎        "“تو نە مەجبووری کەسەکێ ژ خۆ ڕازیکەی، گرنگ ئەوە تو ژ خۆ ڕازی بی و ئەڤە بەسە.”",
-‎        "“هندەک جار دوورکەفتنا ژ خەلکی، مەزنترین دیارییە تو ددەیه‌ گیانێ خۆ.”",
-‎        "“تو گەلەک ژ هندێ بهاتری کو دەمێ خۆ بۆ کەسێن بێ مفا تەرخان بکەی.”",
-‎        "“تشتێ هەر گرنگ ل ڤێ جیهانێ، ئارامیا مێشکێ تە یە؛ هەر تشتێ وی تێک بدەت، ژێ دوور بکەڤە.”",
-‎        "“کەسێن نەرێنی تنێ دڤێن هێزا تە ببڕن؛ نەهێلە ئارامیا ڕۆژا تە تێک بدەن.”",
-‎        "“هەر دەمێ تو هەول ددەی هەمی کەسی ڕازی بکەی، وی دەمی تو یێ خۆ ژ دەست ددەی.”",
-‎        "“دەمێ خۆ بۆ کەسێن بێ مفا تەرخان نەکە.”",
-‎        "“تشتێ هەرە خراب ئەوە تو ژیانا خۆ ب ڕازیکرنا خەلکی ڤە بۆرینی.”",
-‎        "“دوورکەفتنا ژ کەسێن نەرێنی، نیڤا سەرکەفتن و ئارامیا تە یە.”",
-‎        "“خەونێن تە ژ ڕایێن خەلکی گرانبەها ترن؛ لدووڤ دەنگێ دلێ خوە هەرە نەک بۆچونا خەلکی.”",
-‎        "“گۆتنا 'نەخێر' بۆ هەر ژینگەهەکا کو ڕەخنەیێن نەدرۆست ل تە بگرن و باوەرییا تە ب خۆ بشکینن.”",
-‎        "“دانانا سنورێن توند دگەل دەوروبەرێن نەرێنی بۆ هندێ ڕۆژا تە ب کەیف و بێ کێشە دەرباز ببێت.”"
+‎        "“ئەڤرۆ کار بکە، دا کو سوبە شانازیێ ب خۆ بەی.”"
     ];
-
-‎    // گۆڕینی گۆتنان ب شێوازەکێ خودکار ڕۆژانە
     const dayOfYear = Math.floor(new Date() / 8.64e7);
     document.getElementById('daily-quote').innerText = quotes[dayOfYear % quotes.length];
 
-    // ئەنیمەیشنا ژێبرنا هزرێن نەرێنی (Smoke Effect)
+    // LocalStorage بۆ خشتەیێ ڕۆژانە
+    function savePlanner() {
+        const data = {
+            mCheck: document.getElementById('check-morning').checked,
+            mText: document.getElementById('input-morning').value,
+            nCheck: document.getElementById('check-noon').checked,
+            nText: document.getElementById('input-noon').value,
+            aCheck: document.getElementById('check-afternoon').checked,
+            aText: document.getElementById('input-afternoon').value,
+            niCheck: document.getElementById('check-night').checked,
+            niText: document.getElementById('input-night').value,
+        };
+        localStorage.setItem('dodo_planner', JSON.stringify(data));
+    }
+
+    function loadPlanner() {
+        const saved = localStorage.getItem('dodo_planner');
+        if (saved) {
+            const data = JSON.parse(saved);
+            document.getElementById('check-morning').checked = data.mCheck;
+            document.getElementById('input-morning').value = data.mText;
+            document.getElementById('check-noon').checked = data.nCheck;
+            document.getElementById('input-noon').value = data.nText;
+            document.getElementById('check-afternoon').checked = data.aCheck;
+            document.getElementById('input-afternoon').value = data.aText;
+            document.getElementById('check-night').checked = data.niCheck;
+            document.getElementById('input-night').value = data.niText;
+        }
+    }
+    loadPlanner();
+
+    // LocalStorage بۆ دەفتەرا مێشکی
+    function saveJournal() {
+        localStorage.setItem('dodo_journal', document.getElementById('journal-input').value);
+    }
+    if(localStorage.getItem('dodo_journal')) {
+        document.getElementById('journal-input').value = localStorage.getItem('dodo_journal');
+    }
+
     function burnThoughts() {
         const txt = document.getElementById('journal-input');
         if(txt.value.trim() !== "") {
             txt.classList.add('fade-out');
             setTimeout(() => {
                 txt.value = "";
+                localStorage.removeItem('dodo_journal');
                 txt.classList.remove('fade-out');
-                alert("🗑️ هزرێن نەخۆش هاتنە ژێبرن! ئەڤە تنێ هزر بوون، و نوکە ڕۆژا خۆ ب کەیف ببۆرینە. دۆدۆ شانازیێ ب تە دکەت! ✨");
+                alert("🗑️ هزرێن نەخۆش هاتنە ژێبرن! ڕۆژا خۆ ب کەیف ببۆرینە ✨");
             }, 1500);
         } else {
             alert("پێشتر هزرەکێ ل ڤێرێ بنڤیسە!");
+        }
+    }
+
+‎    // گۆهۆڕینا مودێ (Dark/Light)
+    function toggleTheme() {
+        const body = document.getElementById('body');
+        if (body.getAttribute('data-theme') === 'light') {
+            body.removeAttribute('data-theme');
+            localStorage.setItem('dodo_theme', 'dark');
+        } else {
+            body.setAttribute('data-theme', 'light');
+            localStorage.setItem('dodo_theme', 'light');
+        }
+    }
+    if (localStorage.getItem('dodo_theme') === 'light') {
+        document.getElementById('body').setAttribute('data-theme', 'light');
+    }
+
+‎    // گۆهۆڕینا ڕەنگێ سەرەکی (Accent Color)
+    function changeAccentColor(color) {
+        document.documentElement.style.setProperty('--accent-purple', color);
+        localStorage.setItem('dodo_color', color);
+    }
+    if (localStorage.getItem('dodo_color')) {
+        const savedColor = localStorage.getItem('dodo_color');
+        document.documentElement.style.setProperty('--accent-purple', savedColor);
+        document.getElementById('accentColorPicker').value = savedColor;
+    }
+
+‎    // ستریک (Streak Counter)
+    let streak = localStorage.getItem('dodo_streak') ? parseInt(localStorage.getItem('dodo_streak')) : 1;
+    let lastVisit = localStorage.getItem('dodo_last_visit');
+    let todayDate = new Date().toDateString();
+    if(lastVisit !== todayDate) {
+        if(lastVisit) {
+            let lastDate = new Date(lastVisit);
+            let diffDays = Math.floor((new Date() - lastDate) / (1000 * 60 * 60 * 24));
+            if(diffDays === 1) { streak++; }
+            else if(diffDays > 1) { streak = 1; }
+        }
+        localStorage.setItem('dodo_streak', streak);
+        localStorage.setItem('dodo_last_visit', todayDate);
+    }
+    document.getElementById('streak-counter').innerText = "🔥 ستریک: " + streak + " ڕۆژێن بەردەوام";
+
+‎    // ڕاهێنانا هەناسەدانێ
+    function startBreathing() {
+        const circle = document.getElementById('breath-circle');
+        const text = document.getElementById('breath-text');
+        text.innerText = "هەناسەیا کویر هەلبکێشە...";
+        circle.classList.add('breathing-active');
+        setTimeout(() => {
+            text.innerText = "هەناسەیا خۆ راگرە...";
+        }, 4000);
+        setTimeout(() => {
+            text.innerText = "ب ئارامی بەردە ...";
+            circle.classList.remove('breathing-active');
+        }, 8000);
+        setTimeout(() => {
+            text.innerText = "گۆشەیا ئارامیا ناخی 🧘‍♀️";
+        }, 12000);
+    }
+
+‎    // دەنگێ بارانێ
+    function toggleRain() {
+        const audio = document.getElementById('rain-audio');
+        const btn = document.getElementById('rain-btn');
+        if (audio.paused) {
+            audio.play();
+            btn.innerText = "🔇 داخستنا دەنگێ بارانێ";
+        } else {
+            audio.pause();
+            btn.innerText = "🌧️ ڤەکرنا دەنگێ بارانێ";
         }
     }
 </script>

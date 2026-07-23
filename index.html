@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dodocare -جهێ ئارامیا تە</title>
+    <title>Dodocare - جهێ ئارامیا تە</title>
     <style>
         :root {
             --bg-color: #12121f;
@@ -39,14 +39,17 @@
             position: fixed;
             width: 300px;
             height: 300px;
-            background: rgba(112, 111, 211, 0.15);
+            background: var(--accent-purple);
+            opacity: 0.15;
             filter: blur(80px);
             border-radius: 50%;
             z-index: -1;
             animation: moveGlow 10s infinite alternate ease-in-out;
+            transition: background 0.3s;
         }
         .bg-glow:nth-child(2) {
-            background: rgba(255, 121, 121, 0.1);
+            background: var(--accent-pink);
+            opacity: 0.1;
             right: -50px;
             bottom: -50px;
             animation-duration: 14s;
@@ -82,9 +85,10 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        h1 { color: var(--accent-purple); font-size: 2.2rem; margin-bottom: 5px; text-shadow: 0 2px 10px rgba(112,111,211,0.3); }
+        h1 { color: var(--accent-purple); font-size: 2.2rem; margin-bottom: 5px; text-shadow: 0 2px 10px rgba(112,111,211,0.3); transition: color 0.3s; }
         .subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 25px; }
 
         .card {
@@ -98,7 +102,7 @@
             text-align: right;
             transition: transform 0.3s;
         }
-        .card h3 { text-align: center; }
+        .card h3 { text-align: center; color: var(--accent-purple); transition: color 0.3s; }
         .card:hover { transform: translateY(-2px); }
 
         .dodo-box {
@@ -127,10 +131,10 @@
             box-shadow: 0 4px 15px rgba(112,111,211,0.3);
             line-height: 1.6;
             text-align: center;
+            transition: background 0.3s;
         }
         .quote-container { text-align: center; }
 
-        /* Streak Badge */
         .streak-badge {
             background: rgba(255, 121, 121, 0.15);
             color: var(--accent-pink);
@@ -141,6 +145,18 @@
             display: inline-block;
             margin-bottom: 15px;
             font-size: 0.9rem;
+        }
+
+        .time-badge {
+            background: rgba(112, 111, 211, 0.15);
+            color: var(--accent-purple);
+            border: 1px solid var(--accent-purple);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
         }
 
         .btn {
@@ -171,16 +187,22 @@
             outline: none;
             transition: border-color 0.3s;
         }
+        [data-theme="light"] textarea, [data-theme="light"] input[type="text"] {
+            background: rgba(0,0,0,0.04);
+        }
         textarea { height: 90px; resize: none; }
         textarea:focus, input[type="text"]:focus { border-color: var(--accent-purple); }
 
-        /* Structured Planner */
         .planner-section {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             padding: 12px;
             margin-bottom: 12px;
+        }
+        [data-theme="light"] .planner-section {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.04);
         }
         .planner-title {
             font-weight: bold;
@@ -190,6 +212,7 @@
             align-items: center;
             gap: 6px;
             font-size: 0.95rem;
+            transition: color 0.3s;
         }
         .planner-row { display: flex; gap: 8px; align-items: center; }
         .task-checkbox {
@@ -221,7 +244,6 @@
         }
         .task-input { flex-grow: 1; padding: 8px 12px !important; font-size: 0.9rem !important; }
 
-        /* Breathing Circle */
         .breathing-box {
             text-align: center;
             padding: 15px;
@@ -238,10 +260,10 @@
             color: white;
             font-weight: bold;
             box-shadow: 0 0 20px rgba(112,111,211,0.5);
-            transition: transform 4s ease-in-out;
+            transition: transform 6s ease-in-out, background 0.3s;
         }
         .breathing-active {
-            transform: scale(1.3);
+            transform: scale(1.35);
         }
 
         .fade-out {
@@ -267,21 +289,23 @@
     <div class="bg-glow"></div>
 
 <div class="container">
-‎    <!-- بەرا سەرێ (Dark/Light & Color Picker) -->
     <div class="top-bar">
         <button class="theme-toggle" onclick="toggleTheme()">🌓 گوهۆڕینا مودێ</button>
         <div class="color-picker-wrapper">
-‎            🎨 ڕەنگ: <input type="color" id="accentColorPicker" value="#706fd3" onchange="changeAccentColor(this.value)" style="border:none; background:none; width:25px; height:25px; cursor:pointer;">
+            🎨 ڕەنگ: <input type="color" id="accentColorPicker" value="#706fd3" onchange="changeAccentColor(this.value)" style="border:none; background:none; width:25px; height:25px; cursor:pointer;">
         </div>
     </div>
 
     <h1>Dodocare 🐱</h1>
     <div class="subtitle">جهێ ئارامیا ناخێ تە ✨</div>
 
-‎    <!-- پشکا ستریکێ -->
-    <div class="streak-badge" id="streak-counter">🔥 ستریک: 1 ڕۆژێن بەردەوام</div>
+    <!-- پشکا دەمژمێر و سڵاڤا وەکاتی -->
+    <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+        <div class="streak-badge" id="streak-counter">🔥 ستریک: 1 ڕۆژێن بەردەوام</div>
+        <div class="time-badge" id="live-time-badge">⏰ کات: 00:00</div>
+    </div>
 
-‎    <!-- گۆتنێن ڕۆژانە -->
+    <!-- گۆتنێن ڕۆژانە -->
     <div class="card">
         <h3>گۆتنێن ڕۆژانە یێن دۆدۆ 💬</h3>
         <div class="dodo-box">🐱</div>
@@ -290,14 +314,13 @@
         </div>
     </div>
 
-‎    <!-- پلانا ڕۆژانە (Structured Planner ب LocalStorage) -->
+    <!-- پلانا ڕۆژانە (Structured Planner) -->
     <div class="card">
         <h3>خشتەیێ ڕۆژانە 🗓️</h3>
         <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center; margin-bottom: 15px;">
             پلانا خۆ بنڤیسە و هەر دەمەکێ کارەک تەمام کر، ✅ ل بەر بکە!
         </p>
 
-‎        <!-- سپێدەهی -->
         <div class="planner-section">
             <div class="planner-title">🌅 سپێدەهی</div>
             <div class="planner-row">
@@ -306,7 +329,6 @@
             </div>
         </div>
 
-‎        <!-- نیڤرۆ -->
         <div class="planner-section">
             <div class="planner-title">☀️ نیڤرۆ</div>
             <div class="planner-row">
@@ -315,7 +337,6 @@
             </div>
         </div>
 
-‎        <!-- ئێڤاری -->
         <div class="planner-section">
             <div class="planner-title">🌇 ئێڤاری</div>
             <div class="planner-row">
@@ -324,7 +345,6 @@
             </div>
         </div>
 
-‎        <!-- ب شەڤ -->
         <div class="planner-section">
             <div class="planner-title">🌙 ب شەڤ</div>
             <div class="planner-row">
@@ -334,27 +354,21 @@
         </div>
     </div>
 
-‎    <!-- پشکا هەناسەدانێ و دەنگێ بارانێ -->
+    <!-- پشکا هەناسەدانێ (ب ماوەیەکێ درێژتر و ئارامتر) -->
     <div class="card">
         <h3>گۆشەیا ئارامیا ناخی 🧘‍♀️</h3>
         <div class="breathing-box">
             <p id="breath-text" style="font-size: 0.9rem; color: var(--text-muted);">بۆ ئارامکرنا مێشکی، دگەل جووڵەیا دۆدۆی هەناسەیا کوویر هەلبکێشە</p>
             <div class="circle-container" id="breath-circle">هەناسە</div>
-            <button class="btn" onclick="startBreathing()">✨ دەست پێکرنا ڕاهێنانا هەناسەدانێ</button>
-        </div>
-
-        <div style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 15px; text-align: center;">
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">🎧 دەنگێ بارانێ بۆ ئارامیا مێشکی</p>
-            <button class="btn" id="rain-btn" onclick="toggleRain()">🌧️ ڤەکرنا دەنگێ بارانێ</button>
-            <audio id="rain-audio" loop src="https://assets.mixkit.co/active_storage/sfx/1230/1230-preview.mp3"></audio>
+            <button class="btn" onclick="startBreathing()">✨ دەست پێکرنا ڕاهێنانا هەناسەدانێ (بەردەوام)</button>
         </div>
     </div>
 
-‎    <!-- دەفتەرا پاقژکرنا مێشکی -->
+    <!-- دەفتەرا پاقژکرنا مێشکی -->
     <div class="card">
         <h3>دەفتەرا پاقژکرنا مێشکی 🖤</h3>
         <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
-‎            هزرێن نەرێنی ل ڤێرێ بنڤیسە، بخوینە، و پاشان ژناڤ ببە:
+            هزرێن نەرێنی ل ڤێرێ بنڤیسە، بخوینە، و پاشان ژناڤ ببە:
         </p>
         <textarea id="journal-input" placeholder="هزرێن خۆ یێن نەرێنی ل ڤێرێ بنڤیسە..." oninput="saveJournal()"></textarea>
         <button class="btn btn-danger" onclick="burnThoughts()" style="margin-top: 12px;">🗑️ ڤان هزران ژناڤ ببە</button>
@@ -366,26 +380,45 @@
 </div>
 
 <script>
-‎    // گۆتنێن ڕۆژانە
+    // گۆتنێن ڕۆژانە
     const quotes = [
-‎        "“ئەڤرۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!”",
-‎        "“تو گەلەک ژ هندێ ب هێزتری تو دەستا ب داهێلی.”",
-‎        "“بخۆ بژی، نە بۆ ڕازیکرنا خەڵکی.”",
-‎        "“هەر نوکە دەست پێ بکە، چ جاران درەنگ نینە.”",
-‎        "“تو یا ب هێزی، باوەریێ ب شیانێن خۆ بینە.”",
-‎        "“ئەڤرۆ دەرفەتەکا نووی یە بۆ هندێ تو بگەهیە حەزێن خۆ.”",
-‎        "“خەونێن تە مەزنن، هەولدانێن خۆ ژی مەزنتر لێ بکە.”",
-‎        "“تو داهێنەرا ژیانا خۆیی، جوان ڕەنگ بکە.”",
-‎        "“هەر تشتەکێ ئەڤرۆ دکەی، سوبە دێ پێ کەیفخۆش بی.”",
-‎        "“تو ب تنێ دشێی ژیانا خۆ بگۆهۆڕی، دەست پێ بکە.”",
-‎        "“ئارام بە، خودێ دێ دەرگەهێن خێڕێ بۆ تە ڤەکەت.”",
-‎        "“پێنگاڤەکا بچووک باشترە ژ ڕاوەستانێ.”",
-‎        "“تو ژ هەژی باشترین تشتی د ژیانێ دا.”",
-‎        "“دەست ژ هیڤیێن خۆ بەرنەدە، تو کەسەک خودان شیانی.”",
-‎        "“ئەڤرۆ کار بکە، دا کو سوبە شانازیێ ب خۆ بەی.”"
+        "“ئەڤرۆ ڕۆژا تە یە، پێنگاڤێ باڤێژە!”",
+        "“تو گەلەک ژ هندێ ب هێزتری تو دەستا ب داهێلی.”",
+        "“بخۆ بژی، نە بۆ ڕازیکرنا خەڵکی.”",
+        "“هەر نوکە دەست پێ بکە، چ جاران درەنگ نینە.”",
+        "“تو یا ب هێزی، باوەریێ ب شیانێن خۆ بینە.”",
+        "“ئەڤرۆ دەرفەتەکا نووی یە بۆ هندێ تو بگەهیە حەزێن خۆ.”",
+        "“خەونێن تە مەزنن، هەولدانێن خۆ ژی مەزنتر لێ بکە.”",
+        "“تو داهێنەرا ژیانا خۆیی، جوان ڕەنگ بکە.”",
+        "“هەر تشتەکێ ئەڤرۆ دکەی، سوبە دێ پێ کەیفخۆش بی.”",
+        "“تو ب تنێ دشێی ژیانا خۆ بگۆهۆڕی، دەست پێ بکە.”",
+        "“ئارام بە، خودێ دێ دەرگەهێن خێڕێ بۆ تە ڤەکەت.”",
+        "“پێنگاڤەکا بچووک باشترە ژ ڕاوەستانێ.”",
+        "“تو ژ هەژی باشترین تشتی د ژیانێ دا.”",
+        "“دەست ژ هیڤیێن خۆ بەرنەدە، تو کەسەک خودان شیانی.”",
+        "“ئەڤرۆ کار بکە، دا کو سوبە شانازیێ ب خۆ بەی.”"
     ];
     const dayOfYear = Math.floor(new Date() / 8.64e7);
     document.getElementById('daily-quote').innerText = quotes[dayOfYear % quotes.length];
+
+    // دەمژمێرا زیندوو و کات
+    function updateLiveClock() {
+        const now = new Date();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        let timeStr = hours + ':' + minutes;
+        
+        let greeting = "کات: ";
+        if (hours >= 4 && hours < 12) { greeting = "🌅 سپێدە باش • کات: "; }
+        else if (hours >= 12 && hours < 17) { greeting = "☀️ نیڤرۆ باش • کات: "; }
+        else if (hours >= 17 && hours < 21) { greeting = "🌇 ئێڤاری باش • کات: "; }
+        else { greeting = "🌙 شەڤ باش • کات: "; }
+
+        document.getElementById('live-time-badge').innerText = greeting + timeStr;
+    }
+    setInterval(updateLiveClock, 1000);
+    updateLiveClock();
 
     // LocalStorage بۆ خشتەیێ ڕۆژانە
     function savePlanner() {
@@ -441,7 +474,7 @@
         }
     }
 
-‎    // گۆهۆڕینا مودێ (Dark/Light)
+    // گۆهۆڕینا مودێ (Dark/Light Mode Fix)
     function toggleTheme() {
         const body = document.getElementById('body');
         if (body.getAttribute('data-theme') === 'light') {
@@ -456,7 +489,7 @@
         document.getElementById('body').setAttribute('data-theme', 'light');
     }
 
-‎    // گۆهۆڕینا ڕەنگێ سەرەکی (Accent Color)
+    // گۆهۆڕینا ڕەنگێ سەرەکی (Accent Color Dynamic Fix)
     function changeAccentColor(color) {
         document.documentElement.style.setProperty('--accent-purple', color);
         localStorage.setItem('dodo_color', color);
@@ -467,7 +500,7 @@
         document.getElementById('accentColorPicker').value = savedColor;
     }
 
-‎    // ستریک (Streak Counter)
+    // ستریک (Streak Counter)
     let streak = localStorage.getItem('dodo_streak') ? parseInt(localStorage.getItem('dodo_streak')) : 1;
     let lastVisit = localStorage.getItem('dodo_last_visit');
     let todayDate = new Date().toDateString();
@@ -483,35 +516,40 @@
     }
     document.getElementById('streak-counter').innerText = "🔥 ستریک: " + streak + " ڕۆژێن بەردەوام";
 
-‎    // ڕاهێنانا هەناسەدانێ
+    // ڕاهێنانا هەناسەدانێ (بەرفرهە و ب ماوەیەکێ گونجایی - 50+ چرکە)
     function startBreathing() {
         const circle = document.getElementById('breath-circle');
         const text = document.getElementById('breath-text');
-        text.innerText = "هەناسەیا کویر هەلبکێشە...";
+        
+        text.innerText = "هەناسەیا کوویر هەلبکێشە... (هێدی هێدی)";
         circle.classList.add('breathing-active');
-        setTimeout(() => {
-            text.innerText = "هەناسەیا خۆ راگرە...";
-        }, 4000);
-        setTimeout(() => {
-            text.innerText = "ب ئارامی بەردە ...";
-            circle.classList.remove('breathing-active');
-        }, 8000);
-        setTimeout(() => {
-            text.innerText = "گۆشەیا ئارامیا ناخی 🧘‍♀️";
-        }, 12000);
-    }
 
-‎    // دەنگێ بارانێ
-    function toggleRain() {
-        const audio = document.getElementById('rain-audio');
-        const btn = document.getElementById('rain-btn');
-        if (audio.paused) {
-            audio.play();
-            btn.innerText = "🔇 داخستنا دەنگێ بارانێ";
-        } else {
-            audio.pause();
-            btn.innerText = "🌧️ ڤەکرنا دەنگێ بارانێ";
-        }
+        setTimeout(() => {
+            text.innerText = "هەناسەیا خۆ ل دەروونێ خۆ ڕاگرە...";
+        }, 6000);
+
+        setTimeout(() => {
+            text.innerText = "ب ئارامی و هێدی بەردە دەر...";
+            circle.classList.remove('breathing-active');
+        }, 13000);
+
+        setTimeout(() => {
+            text.innerText = "هەناسەیا کوویر هەلبکێشە... (جارەکا دی)";
+            circle.classList.add('breathing-active');
+        }, 19000);
+
+        setTimeout(() => {
+            text.innerText = "هەناسەیا خۆ ڕاگرە...";
+        }, 25000);
+
+        setTimeout(() => {
+            text.innerText = "ب ئارامی بەردە دەر...";
+            circle.classList.remove('breathing-active');
+        }, 32000);
+
+        setTimeout(() => {
+            text.innerText = "گەلەک باش بوو! ئارامیا ناخی پاراستی بە ✨";
+        }, 40000);
     }
 </script>
 
